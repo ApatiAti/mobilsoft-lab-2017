@@ -3,6 +3,7 @@ package com.example.mobsoft.webkorhaz.ui;
 import android.content.Context;
 
 
+import com.example.mobsoft.webkorhaz.ui.ConsultationHourSearch.ConsultationHourSearchPresenter;
 import com.example.mobsoft.webkorhaz.ui.appointment.AppointmentPresenter;
 import com.example.mobsoft.webkorhaz.ui.login.LoginPresenter;
 import com.example.mobsoft.webkorhaz.ui.main.MainPresenter;
@@ -41,5 +42,11 @@ public class UIModule {
     @Singleton
     public AppointmentPresenter provideAppointmentPresenter() {
         return new AppointmentPresenter();
+    }
+
+    @Provides
+    @Singleton
+    public ConsultationHourSearchPresenter provideConsultationHourSearchPresenter() {
+        return new ConsultationHourSearchPresenter();
     }
 }
