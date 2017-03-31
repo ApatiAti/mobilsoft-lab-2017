@@ -1,6 +1,7 @@
 package com.example.mobsoft.webkorhaz;
 
 import com.example.mobsoft.webkorhaz.ui.UIModule;
+import com.example.mobsoft.webkorhaz.ui.appointment.AppointmentActivity;
 import com.example.mobsoft.webkorhaz.ui.login.LoginActivity;
 import com.example.mobsoft.webkorhaz.ui.main.MainActivity;
 
@@ -18,5 +19,7 @@ public interface MobSoftApplicationComponent {
     void inject(MainActivity mainActivity);
 
     void inject(LoginActivity loginActivity);
+
+    void inject(AppointmentActivity loginActivity);
 
 }
