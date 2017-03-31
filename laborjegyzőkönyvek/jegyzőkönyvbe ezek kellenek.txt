@@ -1,0 +1,18 @@
+git commit -m "message"
+git push
+
+
+github.commit/bpatrik/mobsoft-lab
+github.commit/Baloghtamas/SpotifyDemo
+
+
+jegyzőkönyv 
+git fa commit branch + kép róla
+
+travis build működött + kép róla
+
+link github  és travis
+nem kell forrás.
+
+összes képrenyőre MVP-t megcsinálni, a kommunikációt megcsinálni.
+project struktúráról képet
