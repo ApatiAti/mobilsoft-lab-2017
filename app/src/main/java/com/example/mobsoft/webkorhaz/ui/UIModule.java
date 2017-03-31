@@ -3,6 +3,7 @@ package com.example.mobsoft.webkorhaz.ui;
 import android.content.Context;
 
 
+import com.example.mobsoft.webkorhaz.ui.login.LoginPresenter;
 import com.example.mobsoft.webkorhaz.ui.main.MainPresenter;
 
 import javax.inject.Singleton;
@@ -29,4 +30,9 @@ public class UIModule {
         return new MainPresenter();
     }
 
+    @Provides
+    @Singleton
+    public LoginPresenter provideLoginPresenter() {
+        return new LoginPresenter();
+    }
 }

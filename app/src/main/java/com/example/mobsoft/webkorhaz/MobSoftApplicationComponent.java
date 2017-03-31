@@ -1,6 +1,7 @@
 package com.example.mobsoft.webkorhaz;
 
 import com.example.mobsoft.webkorhaz.ui.UIModule;
+import com.example.mobsoft.webkorhaz.ui.login.LoginActivity;
 import com.example.mobsoft.webkorhaz.ui.main.MainActivity;
 
 import javax.inject.Singleton;
@@ -15,5 +16,7 @@ import dagger.Component;
 @Component(modules = {UIModule.class})
 public interface MobSoftApplicationComponent {
     void inject(MainActivity mainActivity);
+
+    void inject(LoginActivity loginActivity);
 
 }
