@@ -6,6 +6,7 @@ import com.example.mobsoft.webkorhaz.ui.appointment.AppointmentActivity;
 import com.example.mobsoft.webkorhaz.ui.consultationHourList.ConsultationHourListActivity;
 import com.example.mobsoft.webkorhaz.ui.login.LoginActivity;
 import com.example.mobsoft.webkorhaz.ui.main.MainActivity;
+import com.example.mobsoft.webkorhaz.ui.navigation.NavigationActivity;
 
 import javax.inject.Singleton;
 
@@ -27,4 +28,6 @@ public interface MobSoftApplicationComponent {
     void inject(ConsultationHourSearchActivity consultationHourSearchActivity);
 
     void inject(ConsultationHourListActivity consultationHourListActivity);
+
+    void inject(NavigationActivity navigationActivity);
 }

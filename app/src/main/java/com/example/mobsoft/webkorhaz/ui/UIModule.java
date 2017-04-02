@@ -8,6 +8,7 @@ import com.example.mobsoft.webkorhaz.ui.appointment.AppointmentPresenter;
 import com.example.mobsoft.webkorhaz.ui.consultationHourList.ConsultationHourListPresenter;
 import com.example.mobsoft.webkorhaz.ui.login.LoginPresenter;
 import com.example.mobsoft.webkorhaz.ui.main.MainPresenter;
+import com.example.mobsoft.webkorhaz.ui.navigation.NavigationPresenter;
 
 import javax.inject.Singleton;
 
@@ -55,5 +56,11 @@ public class UIModule {
     @Singleton
     public ConsultationHourListPresenter provideConsultationHourListPresenter() {
         return new ConsultationHourListPresenter();
+    }
+
+    @Provides
+    @Singleton
+    public NavigationPresenter provideNavigationPresenter() {
+        return new NavigationPresenter();
     }
 }
