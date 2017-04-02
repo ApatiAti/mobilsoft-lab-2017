@@ -38,4 +38,13 @@ public class NavigationActivity extends AppCompatActivity implements NavigationS
         navigationPresenter.detachScreen();
     }
 
+    @Override
+    public void showConsultationHourSearch() {
+
+    }
+
+    @Override
+    public void showAppointmnent() {
+
+    }
 }
