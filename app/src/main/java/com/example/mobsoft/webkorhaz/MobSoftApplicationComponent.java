@@ -1,9 +1,9 @@
 package com.example.mobsoft.webkorhaz;
 
 import com.example.mobsoft.webkorhaz.ui.ConsultationHourSearch.ConsultationHourSearchActivity;
-import com.example.mobsoft.webkorhaz.ui.ConsultationHourSearch.ConsultationHourSearchPresenter;
 import com.example.mobsoft.webkorhaz.ui.UIModule;
 import com.example.mobsoft.webkorhaz.ui.appointment.AppointmentActivity;
+import com.example.mobsoft.webkorhaz.ui.consultationHourList.ConsultationHourListActivity;
 import com.example.mobsoft.webkorhaz.ui.login.LoginActivity;
 import com.example.mobsoft.webkorhaz.ui.main.MainActivity;
 
@@ -25,4 +25,6 @@ public interface MobSoftApplicationComponent {
     void inject(AppointmentActivity loginActivity);
 
     void inject(ConsultationHourSearchActivity consultationHourSearchActivity);
+
+    void inject(ConsultationHourListActivity consultationHourListActivity);
 }
