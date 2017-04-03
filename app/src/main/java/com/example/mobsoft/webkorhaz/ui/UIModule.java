@@ -10,10 +10,14 @@ import com.example.mobsoft.webkorhaz.ui.login.LoginPresenter;
 import com.example.mobsoft.webkorhaz.ui.main.MainPresenter;
 import com.example.mobsoft.webkorhaz.ui.navigation.NavigationPresenter;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import de.greenrobot.event.EventBus;
 
 @Module
 public class UIModule {
@@ -62,5 +66,19 @@ public class UIModule {
     @Singleton
     public NavigationPresenter provideNavigationPresenter() {
         return new NavigationPresenter();
+    }
+
+
+
+    @Provides
+    @Singleton
+    public EventBus provideEventBus() {
+        return EventBus.getDefault();
+    }
+
+    @Provides
+    @Singleton
+    public Executor provideExecutor() {
+        return Executors.newFixedThreadPool(1);
     }
 }
