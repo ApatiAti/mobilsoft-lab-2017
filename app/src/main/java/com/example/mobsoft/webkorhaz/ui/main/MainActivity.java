@@ -6,6 +6,9 @@ import android.widget.Toast;
 
 import com.example.mobsoft.webkorhaz.MobSoftApplication;
 import com.example.mobsoft.webkorhaz.R;
+import com.example.mobsoft.webkorhaz.model.Appointment;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -35,7 +38,17 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
     }
 
     @Override
-    public void showMessage(String text) {
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+    public void showAppointments(List<Appointment> appointments) {
+
+    }
+
+    @Override
+    public void showErrorAtLoad(String message) {
+
+    }
+
+    @Override
+    public void showErrorAtRefreash(String message) {
+
     }
 }

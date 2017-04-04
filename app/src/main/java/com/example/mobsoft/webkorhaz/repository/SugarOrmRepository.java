@@ -2,6 +2,7 @@ package com.example.mobsoft.webkorhaz.repository;
 
 import android.content.Context;
 
+import com.example.mobsoft.webkorhaz.model.Appointment;
 import com.example.mobsoft.webkorhaz.model.Todo;
 import com.orm.SugarContext;
 import com.orm.SugarRecord;
@@ -21,6 +22,35 @@ public class SugarOrmRepository implements Repository {
     public void close() {
         SugarContext.terminate();
     }
+
+    @Override
+    public List<Appointment> getAppointments() {
+        return SugarRecord.listAll(Appointment.class);
+    }
+
+    @Override
+    public void saveAppointment(Appointment appointment) {
+        SugarRecord.saveInTx(appointment);
+    }
+
+    @Override
+    public void updateAppointment(List<Appointment> appointments) {
+        return;
+    }
+
+    @Override
+    public void removeAppointment(Appointment appointment) {
+        SugarRecord.deleteInTx(appointment);
+    }
+
+    @Override
+    public boolean isInDB(Appointment appointment) {
+        return SugarRecord.findById(Appointment.class, appointment.getId()) != null;
+    }
+
+    /**
+     *  Labor miatt
+     */
 
     @Override
     public List<Todo> getFavourites() {

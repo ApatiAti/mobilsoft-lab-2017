@@ -2,6 +2,8 @@ package com.example.mobsoft.webkorhaz.ui.main;
 
 import android.util.Log;
 
+import com.example.mobsoft.webkorhaz.interactor.appointment.AppointmentInteractor;
+import com.example.mobsoft.webkorhaz.interactor.appointment.events.GetAppoinmentsEvent;
 import com.example.mobsoft.webkorhaz.interactor.todo.FavouritesInteractor;
 import com.example.mobsoft.webkorhaz.interactor.todo.events.GetFavouritesEvent;
 import com.example.mobsoft.webkorhaz.model.Todo;
@@ -23,8 +25,14 @@ import static com.example.mobsoft.webkorhaz.MobSoftApplication.injector;
 
 public class MainPresenter extends Presenter<MainScreen> {
 
+    /**
+     * LAbor miatt marad
+     */
     @Inject
     FavouritesInteractor favouritesInteractor;
+
+    @Inject
+    AppointmentInteractor appointmentInteractor;
 
     @Inject
     Executor executor;
@@ -48,6 +56,17 @@ public class MainPresenter extends Presenter<MainScreen> {
         super.detachScreen();
     }
 
+
+    public void showAppointment(){
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                appointmentInteractor.getAppointments();
+            }
+        });
+    }
+
+    /*
     public void getFavourites() {
         executor.execute(new Runnable() {
             @Override
@@ -56,21 +75,20 @@ public class MainPresenter extends Presenter<MainScreen> {
             }
         });
     }
+*/
 
-
-    public void onEventMainThread(GetFavouritesEvent event) {
+    public void onEventMainThread(GetAppoinmentsEvent event) {
         if (event.getThrowable() != null) {
             event.getThrowable().printStackTrace();
             if (screen != null) {
-                screen.showMessage("error");
+                screen.showErrorAtLoad("Error");
             }
-            Log.e("Networking", "Error reading favourites", event.getThrowable());
+            Log.e("DB", "Error reading appointments from DB", event.getThrowable());
         } else {
             if (screen != null) {
-                for(Todo t : event.getTodos()){
-                    screen.showMessage(t.getName());;
-                }
+                screen.showAppointments(event.getAppointments());
             }
         }
     }
+
 }
