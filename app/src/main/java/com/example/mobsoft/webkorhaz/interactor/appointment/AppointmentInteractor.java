@@ -2,13 +2,11 @@ package com.example.mobsoft.webkorhaz.interactor.appointment;
 
 
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.GetAppoinmentsEvent;
-import com.example.mobsoft.webkorhaz.interactor.todo.events.GetFavouritesEvent;
-import com.example.mobsoft.webkorhaz.interactor.todo.events.RemoveFavouriteEvent;
-import com.example.mobsoft.webkorhaz.interactor.todo.events.SaveFavouriteEvent;
+import com.example.mobsoft.webkorhaz.interactor.appointment.events.ReloadAppointentsEvents;
 import com.example.mobsoft.webkorhaz.model.Appointment;
-import com.example.mobsoft.webkorhaz.model.Todo;
 import com.example.mobsoft.webkorhaz.repository.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -25,7 +23,7 @@ public class AppointmentInteractor {
     public AppointmentInteractor() {
     }
 
-    public void getAppointments() {
+    public void loadAppointmentsFromDb() {
         GetAppoinmentsEvent event = new GetAppoinmentsEvent();
         try {
             List<Appointment> appointments = repository.getAppointments();
@@ -37,6 +35,21 @@ public class AppointmentInteractor {
         }
     }
 
+    public void reloadAppoinmentsFromServer() {
+        ReloadAppointentsEvents event = new ReloadAppointentsEvents();
+        try {
+//            List<Appointment> appointments = network.getAppointments();
+            List<Appointment> appointments = new ArrayList<>();
+            event.setAppointments(appointments);
+            bus.post(event);
+        } catch (Exception e){
+            event.setThrowable(e);
+            bus.post(event);
+        }
+    }
+
+
+/*
     public void getFavourites() {
         GetFavouritesEvent event = new GetFavouritesEvent();
         try {
@@ -81,4 +94,6 @@ public class AppointmentInteractor {
             bus.post(event);
         }
     }
+
+    */
 }

@@ -5,8 +5,6 @@ import android.util.Log;
 import com.example.mobsoft.webkorhaz.interactor.appointment.AppointmentInteractor;
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.GetAppoinmentsEvent;
 import com.example.mobsoft.webkorhaz.interactor.todo.FavouritesInteractor;
-import com.example.mobsoft.webkorhaz.interactor.todo.events.GetFavouritesEvent;
-import com.example.mobsoft.webkorhaz.model.Todo;
 import com.example.mobsoft.webkorhaz.ui.Presenter;
 
 
@@ -57,16 +55,35 @@ public class MainPresenter extends Presenter<MainScreen> {
     }
 
 
-    public void showAppointment(){
+    /**
+     * Db-ben eltárolt Appoinmentek lekérdezése
+     */
+    public void loadAppointmentFromDb(){
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                appointmentInteractor.getAppointments();
+                appointmentInteractor.loadAppointmentsFromDb();
             }
         });
     }
 
-    /*
+    /**
+     * Szerver oldalról lekérdezi a felhasználó Appointmentjeit
+     */
+    public void refreashAppointments(){
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                appointmentInteractor.reloadAppoinmentsFromServer();
+            }
+        });
+    }
+
+
+
+    /**
+     *  labor miatt
+     */
     public void getFavourites() {
         executor.execute(new Runnable() {
             @Override
@@ -75,7 +92,7 @@ public class MainPresenter extends Presenter<MainScreen> {
             }
         });
     }
-*/
+
 
     public void onEventMainThread(GetAppoinmentsEvent event) {
         if (event.getThrowable() != null) {
