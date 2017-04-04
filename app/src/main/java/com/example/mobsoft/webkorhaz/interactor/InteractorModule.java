@@ -1,6 +1,7 @@
 package com.example.mobsoft.webkorhaz.interactor;
 
 import com.example.mobsoft.webkorhaz.interactor.appointment.AppointmentInteractor;
+import com.example.mobsoft.webkorhaz.interactor.login.LoginInteractor;
 import com.example.mobsoft.webkorhaz.interactor.todo.FavouritesInteractor;
 
 import dagger.Module;
@@ -22,4 +23,8 @@ public class InteractorModule {
 		return new AppointmentInteractor();
 	}
 
+	@Provides
+	public LoginInteractor provideLogin(){
+		return new LoginInteractor();
+	}
 }
