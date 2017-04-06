@@ -5,6 +5,7 @@ import com.example.mobsoft.webkorhaz.interactor.InteractorModule;
 import com.example.mobsoft.webkorhaz.interactor.todo.FavouritesInteractor;
 import com.example.mobsoft.webkorhaz.repository.RepositoryModule;
 import com.example.mobsoft.webkorhaz.ui.ConsultationHourSearch.ConsultationHourSearchActivity;
+import com.example.mobsoft.webkorhaz.ui.ConsultationHourSearch.ConsultationHourSearchPresenter;
 import com.example.mobsoft.webkorhaz.ui.UIModule;
 import com.example.mobsoft.webkorhaz.ui.appointment.AppointmentActivity;
 import com.example.mobsoft.webkorhaz.ui.consultationHourList.ConsultationHourListActivity;
@@ -39,6 +40,8 @@ public interface MobSoftApplicationComponent {
     void inject(FavouritesInteractor favouritesInteractor);
 
     void inject(MainPresenter mainPresenter);
+
+    void inject(ConsultationHourSearchPresenter consultationHourSearchPresenter);
 
     void inject(MobSoftApplication mobSoftApplication);
 
