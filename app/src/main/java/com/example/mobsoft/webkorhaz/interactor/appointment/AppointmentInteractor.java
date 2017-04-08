@@ -1,8 +1,10 @@
 package com.example.mobsoft.webkorhaz.interactor.appointment;
 
 
-import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointmentsFromDbEvent;
-import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointmentsFromServerEvents;
+import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointmentListFromDbEvent;
+import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointmentListFromServerEvents;
+import com.example.mobsoft.webkorhaz.interactor.appointment.events.ReloadAppoinmentFromServerEvent;
+import com.example.mobsoft.webkorhaz.interactor.appointment.events.SaveAppointmentsEvents;
 import com.example.mobsoft.webkorhaz.model.Appointment;
 import com.example.mobsoft.webkorhaz.repository.Repository;
 
@@ -24,7 +26,7 @@ public class AppointmentInteractor {
     }
 
     public void loadAppointmentsFromDb() {
-        LoadAppointmentsFromDbEvent event = new LoadAppointmentsFromDbEvent();
+        LoadAppointmentListFromDbEvent event = new LoadAppointmentListFromDbEvent();
         try {
             List<Appointment> appointments = repository.getAppointments();
             event.setAppointments(appointments);
@@ -35,8 +37,8 @@ public class AppointmentInteractor {
         }
     }
 
-    public void reloadAppoinmentsFromServer() {
-        LoadAppointmentsFromServerEvents event = new LoadAppointmentsFromServerEvents();
+    public void reloadAppoinmentListFromServer() {
+        LoadAppointmentListFromServerEvents event = new LoadAppointmentListFromServerEvents();
         try {
 //            List<Appointment> appointments = network.getAppointments();
             List<Appointment> appointments = new ArrayList<>();
@@ -47,6 +49,40 @@ public class AppointmentInteractor {
             bus.post(event);
         }
     }
+
+    public void saveAppointent(Appointment appointment) {
+        SaveAppointmentsEvents event = new SaveAppointmentsEvents();
+        try {
+//            boolean succes = network.saveAppointment(appointemnt);
+            boolean succes = true;
+            if (succes){
+                repository.saveAppointment(appointment);
+                event.setSucces(true);
+            } else {
+                event.setSucces(false);
+            }
+
+            bus.post(event);
+        } catch (Exception e){
+            event.setThrowable(e);
+            event.setSucces(false);
+            bus.post(event);
+        }
+    }
+
+    public void reloadAppoinmentFromServer(Appointment appointment) {
+        ReloadAppoinmentFromServerEvent event = new ReloadAppoinmentFromServerEvent();
+        try {
+//            Appointment reloadedAppointent= network.reloadAppointment(appointemnt);
+            Appointment reloadedAppointent = null;
+            event.setAppointment(reloadedAppointent);
+            bus.post(event);
+        } catch (Exception e){
+            event.setThrowable(e);
+            bus.post(event);
+        }
+    }
+
 
 
 /*

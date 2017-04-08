@@ -8,6 +8,7 @@ import com.example.mobsoft.webkorhaz.ui.ConsultationHourSearch.ConsultationHourS
 import com.example.mobsoft.webkorhaz.ui.ConsultationHourSearch.ConsultationHourSearchPresenter;
 import com.example.mobsoft.webkorhaz.ui.UIModule;
 import com.example.mobsoft.webkorhaz.ui.appointment.AppointmentActivity;
+import com.example.mobsoft.webkorhaz.ui.appointment.AppointmentPresenter;
 import com.example.mobsoft.webkorhaz.ui.consultationHourList.ConsultationHourListActivity;
 import com.example.mobsoft.webkorhaz.ui.login.LoginActivity;
 import com.example.mobsoft.webkorhaz.ui.login.LoginPresenter;
@@ -49,6 +50,8 @@ public interface MobSoftApplicationComponent {
     void inject(MainPresenter mainPresenter);
 
     void inject(LoginPresenter loginPresenter);
+
+    void inject(AppointmentPresenter appointmentPresenter);
 
     void inject(ConsultationHourSearchPresenter consultationHourSearchPresenter);
 

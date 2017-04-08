@@ -5,14 +5,14 @@ import com.example.mobsoft.webkorhaz.model.Appointment;
 import java.util.List;
 
 
-public class LoadAppointmentsFromDbEvent {
+public class LoadAppointmentListFromDbEvent {
 	private int code;
 	private List<Appointment> appointments;
 	private Throwable throwable;
 
 	//<editor-fold desc="Constructors|Getters|Setters">
 
-	public LoadAppointmentsFromDbEvent() {
+	public LoadAppointmentListFromDbEvent() {
 	}
 
 	public int getCode() {

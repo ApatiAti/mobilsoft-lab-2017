@@ -2,17 +2,18 @@ package com.example.mobsoft.webkorhaz.interactor.appointment.events;
 
 import com.example.mobsoft.webkorhaz.model.Appointment;
 
-import java.util.List;
+/**
+ * Created by Apati on 2017.04.08..
+ */
 
-
-public class LoadAppointmentsFromServerEvents {
+public class ReloadAppoinmentFromServerEvent {
     private int code;
-    private List<Appointment> appointments;
+    private Appointment appointment;
     private Throwable throwable;
 
     //<editor-fold desc="Constructors|Getters|Setters">
 
-    public LoadAppointmentsFromServerEvents() {
+    public ReloadAppoinmentFromServerEvent() {
     }
 
     public int getCode() {
@@ -23,12 +24,12 @@ public class LoadAppointmentsFromServerEvents {
         this.code = code;
     }
 
-    public List<Appointment> getAppointments() {
-        return appointments;
+    public Appointment getAppointment() {
+        return appointment;
     }
 
-    public void setAppointments(List<Appointment> appointments) {
-        this.appointments = appointments;
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
     }
 
     public Throwable getThrowable() {
@@ -41,3 +42,4 @@ public class LoadAppointmentsFromServerEvents {
 
 //</editor-fold>
 }
+

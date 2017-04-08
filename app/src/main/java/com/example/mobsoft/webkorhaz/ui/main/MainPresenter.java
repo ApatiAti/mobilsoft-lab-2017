@@ -3,8 +3,8 @@ package com.example.mobsoft.webkorhaz.ui.main;
 import android.util.Log;
 
 import com.example.mobsoft.webkorhaz.interactor.appointment.AppointmentInteractor;
-import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointmentsFromDbEvent;
-import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointmentsFromServerEvents;
+import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointmentListFromDbEvent;
+import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointmentListFromServerEvents;
 import com.example.mobsoft.webkorhaz.interactor.todo.FavouritesInteractor;
 import com.example.mobsoft.webkorhaz.ui.Presenter;
 
@@ -75,7 +75,7 @@ public class MainPresenter extends Presenter<MainScreen> {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                appointmentInteractor.reloadAppoinmentsFromServer();
+                appointmentInteractor.reloadAppoinmentListFromServer();
             }
         });
     }
@@ -96,10 +96,10 @@ public class MainPresenter extends Presenter<MainScreen> {
 
 
     /**
-     * {@link LoadAppointmentsFromDbEvent} eventeket a {@link EventBus}-ról feldolgozó metódus. Android UI szálát hasznélja a feldolgozásra
+     * {@link LoadAppointmentListFromDbEvent} eventeket a {@link EventBus}-ról feldolgozó metódus. Android UI szálát hasznélja a feldolgozásra
      * @param event
      */
-    public void onEventMainThread(LoadAppointmentsFromDbEvent event) {
+    public void onEventMainThread(LoadAppointmentListFromDbEvent event) {
         if (event.getThrowable() != null) {
             event.getThrowable().printStackTrace();
             if (screen != null) {
@@ -114,10 +114,10 @@ public class MainPresenter extends Presenter<MainScreen> {
     }
 
     /**
-     * {@link LoadAppointmentsFromServerEvents} eventeket a {@link EventBus}-ról feldolgozó metódus. Android UI szálát hasznélja a feldolgozásra
+     * {@link LoadAppointmentListFromServerEvents} eventeket a {@link EventBus}-ról feldolgozó metódus. Android UI szálát hasznélja a feldolgozásra
      * @param event
      */
-    public void onEventMainThread(LoadAppointmentsFromServerEvents event) {
+    public void onEventMainThread(LoadAppointmentListFromServerEvents event) {
         if (event.getThrowable() != null) {
             event.getThrowable().printStackTrace();
             if (screen != null) {
