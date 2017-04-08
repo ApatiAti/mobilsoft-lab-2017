@@ -41,7 +41,7 @@ public class ConsultationHourListActivity extends AppCompatActivity implements C
 
     @Override
     public void showConsultationHourList() {
-
+        consultationHourListPresenter.showConsultationHourList(new Object());
     }
 
     @Override
