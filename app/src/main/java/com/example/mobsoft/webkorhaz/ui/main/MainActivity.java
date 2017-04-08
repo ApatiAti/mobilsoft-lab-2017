@@ -37,18 +37,22 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
         mainPresenter.detachScreen();
     }
 
+    /**
+     * Feltölti a képernyőt appointmentekkel
+     * @param appointments
+     */
     @Override
     public void showAppointments(List<Appointment> appointments) {
 
     }
 
     @Override
-    public void showErrorAtLoad(String message) {
-
+    public void showErrorAtLoadFromDb(String message) {
+        Toast.makeText(this, "Hiba történt az adatbázis olvasása közben!\n" + message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void showErrorAtRefreash(String message) {
-
+    public void showErrorAtRefreshFromServer(String message) {
+        Toast.makeText(this, "Hiba történt a szerver elérése közben!\n" + message, Toast.LENGTH_SHORT).show();
     }
 }

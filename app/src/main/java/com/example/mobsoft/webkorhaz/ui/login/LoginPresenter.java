@@ -33,7 +33,7 @@ public class LoginPresenter extends Presenter<LoginScreen> {
     public LoginPresenter() {
     }
 
-    public void login(final User user){
+    public void startLogin(final User user){
         executor.execute(new Runnable() {
             @Override
             public void run() {
@@ -52,6 +52,12 @@ public class LoginPresenter extends Presenter<LoginScreen> {
         super.detachScreen();
     }
 
+
+
+    /**
+     * {@link LoginEvent} eventeket a {@link EventBus}-ról feldolgozó metódus. Android UI szálát hasznélja a feldolgozásra
+     * @param event
+     */
     public void onEventMainThread(LoginEvent event) {
         if (event.getThrowable() != null) {
             event.getThrowable().printStackTrace();
