@@ -2,7 +2,6 @@ package com.example.mobsoft.webkorhaz.ui.login;
 
 import android.util.Log;
 
-import com.example.mobsoft.webkorhaz.interactor.appointment.events.GetAppoinmentsEvent;
 import com.example.mobsoft.webkorhaz.interactor.login.LoginInteractor;
 import com.example.mobsoft.webkorhaz.interactor.login.events.LoginEvent;
 import com.example.mobsoft.webkorhaz.model.User;
@@ -10,10 +9,11 @@ import com.example.mobsoft.webkorhaz.ui.Presenter;
 
 import java.util.concurrent.Executor;
 
-import javax.annotation.security.RunAs;
 import javax.inject.Inject;
 
 import de.greenrobot.event.EventBus;
+
+import static com.example.mobsoft.webkorhaz.MobSoftApplication.injector;
 
 /**
  * Created by mobsoft on 2017. 03. 31..
@@ -45,10 +45,13 @@ public class LoginPresenter extends Presenter<LoginScreen> {
     @Override
     public void attachScreen(LoginScreen screen) {
         super.attachScreen(screen);
+        injector.inject(this);
+        bus.register(this);
     }
 
     @Override
-    public void detachScreen() {
+    public void detachScreen(){
+        bus.unregister(this);
         super.detachScreen();
     }
 

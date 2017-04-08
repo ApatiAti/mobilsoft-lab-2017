@@ -10,6 +10,7 @@ import com.example.mobsoft.webkorhaz.ui.UIModule;
 import com.example.mobsoft.webkorhaz.ui.appointment.AppointmentActivity;
 import com.example.mobsoft.webkorhaz.ui.consultationHourList.ConsultationHourListActivity;
 import com.example.mobsoft.webkorhaz.ui.login.LoginActivity;
+import com.example.mobsoft.webkorhaz.ui.login.LoginPresenter;
 import com.example.mobsoft.webkorhaz.ui.main.MainActivity;
 import com.example.mobsoft.webkorhaz.ui.main.MainPresenter;
 import com.example.mobsoft.webkorhaz.ui.navigation.NavigationActivity;
@@ -25,6 +26,10 @@ import dagger.Component;
 @Singleton
 @Component(modules = {UIModule.class, RepositoryModule.class, InteractorModule.class})
 public interface MobSoftApplicationComponent {
+
+    /**
+     * Activitys
+     */
     void inject(MainActivity mainActivity);
 
     void inject(LoginActivity loginActivity);
@@ -37,11 +42,26 @@ public interface MobSoftApplicationComponent {
 
     void inject(NavigationActivity navigationActivity);
 
-    void inject(FavouritesInteractor favouritesInteractor);
+    /**
+     * Presenters
+     */
 
     void inject(MainPresenter mainPresenter);
 
+    void inject(LoginPresenter loginPresenter);
+
     void inject(ConsultationHourSearchPresenter consultationHourSearchPresenter);
+
+    /**
+     * Interractors
+     */
+
+    void inject(FavouritesInteractor favouritesInteractor);
+
+
+    /**
+     * Others
+     */
 
     void inject(MobSoftApplication mobSoftApplication);
 

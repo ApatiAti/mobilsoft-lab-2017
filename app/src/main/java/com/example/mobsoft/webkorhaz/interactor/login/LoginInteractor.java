@@ -1,6 +1,5 @@
 package com.example.mobsoft.webkorhaz.interactor.login;
 
-import com.example.mobsoft.webkorhaz.interactor.appointment.events.GetAppoinmentsEvent;
 import com.example.mobsoft.webkorhaz.interactor.login.events.LoginEvent;
 import com.example.mobsoft.webkorhaz.model.User;
 import com.example.mobsoft.webkorhaz.repository.Repository;
