@@ -3,7 +3,8 @@ package com.example.mobsoft.webkorhaz.ui.main;
 import android.util.Log;
 
 import com.example.mobsoft.webkorhaz.interactor.appointment.AppointmentInteractor;
-import com.example.mobsoft.webkorhaz.interactor.appointment.events.GetAppoinmentsEvent;
+import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointmentsFromDbEvent;
+import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointmentsFromServerEvents;
 import com.example.mobsoft.webkorhaz.interactor.todo.FavouritesInteractor;
 import com.example.mobsoft.webkorhaz.ui.Presenter;
 
@@ -94,11 +95,15 @@ public class MainPresenter extends Presenter<MainScreen> {
     }
 
 
-    public void onEventMainThread(GetAppoinmentsEvent event) {
+    /**
+     * {@link LoadAppointmentsFromDbEvent} eventeket a {@link EventBus}-ról feldolgozó metódus. Android UI szálát hasznélja a feldolgozásra
+     * @param event
+     */
+    public void onEventMainThread(LoadAppointmentsFromDbEvent event) {
         if (event.getThrowable() != null) {
             event.getThrowable().printStackTrace();
             if (screen != null) {
-                screen.showErrorAtLoad("Error");
+                screen.showErrorAtLoadFromDb("DB error");
             }
             Log.e("DB", "Error reading appointments from DB", event.getThrowable());
         } else {
@@ -108,4 +113,21 @@ public class MainPresenter extends Presenter<MainScreen> {
         }
     }
 
+    /**
+     * {@link LoadAppointmentsFromServerEvents} eventeket a {@link EventBus}-ról feldolgozó metódus. Android UI szálát hasznélja a feldolgozásra
+     * @param event
+     */
+    public void onEventMainThread(LoadAppointmentsFromServerEvents event) {
+        if (event.getThrowable() != null) {
+            event.getThrowable().printStackTrace();
+            if (screen != null) {
+                screen.showErrorAtRefreshFromServer("Network error");
+            }
+            Log.e("DB", "Error reading appointments from DB", event.getThrowable());
+        } else {
+            if (screen != null) {
+                screen.showAppointments(event.getAppointments());
+            }
+        }
+    }
 }

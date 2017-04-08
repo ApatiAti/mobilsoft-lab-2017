@@ -1,8 +1,8 @@
 package com.example.mobsoft.webkorhaz.interactor.appointment;
 
 
-import com.example.mobsoft.webkorhaz.interactor.appointment.events.GetAppoinmentsEvent;
-import com.example.mobsoft.webkorhaz.interactor.appointment.events.ReloadAppointentsEvents;
+import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointmentsFromDbEvent;
+import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointmentsFromServerEvents;
 import com.example.mobsoft.webkorhaz.model.Appointment;
 import com.example.mobsoft.webkorhaz.repository.Repository;
 
@@ -24,7 +24,7 @@ public class AppointmentInteractor {
     }
 
     public void loadAppointmentsFromDb() {
-        GetAppoinmentsEvent event = new GetAppoinmentsEvent();
+        LoadAppointmentsFromDbEvent event = new LoadAppointmentsFromDbEvent();
         try {
             List<Appointment> appointments = repository.getAppointments();
             event.setAppointments(appointments);
@@ -36,7 +36,7 @@ public class AppointmentInteractor {
     }
 
     public void reloadAppoinmentsFromServer() {
-        ReloadAppointentsEvents event = new ReloadAppointentsEvents();
+        LoadAppointmentsFromServerEvents event = new LoadAppointmentsFromServerEvents();
         try {
 //            List<Appointment> appointments = network.getAppointments();
             List<Appointment> appointments = new ArrayList<>();
