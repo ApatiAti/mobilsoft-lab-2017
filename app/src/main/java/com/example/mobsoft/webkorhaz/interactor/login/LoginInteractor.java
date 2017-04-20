@@ -2,6 +2,7 @@ package com.example.mobsoft.webkorhaz.interactor.login;
 
 import com.example.mobsoft.webkorhaz.interactor.login.events.LoginEvent;
 import com.example.mobsoft.webkorhaz.model.User;
+import com.example.mobsoft.webkorhaz.network.HttpNetwork;
 import com.example.mobsoft.webkorhaz.repository.Repository;
 
 
@@ -29,7 +30,8 @@ public class LoginInteractor {
     public void login(User user){
         LoginEvent event = new LoginEvent();
         try {
-            User activeUser = null; // network.startLogin(user);
+            User activeUser = HttpNetwork.startLogin(user);
+            // user and activeUser must be merged.
             event.setUser(activeUser);
             bus.post(event);
         } catch (Exception e){

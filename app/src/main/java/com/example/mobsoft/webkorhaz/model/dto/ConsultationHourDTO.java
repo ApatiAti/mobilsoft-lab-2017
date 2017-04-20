@@ -7,7 +7,8 @@ import java.util.Date;
  */
 
 public class ConsultationHourDTO {
-    public String departmentName;
+    // nem kell mert ott lesz az előző oldalról
+    //    public String departmentName;
     public String tpye;
     public Date beginDate;
     public Date endDate;
@@ -17,13 +18,13 @@ public class ConsultationHourDTO {
     public ConsultationHourDTO() {
     }
 
-    public String getDepartmentName() {
-        return departmentName;
-    }
-
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName;
-    }
+//    public String getDepartmentName() {
+//        return departmentName;
+//    }
+//
+//    public void setDepartmentName(String departmentName) {
+//        this.departmentName = departmentName;
+//    }
 
     public String getTpye() {
         return tpye;

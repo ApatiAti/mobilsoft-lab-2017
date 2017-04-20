@@ -6,9 +6,9 @@ import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointme
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.ReloadAppoinmentFromServerEvent;
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.SaveAppointmentsEvents;
 import com.example.mobsoft.webkorhaz.model.Appointment;
+import com.example.mobsoft.webkorhaz.network.HttpNetwork;
 import com.example.mobsoft.webkorhaz.repository.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -37,11 +37,10 @@ public class AppointmentInteractor {
         }
     }
 
-    public void reloadAppoinmentListFromServer() {
+    public void reloadAppoinmentListFromServer(long userId) {
         LoadAppointmentListFromServerEvents event = new LoadAppointmentListFromServerEvents();
         try {
-//            List<Appointment> appointments = network.getAppointments();
-            List<Appointment> appointments = new ArrayList<>();
+            List<Appointment> appointments = HttpNetwork.getAppointmentList(0);
             event.setAppointments(appointments);
             bus.post(event);
         } catch (Exception e){
@@ -53,8 +52,7 @@ public class AppointmentInteractor {
     public void saveAppointent(Appointment appointment) {
         SaveAppointmentsEvents event = new SaveAppointmentsEvents();
         try {
-//            boolean succes = network.saveAppointment(appointemnt);
-            boolean succes = true;
+            boolean succes = HttpNetwork.saveAppointment(appointment);
             if (succes){
                 repository.saveAppointment(appointment);
                 event.setSucces(true);
@@ -73,8 +71,7 @@ public class AppointmentInteractor {
     public void reloadAppoinmentFromServer(Appointment appointment) {
         ReloadAppoinmentFromServerEvent event = new ReloadAppoinmentFromServerEvent();
         try {
-//            Appointment reloadedAppointent= network.reloadAppointment(appointemnt);
-            Appointment reloadedAppointent = null;
+            Appointment reloadedAppointent = HttpNetwork.reloadAppointment(appointment);
             event.setAppointment(reloadedAppointent);
             bus.post(event);
         } catch (Exception e){

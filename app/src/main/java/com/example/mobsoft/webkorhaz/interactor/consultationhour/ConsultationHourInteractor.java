@@ -3,6 +3,7 @@ package com.example.mobsoft.webkorhaz.interactor.consultationhour;
 import com.example.mobsoft.webkorhaz.interactor.consultationhour.events.SearchConsultationHourEvent;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDTO;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourSearch;
+import com.example.mobsoft.webkorhaz.network.HttpNetwork;
 
 import java.util.List;
 
@@ -24,9 +25,8 @@ public class ConsultationHourInteractor {
     public void searchConsultationHour(ConsultationHourSearch searchParam){
         SearchConsultationHourEvent event = new SearchConsultationHourEvent();
         try {
-//            List<ConsultationHourDTO> appointments = network.seachConsultationHour(searchParam);
-            List<ConsultationHourDTO> consultationHourDTOs =  null;
-            event.setConsultationHourDTOs(consultationHourDTOs);
+            List<ConsultationHourDTO> consultationHourDTOList = HttpNetwork.seachConsultationHour(searchParam);
+            event.setConsultationHourDTOs(consultationHourDTOList);
             bus.post(event);
         } catch (Exception e){
             event.setThrowable(e);
