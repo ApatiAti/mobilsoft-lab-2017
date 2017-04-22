@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">WebKorhaz</string>
+
+    <string name="login_welcome">Üdvözöljük!</string>
+    <string name="login_username">Felhasználó név</string>
+    <string name="login_pass">Jelszó</string>
+    <string name="title_activity_navigation_drawer_main">NavigationDrawerMain</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+
 </resources>

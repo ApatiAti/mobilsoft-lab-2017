@@ -13,7 +13,8 @@ import java.util.List;
 
 public class HttpNetwork {
     public static User startLogin(User user) {
-        return null;
+        // TODO
+        return user;
     }
 
     public static List<ConsultationHourDTO> seachConsultationHour(ConsultationHourSearch searchParam) {

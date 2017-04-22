@@ -69,6 +69,7 @@ public class LoginPresenter extends Presenter<LoginScreen> {
             }
             Log.e("Networking", "Error at login in", event.getThrowable());
         } else {
+            // TODO user mentése
             if (screen != null) {
                 screen.loginSucces();
             }

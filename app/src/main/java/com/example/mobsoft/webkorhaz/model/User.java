@@ -15,6 +15,11 @@ public class User {
     public User() {
     }
 
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
     public User(Long id, String email, String password, String token) {
         this.id = id;
         this.email = email;
