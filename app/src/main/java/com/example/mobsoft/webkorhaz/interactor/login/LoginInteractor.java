@@ -1,5 +1,6 @@
 package com.example.mobsoft.webkorhaz.interactor.login;
 
+import com.example.mobsoft.webkorhaz.MobSoftApplication;
 import com.example.mobsoft.webkorhaz.interactor.login.events.LoginEvent;
 import com.example.mobsoft.webkorhaz.model.User;
 import com.example.mobsoft.webkorhaz.network.HttpNetwork;
@@ -22,6 +23,7 @@ public class LoginInteractor {
     EventBus bus;
 
     public LoginInteractor() {
+        MobSoftApplication.injector.inject(this);
     }
 
     /**

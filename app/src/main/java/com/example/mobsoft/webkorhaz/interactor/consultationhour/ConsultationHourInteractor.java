@@ -1,5 +1,6 @@
 package com.example.mobsoft.webkorhaz.interactor.consultationhour;
 
+import com.example.mobsoft.webkorhaz.MobSoftApplication;
 import com.example.mobsoft.webkorhaz.interactor.consultationhour.events.SearchConsultationHourEvent;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDTO;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourSearch;
@@ -20,6 +21,7 @@ public class ConsultationHourInteractor {
     EventBus bus;
 
     public ConsultationHourInteractor() {
+        MobSoftApplication.injector.inject(this);
     }
 
     public void searchConsultationHour(ConsultationHourSearch searchParam){

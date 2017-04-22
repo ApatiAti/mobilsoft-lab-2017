@@ -1,6 +1,7 @@
 package com.example.mobsoft.webkorhaz.interactor.appointment;
 
 
+import com.example.mobsoft.webkorhaz.MobSoftApplication;
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointmentListFromDbEvent;
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointmentListFromServerEvents;
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.ReloadAppoinmentFromServerEvent;
@@ -23,6 +24,7 @@ public class AppointmentInteractor {
     EventBus bus;
 
     public AppointmentInteractor() {
+        MobSoftApplication.injector.inject(this);
     }
 
     public void loadAppointmentsFromDb() {
