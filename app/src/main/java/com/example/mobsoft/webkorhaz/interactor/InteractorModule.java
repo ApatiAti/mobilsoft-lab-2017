@@ -18,7 +18,6 @@ public class InteractorModule {
 		return new FavouritesInteractor();
 	}
 
-
 	@Provides
 	public AppointmentInteractor provideAppointment() {
 		return new AppointmentInteractor();
