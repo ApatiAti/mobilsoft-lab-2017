@@ -95,8 +95,9 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
     private void navigateToNavigationActivity() {
         Intent intent = new Intent(MainActivity.this, NavigationActivity.class);
         // Hogy ne tudjunk vissza navigálni
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
+//        finish();
     }
 
     /**
