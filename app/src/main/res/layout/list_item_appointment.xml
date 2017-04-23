@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textViewItemAppointmentDepartment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="13dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textSize="16sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/textViewItemAppointmentDate"
+        android:enabled="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:text="TextView"
+        android:textSize="16sp"
+        android:layout_below="@+id/textViewItemAppointmentDepartment"
+        android:layout_alignLeft="@+id/textViewItemAppointmentDepartment"
+        android:layout_alignStart="@+id/textViewItemAppointmentDepartment" />
+
+
+    <TextView
+        android:id="@+id/textViewItemAppointmentRoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="16sp"
+        android:layout_below="@+id/textViewItemAppointmentDate"
+        android:layout_alignLeft="@+id/textViewItemAppointmentDate"
+        android:layout_alignStart="@+id/textViewItemAppointmentDate" />
+
+</RelativeLayout>

@@ -28,6 +28,7 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.1.1'
     compile 'com.android.support:design:25.1.1'
+    compile 'com.android.support:support-v4:25.0.0'
     testCompile 'junit:junit:4.12'
 
     // Dagger 2 and Compiler
@@ -40,6 +41,4 @@ dependencies {
 
     compile 'com.github.satyan:sugar:1.4'
     compile 'de.greenrobot:eventbus:2.4.0'
-    compile 'com.android.support.constraint:constraint-layout:+'
-
 }

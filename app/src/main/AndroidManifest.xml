@@ -22,18 +22,19 @@
             android:name="DOMAIN_PACKAGE_NAME"
             android:value="hu.bme.aut.mobsoft.mobsoftlab.model" />
 
-        <activity android:name=".ui.login.LoginActivity">
+        <activity android:name=".ui.login.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.main.MainActivity" />
-        <activity
-            android:name=".ui.main.NavigationDrawerMain"
-            android:label="@string/title_activity_navigation_drawer_main"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".ui.main.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".ui.appointment.AppointmentActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
