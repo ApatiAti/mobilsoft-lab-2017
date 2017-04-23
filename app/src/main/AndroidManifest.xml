@@ -35,6 +35,8 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".ui.appointment.AppointmentActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.navigation.NavigationActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

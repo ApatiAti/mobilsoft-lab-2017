@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.miNavigation:
-                Intent intent = new Intent(MainActivity.this, NavigationActivity.class);
+                navigateToNavigationActivity();
                 return true;
             case R.id.miRefresh:
                 Toast.makeText(this, "//TODO Refresh!\n" , Toast.LENGTH_SHORT).show();
@@ -88,6 +88,17 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    /**
+     *  Átnavigálunk a NavigationActivity-re úgyhogy az nem kerül a BackStackre
+     */
+    private void navigateToNavigationActivity() {
+        Intent intent = new Intent(MainActivity.this, NavigationActivity.class);
+        // Hogy ne tudjunk vissza navigálni
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
+    }
+
     /**
      * Feltölti a képernyőt appointmentekkel
      * @param appointments

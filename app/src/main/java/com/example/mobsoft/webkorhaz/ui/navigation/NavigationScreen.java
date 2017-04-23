@@ -1,12 +1,13 @@
 package com.example.mobsoft.webkorhaz.ui.navigation;
 
+import android.view.View;
+
 /**
  * Created by mobsoft on 2017. 03. 31..
  */
 
 public interface NavigationScreen {
-    public void showConsultationHourSearch();
+    void error(String s);
 
-    public void showAppointmnent();
-
+    void afterLogout();
 }
