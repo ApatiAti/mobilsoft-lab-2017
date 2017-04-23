@@ -32,4 +32,8 @@ public class HttpNetwork {
     public static Appointment reloadAppointment(Appointment appointment) {
         return null;
     }
+
+    public static User startLogout() {
+        return null;
+    }
 }
