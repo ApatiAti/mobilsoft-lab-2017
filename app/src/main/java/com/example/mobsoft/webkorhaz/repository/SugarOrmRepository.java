@@ -6,6 +6,7 @@ import com.example.mobsoft.webkorhaz.model.Appointment;
 import com.example.mobsoft.webkorhaz.model.Todo;
 import com.orm.SugarContext;
 import com.orm.SugarRecord;
+import com.orm.query.Select;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,8 @@ public class SugarOrmRepository implements Repository {
 
     @Override
     public List<Appointment> getAppointments() {
-        return SugarRecord.listAll(Appointment.class);
+        return Select.from(Appointment.class).orderBy("beginDate").list();
+//        return SugarRecord.listAll(Appointment.class);
     }
 
     @Override

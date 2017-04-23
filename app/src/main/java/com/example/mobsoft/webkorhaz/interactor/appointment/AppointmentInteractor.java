@@ -10,6 +10,8 @@ import com.example.mobsoft.webkorhaz.model.Appointment;
 import com.example.mobsoft.webkorhaz.network.HttpNetwork;
 import com.example.mobsoft.webkorhaz.repository.Repository;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -30,7 +32,19 @@ public class AppointmentInteractor {
     public void loadAppointmentsFromDb() {
         LoadAppointmentListFromDbEvent event = new LoadAppointmentListFromDbEvent();
         try {
-            List<Appointment> appointments = repository.getAppointments();
+//            List<Appointment> appointments = repository.getAppointments();
+            // TEST code
+            List<Appointment> appointments = new ArrayList<>();
+            Appointment appointment = new Appointment(
+                    1l, new Date(), new Date(), "IB028", "Dr Kovács","Szemészet", "", 10l, 10l
+            );
+            Appointment appointment2 = new Appointment(
+                    1l, new Date(), new Date(), "IB028", "Dr Kovács", "Ortopédia", "", 10l, 10l
+            );
+
+            appointments.add(appointment);
+            appointments.add(appointment2);
+
             event.setAppointments(appointments);
             bus.post(event);
         } catch (Exception e){

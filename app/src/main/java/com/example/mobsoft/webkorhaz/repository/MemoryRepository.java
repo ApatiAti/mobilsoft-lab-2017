@@ -27,14 +27,14 @@ public class MemoryRepository implements Repository {
 		c.add(Calendar.HOUR_OF_DAY, +2);
 		Date endDate = c.getTime();
 
-		Appointment flight1 = new Appointment(1L, beginDate, endDate, "Ib025", "Dr Doktor", "Fáj fejem", 11L, 12L);
+		Appointment flight1 = new Appointment(1L, beginDate, endDate, "Ib025", "Dr Doktor", "Szemészet", "Fáj fejem", 11L, 12L);
 
 		c.add(Calendar.DAY_OF_YEAR, +1);
 		beginDate = c.getTime();
 		c.add(Calendar.HOUR_OF_DAY, +1);
 		endDate = c.getTime();
 
-		Appointment flight2 = new Appointment(2L, beginDate, endDate, "EB01", "Dr Doktor", "Cucc fejem", 15L, 17L);
+		Appointment flight2 = new Appointment(2L, beginDate, endDate, "EB01", "Dr Doktor", "Ortopédia", "Cucc fejem", 15L, 17L);
 
 		appointmentList = new ArrayList<>();
 		appointmentList.add(flight1);

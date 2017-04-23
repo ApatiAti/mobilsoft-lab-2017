@@ -18,6 +18,7 @@ public class Appointment {
     private Date endDate;
     private String room;
     private String doctorsName;
+    private String departmentName;
 
     private String complaint;
     private Long patientId;
@@ -26,12 +27,13 @@ public class Appointment {
     public Appointment() {
     }
 
-    public Appointment(Long id, Date beginDate, Date endDate, String room, String doctorsName, String complaint, Long patientId, Long consultationHourId) {
+    public Appointment(Long id, Date beginDate, Date endDate, String room, String doctorsName, String departmentName, String complaint, Long patientId, Long consultationHourId) {
         this.id = id;
         this.beginDate = beginDate;
         this.endDate = endDate;
         this.room = room;
         this.doctorsName = doctorsName;
+        this.departmentName = departmentName;
         this.complaint = complaint;
         this.patientId = patientId;
         this.consultationHourId = consultationHourId;
@@ -75,5 +77,13 @@ public class Appointment {
 
     public void setDoctorsName(String doctorsName) {
         this.doctorsName = doctorsName;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 }
