@@ -1,5 +1,6 @@
 package com.example.mobsoft.webkorhaz.model;
 
+import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDTO;
 import com.orm.dsl.Table;
 
 import java.io.Serializable;
@@ -19,7 +20,8 @@ public class Appointment implements Serializable {
     private Date endDate;
     private String room;
     private String doctorsName;
-    private String departmentName;;
+    private String departmentName;
+    private String chType;
 
     private String complaint;
     private Long patientId;
@@ -28,7 +30,7 @@ public class Appointment implements Serializable {
     public Appointment() {
     }
 
-    public Appointment(Long id, Date beginDate, Date endDate, String room, String doctorsName, String departmentName, String complaint, Long patientId, Long consultationHourId) {
+    public Appointment(Long id, Date beginDate, Date endDate, String room, String doctorsName, String departmentName, String complaint, Long patientId, Long consultationHourId, String chType) {
         this.id = id;
         this.beginDate = beginDate;
         this.endDate = endDate;
@@ -38,6 +40,7 @@ public class Appointment implements Serializable {
         this.complaint = complaint;
         this.patientId = patientId;
         this.consultationHourId = consultationHourId;
+        this.chType = chType;
     }
 
     public Appointment(Appointment oldAppointment) {
@@ -50,6 +53,20 @@ public class Appointment implements Serializable {
         this.complaint = oldAppointment.getComplaint();
         this.patientId = oldAppointment.getPatientId();
         this.consultationHourId = oldAppointment.getConsultationHourId();
+        this.chType = oldAppointment.getChType();
+    }
+
+    public Appointment(ConsultationHourDTO item) {
+//        this.id = oldAppointment.getId();
+        this.beginDate = item.getBeginDate();
+        this.endDate = item.getEndDate();
+        this.room = "Ib025";
+        this.doctorsName = "Doktor";
+        this.departmentName = "department";
+        this.complaint = "";
+        this.patientId = 123l;
+        this.consultationHourId = 1l;
+        this.chType = item.getTpye();
     }
 
     public Long getId() {
@@ -122,6 +139,14 @@ public class Appointment implements Serializable {
 
     public void setConsultationHourId(Long consultationHourId) {
         this.consultationHourId = consultationHourId;
+    }
+
+    public String getChType() {
+        return chType;
+    }
+
+    public void setChType(String chType) {
+        this.chType = chType;
     }
 
     @Override

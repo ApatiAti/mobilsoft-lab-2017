@@ -33,13 +33,12 @@ public class AppointmentInteractor {
         LoadAppointmentListFromDbEvent event = new LoadAppointmentListFromDbEvent();
         try {
 //            List<Appointment> appointments = repository.getAppointments();
-            // TEST code
             List<Appointment> appointments = new ArrayList<>();
             Appointment appointment = new Appointment(
-                    1l, new Date(), new Date(), "IB028", "Dr Kovács","Szemészet", "", 10l, 10l
+                    1l, new Date(), new Date(), "IB028", "Dr Kovács","Szemészet", "", 10l, 10l, "Valami típus"
             );
             Appointment appointment2 = new Appointment(
-                    1l, new Date(), new Date(), "IB028", "Dr Kovács", "Ortopédia", "", 10l, 10l
+                    1l, new Date(), new Date(), "IB028", "Dr Kovács", "Ortopédia", "", 10l, 10l, "Valami típus"
             );
 
             appointments.add(appointment);

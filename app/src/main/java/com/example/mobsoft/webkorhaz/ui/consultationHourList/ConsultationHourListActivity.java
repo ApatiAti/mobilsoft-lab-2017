@@ -12,6 +12,8 @@ import android.view.View;
 
 import com.example.mobsoft.webkorhaz.MobSoftApplication;
 import com.example.mobsoft.webkorhaz.R;
+import com.example.mobsoft.webkorhaz.interactor.appointment.AppointmentInteractor;
+import com.example.mobsoft.webkorhaz.model.Appointment;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDTO;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDtoList;
 import com.example.mobsoft.webkorhaz.ui.appointment.AppointmentActivity;
@@ -81,9 +83,11 @@ public class ConsultationHourListActivity extends AppCompatActivity implements C
             @Override
             public void onClick(View view, int position) {
                 ConsultationHourDTO item = consultationHourDtoList.get(position);
+                Appointment newAppointment = new Appointment(item);
                 Intent intent = new Intent(ConsultationHourListActivity.this, AppointmentActivity.class);
-                intent.putExtra(getString(R.string.resource_intent_consultationHourDto), item);
+                intent.putExtra(getString(R.string.resource_intent_appointment), newAppointment);
                 startActivity(intent);
+                finish();
             }
         }));
             }
