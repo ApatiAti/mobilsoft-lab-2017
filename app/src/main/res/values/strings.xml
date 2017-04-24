@@ -30,5 +30,7 @@
 
 
     <string name="resource_intent_consultationHour">consultationHourDtoList</string>
+    <string name="resource_intent_appointment">appointment</string>
     <string name="departmentName">departmentName</string>
+    <string name="resource_intent_appointment_position">appointment_position</string>
 </resources>

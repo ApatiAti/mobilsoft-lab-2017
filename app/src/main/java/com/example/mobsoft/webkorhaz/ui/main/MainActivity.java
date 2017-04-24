@@ -3,12 +3,14 @@ package com.example.mobsoft.webkorhaz.ui.main;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.mobsoft.webkorhaz.MobSoftApplication;
@@ -17,16 +19,20 @@ import com.example.mobsoft.webkorhaz.model.Appointment;
 import com.example.mobsoft.webkorhaz.ui.appointment.AppointmentActivity;
 import com.example.mobsoft.webkorhaz.ui.navigation.NavigationActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity implements MainScreen {
 
-    ListView listView;
+    RecyclerView recyclerView;
+    AppointmentAdapter appointmentAdapter;
+    private List<Appointment> appointmentList = new ArrayList<>();
 
     @Inject
     MainPresenter mainPresenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,15 +41,35 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
 
         MobSoftApplication.injector.inject(this);
 
-        listView = (ListView) findViewById(R.id.mainListAppointment);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        appointmentAdapter = new AppointmentAdapter(appointmentList);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+
+
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view_apppointment);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(appointmentAdapter);
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), layoutManager.getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onClick(View view, int position) {
+                Appointment appointment = appointmentList.get(position);
                 Intent intent = new Intent(MainActivity.this, AppointmentActivity.class);
-                // adatokat át kellene adni vhogy
+                intent.putExtra(getString(R.string.resource_intent_appointment), appointment);
+//                intent.putExtra(getString(R.string.resource_intent_appointment_position), position);
                 startActivity(intent);
             }
-        });
+
+//            @Override
+//            public void onLongClick(View view, int position) {
+//                Appointment movie = appointmentList.get(position);
+//                Toast.makeText(getApplicationContext(), "Hosszan " + movie.getDepartmentName() + " is selected!", Toast.LENGTH_SHORT).show();
+//            }
+        }));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        toolbar.setTitle(R.string.title_activity_main);
@@ -55,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
     protected void onStart() {
         super.onStart();
         mainPresenter.attachScreen(this);
-        // TODO ez így nem jó
+        // TODO ez így nem jó, mert ha saját magára navigálunk vissza akkor a presenter már fel van iratkozva erre aaz eseményre
         mainPresenter.loadAppointmentFromDb();
     }
 
@@ -106,10 +132,10 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
      */
     @Override
     public void showAppointments(List<Appointment> appointments) {
-        AppointmentListAdapter adapter = new AppointmentListAdapter(getBaseContext(), R.layout.list_item_appointment, appointments);
+        appointmentList.clear();
+        appointmentList.addAll(appointments);
 
-        listView.setAdapter(adapter);
-
+        appointmentAdapter.notifyDataSetChanged();
     }
 
     @Override

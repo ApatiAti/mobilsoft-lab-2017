@@ -22,34 +22,10 @@
             app:popupTheme="@style/AppTheme.PopupOverlay"
             android:gravity="top|start">
 
-
-            <!-- e szerint meg lehet csinálni talán http://stackoverflow.com/questions/33233902/how-to-create-toolbar-with-custom-button-on-the-left-->
-            <!--<android.support.v7.widget.LinearLayoutCompat-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:orientation="horizontal"-->
-            <!--&gt;-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/toolbar_main_navigation"-->
-                <!--style="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle"-->
-                <!--android:layout_width="270dp"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:background="?attr/selectableItemBackground"-->
-                <!--android:drawableLeft="@drawable/ic_menu"-->
-                <!--android:textAllCaps="true"-->
-                <!--/>-->
-
-        <!--</android.support.v7.widget.LinearLayoutCompat>-->
-
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
-    <ListView
-        android:id="@+id/mainListAppointment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    <include layout="@layout/content_main" />
 
 </android.support.design.widget.CoordinatorLayout>

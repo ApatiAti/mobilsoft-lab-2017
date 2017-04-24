@@ -2,13 +2,14 @@ package com.example.mobsoft.webkorhaz.model;
 
 import com.orm.dsl.Table;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Apati on 2017.04.03..
  */
 @Table
-public class Appointment {
+public class Appointment implements Serializable {
     /* TODO ez nem lesz jó mivel a szerver az consultationOHour-okat és appointment-ekete tárol
     mind a kettőt el kéne tárolni hasonlóan mitn a szerver oldalon.
     Továbbá ameg kell oldani azt hogy a user-enként külön legyenek eltárolva a telóban a dolgok
@@ -85,5 +86,21 @@ public class Appointment {
 
     public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Appointment that = (Appointment) o;
+
+        return id != null ? id.equals(that.id) : that.id == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 }
