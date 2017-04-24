@@ -10,7 +10,7 @@ import java.util.List;
 
 public class SaveAppointmentsEvents {
     private int code;
-    private boolean succes;
+    private Appointment appointment;
     private Throwable throwable;
 
     //<editor-fold desc="Constructors|Getters|Setters">
@@ -26,12 +26,12 @@ public class SaveAppointmentsEvents {
         this.code = code;
     }
 
-    public boolean isSucces() {
-        return succes;
+    public Appointment getAppointment() {
+        return appointment;
     }
 
-    public void setSucces(boolean succes) {
-        this.succes = succes;
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
     }
 
     public Throwable getThrowable() {

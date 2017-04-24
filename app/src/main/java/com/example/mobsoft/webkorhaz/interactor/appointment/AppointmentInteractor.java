@@ -67,18 +67,14 @@ public class AppointmentInteractor {
     public void saveAppointent(Appointment appointment) {
         SaveAppointmentsEvents event = new SaveAppointmentsEvents();
         try {
-            boolean succes = HttpNetwork.saveAppointment(appointment);
-            if (succes){
-                repository.saveAppointment(appointment);
-                event.setSucces(true);
-            } else {
-                event.setSucces(false);
-            }
+            Appointment savedAppointment = HttpNetwork.saveAppointment(appointment);
+
+            repository.saveAppointment(savedAppointment);
+            event.setAppointment(savedAppointment);
 
             bus.post(event);
         } catch (Exception e){
             event.setThrowable(e);
-            event.setSucces(false);
             bus.post(event);
         }
     }

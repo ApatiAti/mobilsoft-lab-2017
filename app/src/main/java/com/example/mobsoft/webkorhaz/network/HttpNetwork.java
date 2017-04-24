@@ -39,8 +39,8 @@ public class HttpNetwork {
         return null;
     }
 
-    public static boolean saveAppointment(Appointment appointment) {
-        return true;
+    public static Appointment saveAppointment(Appointment appointment) {
+        return null;
     }
 
     public static Appointment reloadAppointment(Appointment appointment) {

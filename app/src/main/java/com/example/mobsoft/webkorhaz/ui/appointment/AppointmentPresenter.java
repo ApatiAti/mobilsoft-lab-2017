@@ -102,7 +102,7 @@ public class AppointmentPresenter extends Presenter<AppointmentScreen> {
             Log.e("Networking", msg, event.getThrowable());
         } else {
             if (screen != null) {
-                // Mit kéne itt csinálni?
+                screen.appointmentSaved(event.getAppointment());
             }
         }
     }
