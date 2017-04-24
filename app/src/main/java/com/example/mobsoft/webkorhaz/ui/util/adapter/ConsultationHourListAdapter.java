@@ -1,13 +1,12 @@
 package com.example.mobsoft.webkorhaz.ui.util.adapter;
 
 import android.content.Context;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.mobsoft.webkorhaz.R;
@@ -21,39 +20,54 @@ import java.util.List;
  * Created by Apati on 2017.04.24..
  */
 
-public class ConsultationHourListAdapter extends ArrayAdapter<ConsultationHourDTO> {
+public class ConsultationHourListAdapter extends RecyclerView.Adapter<ConsultationHourListAdapter.ConsultationHourDtoViewHolder> {
 
-    DateFormat fullDateFormat;
-    DateFormat timeFormat = new SimpleDateFormat("hh:mm");
+    DateFormat fullDateTimeFormat;
+    DateFormat timeFormat;
+    List<ConsultationHourDTO> consultationHourDTOList;
 
-    public ConsultationHourListAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<ConsultationHourDTO> objects) {
-        super(context, resource, objects);
-        fullDateFormat = android.text.format.DateFormat.getDateFormat(context.getApplicationContext());
+
+
+    public class ConsultationHourDtoViewHolder extends RecyclerView.ViewHolder{
+        TextView textViewTypeName;
+        TextView textViewInterval;
+        TextView textViewPatientNumbers;
+
+        public ConsultationHourDtoViewHolder(View itemView) {
+            super(itemView);
+            textViewTypeName = (TextView) itemView.findViewById(R.id.chListViewTypeName);
+            textViewInterval = (TextView) itemView.findViewById(R.id.chListViewInterval);
+            textViewPatientNumbers = (TextView) itemView.findViewById(R.id.chListPatientNumbers);
+        }
     }
 
-    @NonNull
+    public ConsultationHourListAdapter(List<ConsultationHourDTO> consultationHourDTOList, DateFormat fullDateTimeFormat, DateFormat timeFormat) {
+        this.consultationHourDTOList = consultationHourDTOList;
+        this.fullDateTimeFormat = fullDateTimeFormat;
+        this.timeFormat = timeFormat;
+    }
+
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        // TODO optimalize
-        //  http://www.vogella.com/tutorials/AndroidListView/article.html#androidlists_overview
-        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    public ConsultationHourDtoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View rowView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_consultationhour_dto, parent, false);
+        return new ConsultationHourDtoViewHolder(rowView);
+    }
 
-        View rowView = inflater.inflate(R.layout.list_item_consultationhour_dto, parent, false);
+    @Override
+    public void onBindViewHolder(ConsultationHourDtoViewHolder holder, int position) {
+        ConsultationHourDTO item = consultationHourDTOList.get(position);
 
-        TextView textViewTypeName = (TextView) rowView.findViewById(R.id.chListViewTypeName);
-        TextView textViewInterval = (TextView) rowView.findViewById(R.id.chListViewInterval);
-        TextView textViewPatientNumbers = (TextView) rowView.findViewById(R.id.chListPatientNumbers);
-
-        ConsultationHourDTO item = getItem(position);
-
-        String date = fullDateFormat.format(item.getBeginDate()) + " - " + timeFormat.format(item.getEndDate()) ;
+        String date = fullDateTimeFormat.format(item.getBeginDate()) + " - " + timeFormat.format(item.getEndDate()) ;
         String patientNumbers = item.getAvailable() + " / " + item.getMaxNumberOfPatient();
 
-        textViewTypeName.setText(item.getTpye());
-        textViewInterval.setText(date);
-        textViewPatientNumbers.setText(patientNumbers);
+        holder.textViewTypeName.setText(item.getTpye());
+        holder.textViewPatientNumbers.setText(patientNumbers);
+        holder.textViewInterval.setText(date);
+    }
 
-        return rowView;
+    @Override
+    public int getItemCount() {
+        return consultationHourDTOList.size();
     }
 
 }

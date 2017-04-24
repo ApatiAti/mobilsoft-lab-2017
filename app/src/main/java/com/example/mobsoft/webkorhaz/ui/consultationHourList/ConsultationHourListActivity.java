@@ -1,23 +1,26 @@
 package com.example.mobsoft.webkorhaz.ui.consultationHourList;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import com.example.mobsoft.webkorhaz.MobSoftApplication;
 import com.example.mobsoft.webkorhaz.R;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDTO;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDtoList;
 import com.example.mobsoft.webkorhaz.ui.appointment.AppointmentActivity;
-import com.example.mobsoft.webkorhaz.ui.main.MainActivity;
+import com.example.mobsoft.webkorhaz.ui.main.RecyclerTouchListener;
 import com.example.mobsoft.webkorhaz.ui.util.adapter.ConsultationHourListAdapter;
 
-import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -28,9 +31,12 @@ import javax.inject.Inject;
 
 public class ConsultationHourListActivity extends AppCompatActivity implements ConsultationHourListScreen {
 
-    private List<ConsultationHourDTO> consultationHourDTOList;
+    static DateFormat timeFormat;
+    static DateFormat fullDateTimeFormat;
 
-    ListView listView;
+    RecyclerView recyclerView;
+    ConsultationHourListAdapter consultationHourListAdapter;
+    private List<ConsultationHourDTO> consultationHourDtoList = new ArrayList<>();
 
     @Inject
     ConsultationHourListPresenter consultationHourListPresenter;
@@ -43,6 +49,9 @@ public class ConsultationHourListActivity extends AppCompatActivity implements C
 
         MobSoftApplication.injector.inject(this);
 
+        timeFormat = new SimpleDateFormat(getString(R.string.timeFormat));
+        fullDateTimeFormat = new SimpleDateFormat(getString(R.string.fullDateTimeFormat));
+
         ConsultationHourDtoList dtoList = (ConsultationHourDtoList) getIntent().getSerializableExtra(getString(R.string.resource_intent_consultationHour));
         String departmentName = (String) getIntent().getSerializableExtra(getString(R.string.departmentName));
 
@@ -52,22 +61,29 @@ public class ConsultationHourListActivity extends AppCompatActivity implements C
         setSupportActionBar(toolbar);
 
 
-        consultationHourDTOList = dtoList.getList();
+        consultationHourDtoList = dtoList.getList();
+        consultationHourListAdapter = new ConsultationHourListAdapter(consultationHourDtoList, fullDateTimeFormat, timeFormat);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
 
-        ConsultationHourListAdapter adapter = new ConsultationHourListAdapter(getBaseContext(), R.layout.list_item_consultationhour_dto, consultationHourDTOList);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view_consultationhour);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(consultationHourListAdapter);
 
-        listView = (ListView) findViewById(R.id.consultatioHourSearchList);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), layoutManager.getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onClick(View view, int position) {
+                ConsultationHourDTO item = consultationHourDtoList.get(position);
                 Intent intent = new Intent(ConsultationHourListActivity.this, AppointmentActivity.class);
-                // adatokat át kellene adni vhogy
+                intent.putExtra(getString(R.string.resource_intent_consultationHourDto), item);
                 startActivity(intent);
             }
-        });
-
-    }
+        }));
+            }
 
     @Override
     protected void onStart() {
