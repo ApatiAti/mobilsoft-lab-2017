@@ -38,7 +38,7 @@ import javax.inject.Inject;
 
 public class ConsultationHourSearchActivity extends AppCompatActivity implements ConsultationHourSearchScreen {
 
-    private SimpleDateFormat simpleDateFormat;
+    static SimpleDateFormat simpleDateFormat;
 
     List<DepartmentData> departmentDataList = new ArrayList<>();
     Map<Long, List<ConsultationHourType>> departmentTypeMap = new HashMap<>();
@@ -64,7 +64,7 @@ public class ConsultationHourSearchActivity extends AppCompatActivity implements
         setSupportActionBar(toolbar);
 
 
-        simpleDateFormat = (SimpleDateFormat) android.text.format.DateFormat.getDateFormat(getApplicationContext());
+        simpleDateFormat = new SimpleDateFormat(getString(R.string.fullDateTimeFormat));
 
         TextView startDateTextView = (TextView) findViewById(R.id.chsearchDateBegin);
         TextView endDateTextView = (TextView) findViewById(R.id.chsearchDateEnd);

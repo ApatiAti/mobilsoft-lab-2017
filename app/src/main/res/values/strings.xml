@@ -38,6 +38,6 @@
 
 
     <string name="timeFormat">hh:mm</string>
-    <string name="fullDateTimeFormat">yyyy-MM-dd hh:mm</string>
+    <string name="fullDateTimeFormat">yyyy-MM-dd HH:mm</string>
     <string name="resource_intent_consultationHourDto">consultationHourDto</string>
 </resources>

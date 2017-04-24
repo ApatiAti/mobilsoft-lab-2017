@@ -29,9 +29,6 @@ public class MySlideDateTimeListener extends SlideDateTimeListener {
         setSelectedDate(date);
 
         String format = mFormatter.format(date);
-        Toast.makeText(textView.getContext(),
-                format, Toast.LENGTH_SHORT).show();
-
         textView.setText(format);
     }
 
