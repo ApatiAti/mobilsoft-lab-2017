@@ -1,15 +1,19 @@
 package com.example.mobsoft.webkorhaz.ui.appointment;
 
 import android.app.Application;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.mobsoft.webkorhaz.MobSoftApplication;
 import com.example.mobsoft.webkorhaz.R;
 import com.example.mobsoft.webkorhaz.model.Appointment;
+import com.example.mobsoft.webkorhaz.ui.main.MainActivity;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -29,6 +33,8 @@ public class AppointmentActivity extends AppCompatActivity implements Appointmen
     Appointment oldAppointment;
     Appointment activeAppointment;
 
+//    Integer position;
+
     @Inject
     AppointmentPresenter appointmentPresenter;
 
@@ -44,7 +50,8 @@ public class AppointmentActivity extends AppCompatActivity implements Appointmen
         timeFormat = new SimpleDateFormat(getString(R.string.timeFormat));
 
         oldAppointment = (Appointment) getIntent().getSerializableExtra(getString(R.string.resource_intent_appointment));
-        refreshAppointmentFromOldValue(oldAppointment);
+//        position = (Integer) getIntent().getSerializableExtra(getString(R.string.resource_intent_appointment_position));
+        refreshAppointmentFromOldValue();
 
         EditText editTextDoctor = (EditText) findViewById(R.id.appointmentEditDoctor);
         EditText editTextRoom = (EditText) findViewById(R.id.appointmentEditRoom);
@@ -88,12 +95,48 @@ public class AppointmentActivity extends AppCompatActivity implements Appointmen
         Toast.makeText(this, "Hiba történt! " + message, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void appointmentSaved(Appointment appointment) {
+        Toast.makeText(this, "Sikeres appointment mentés! ", Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(AppointmentActivity.this, MainActivity.class);
+//      "felesleges" mert a MainActivity-n mindig db-ből frissül majd
+//        i.putExtra(getString(R.string.resource_intent_appointment), appointment);
+//        i.putExtra(getString(R.string.resource_intent_appointment_position), position);
+
+        startActivity(i);
+        finish();
+    }
+
     public void saveAppointment(Appointment appointment) {
         appointmentPresenter.saveAppointment(appointment);
     }
 
-    public void refreshAppointmentFromOldValue(Appointment oldAppointment) {
+    public void refreshAppointmentFromOldValue() {
         activeAppointment = new Appointment(oldAppointment);
+    }
+
+
+    // Menu ikonok inflate-elése az actionbar-ban
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.getMenuInflater().inflate(R.menu.menu_appointment, menu);
+        return true;
+    }
+
+    // Menu elemek onClick eseményének kezelése
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.miRefresh:
+                refreshAppointmentFromOldValue();
+                return true;
+            case R.id.miSave:
+                appointmentPresenter.saveAppointment(activeAppointment);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 

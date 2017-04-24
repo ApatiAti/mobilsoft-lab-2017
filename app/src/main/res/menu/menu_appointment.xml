@@ -4,14 +4,14 @@
     <item
         android:id="@+id/miReload"
         android:orderInCategory="100"
-        android:icon="@drawable/ic_menu"
+        android:icon="@drawable/ic_refresh"
         app:showAsAction="always"
         android:title="@string/appointment_reload">
     </item>
     <item
         android:id="@+id/miSave"
-        android:icon="@drawable/ic_refresh"
-        app:showAsAction="ifRoom|withText"
+        android:icon="@drawable/ic_save"
+        app:showAsAction="always"
         android:title="@string/appointment_save">
     </item>
 </menu>
