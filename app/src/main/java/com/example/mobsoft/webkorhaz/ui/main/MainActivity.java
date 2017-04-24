@@ -18,7 +18,10 @@ import com.example.mobsoft.webkorhaz.R;
 import com.example.mobsoft.webkorhaz.model.Appointment;
 import com.example.mobsoft.webkorhaz.ui.appointment.AppointmentActivity;
 import com.example.mobsoft.webkorhaz.ui.navigation.NavigationActivity;
+import com.example.mobsoft.webkorhaz.ui.util.adapter.AppointmentAdapter;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +29,7 @@ import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity implements MainScreen {
 
+    DateFormat dateFormat;
     RecyclerView recyclerView;
     AppointmentAdapter appointmentAdapter;
     private List<Appointment> appointmentList = new ArrayList<>();
@@ -40,8 +44,8 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
         setContentView(R.layout.activity_main);
 
         MobSoftApplication.injector.inject(this);
-
-        appointmentAdapter = new AppointmentAdapter(appointmentList);
+        dateFormat = new SimpleDateFormat(getString(R.string.fullDateTimeFormat));
+        appointmentAdapter = new AppointmentAdapter(appointmentList, dateFormat);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
 
 
