@@ -60,6 +60,9 @@ public class ConsultationHourListActivity extends AppCompatActivity implements C
         toolbar.setTitle(departmentName);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 
         consultationHourDtoList = dtoList.getList();
         consultationHourListAdapter = new ConsultationHourListAdapter(consultationHourDtoList, fullDateTimeFormat, timeFormat);
@@ -108,5 +111,12 @@ public class ConsultationHourListActivity extends AppCompatActivity implements C
     @Override
     public void showApointmentCreateScreen() {
 
+    }
+
+    // Toolbar back button
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

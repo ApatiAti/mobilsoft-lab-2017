@@ -71,6 +71,7 @@ public class AppointmentPresenter extends Presenter<AppointmentScreen> {
      * {@link ShowAppointmentEvent} eventeket a {@link EventBus}-ról feldolgozó metódus. Android UI szálát hasznélja a feldolgozásra
      * @param event
      */
+    /* TODO átnézni kell-e ez
     public void onEventMainThread(ShowAppointmentEvent event) {
         if (event.getThrowable() != null) {
             event.getThrowable().printStackTrace();
@@ -85,6 +86,7 @@ public class AppointmentPresenter extends Presenter<AppointmentScreen> {
             }
         }
     }
+    */
 
     /**
      * {@link SaveAppointmentsEvents} eventeket a {@link EventBus}-ról feldolgozó metódus. Android UI szálát hasznélja a feldolgozásra
@@ -109,6 +111,7 @@ public class AppointmentPresenter extends Presenter<AppointmentScreen> {
      * {@link ReloadAppoinmentFromServerEvent} eventeket a {@link EventBus}-ról feldolgozó metódus. Android UI szálát hasznélja a feldolgozásra
      * @param event
      */
+    /* TODO átnézni kell-e ez
     public void onEventMainThread(ReloadAppoinmentFromServerEvent event) {
         if (event.getThrowable() != null) {
             event.getThrowable().printStackTrace();
@@ -123,4 +126,5 @@ public class AppointmentPresenter extends Presenter<AppointmentScreen> {
             }
         }
     }
+    */
 }

@@ -28,6 +28,13 @@
     <string name="consultationHourSearch_type">Rendelés típus</string>
     <string name="consultationHourSearch_date_interval">Idő intervallum</string>
 
+    <string name="appointment_doctor">Doctor</string>
+    <string name="appointment_room">Helyszín</string>
+    <string name="appointment_date">Időpont</string>
+    <string name="appointment_complaints">Beteg panaszai</string>
+    <string name="appointment_reload">Visszaállítás</string>
+    <string name="appointment_save">Mentés</string>
+
 
     <string name="resource_intent_consultationHour">consultationHourDtoList</string>
     <string name="resource_intent_appointment">appointment</string>
@@ -40,4 +47,5 @@
     <string name="timeFormat">hh:mm</string>
     <string name="fullDateTimeFormat">yyyy-MM-dd HH:mm</string>
     <string name="resource_intent_consultationHourDto">consultationHourDto</string>
+
 </resources>

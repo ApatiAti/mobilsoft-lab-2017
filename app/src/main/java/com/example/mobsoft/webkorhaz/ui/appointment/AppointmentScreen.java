@@ -9,6 +9,4 @@ public interface AppointmentScreen {
 
     public void showMessage(String message);
 
-    public void showAppointment(Appointment appointment);
-
 }
