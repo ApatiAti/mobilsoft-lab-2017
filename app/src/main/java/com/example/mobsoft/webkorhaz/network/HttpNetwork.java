@@ -8,6 +8,7 @@ import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourType;
 import com.example.mobsoft.webkorhaz.model.dto.DepartmentData;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,7 +22,17 @@ public class HttpNetwork {
     }
 
     public static List<ConsultationHourDTO> seachConsultationHour(ConsultationHourSearch searchParam) {
-        return null;
+        List<ConsultationHourDTO> list = new ArrayList<>();
+        ConsultationHourDTO dto = new ConsultationHourDTO();
+        Date date = new Date();
+        dto.setBeginDate(date);
+        dto.setEndDate(new Date(date.getTime()+ 1000*60*60));
+        dto.setAvailable(10);
+        dto.setMaxNumberOfPatient(12);
+        dto.setTpye("Vállon veregetés");
+
+        list.add(dto);
+        return list;
     }
 
     public static List<Appointment> getAppointmentList(long userId) {

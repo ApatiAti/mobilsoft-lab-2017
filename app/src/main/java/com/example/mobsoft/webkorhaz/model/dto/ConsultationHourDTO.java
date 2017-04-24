@@ -1,12 +1,13 @@
 package com.example.mobsoft.webkorhaz.model.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Apati on 2017.04.05..
  */
 
-public class ConsultationHourDTO {
+public class ConsultationHourDTO implements Serializable {
     // nem kell mert ott lesz az előző oldalról
     //    public String departmentName;
     public String tpye;

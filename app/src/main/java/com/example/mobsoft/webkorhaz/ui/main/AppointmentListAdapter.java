@@ -27,7 +27,7 @@ public class AppointmentListAdapter extends ArrayAdapter<Appointment> {
 
     public AppointmentListAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<Appointment> objects) {
         super(context, resource, objects);
-         dateFormat = android.text.format.DateFormat.getDateFormat(context.getApplicationContext());
+        dateFormat = android.text.format.DateFormat.getDateFormat(context.getApplicationContext());
     }
 
 

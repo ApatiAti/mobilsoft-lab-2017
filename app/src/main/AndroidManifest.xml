@@ -32,7 +32,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.main.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="@string/title_activity_main"/>
         <activity android:name=".ui.appointment.AppointmentActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.navigation.NavigationActivity"
@@ -40,6 +41,9 @@
         <activity android:name=".ui.ConsultationHourSearch.ConsultationHourSearchActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:label="@string/title_activity_consultationHourSearch"/>
+        <activity android:name=".ui.consultationHourList.ConsultationHourListActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="@string/title_activity_consultationHourListActivity" />
 
     </application>
 

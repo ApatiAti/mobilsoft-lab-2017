@@ -5,6 +5,7 @@
     <string name="title_activity_main">Időpontok</string>
     <string name="title_activity_navigation">A korház alkalmazás</string>
     <string name="title_activity_consultationHourSearch">Rendelés keresés</string>
+    <string name="title_activity_consultationHourListActivity">Keresési eredmények</string>
 
     <string name="login_welcome">Üdvözöljük!</string>
     <string name="login_username">Felhasználó név</string>
@@ -28,4 +29,6 @@
     <string name="consultationHourSearch_date_interval">Idő intervallum</string>
 
 
+    <string name="resource_intent_consultationHour">consultationHourDtoList</string>
+    <string name="departmentName">departmentName</string>
 </resources>

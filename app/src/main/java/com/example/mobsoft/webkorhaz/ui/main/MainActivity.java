@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
         });
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.title_activity_main);
+//        toolbar.setTitle(R.string.title_activity_main);
         // Sets the Toolbar to act as the ActionBar
         setSupportActionBar(toolbar);
     }

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:paddingTop="10dp">
+
+    <TextView
+        android:id="@+id/chListViewTypeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="13dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="8dp"
+        android:textSize="20sp"
+        android:text="Vizsgálat"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/chListViewInterval"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/chListViewTypeName"
+        android:layout_alignStart="@+id/chListViewTypeName"
+        android:layout_below="@+id/chListViewTypeName"
+        android:layout_marginTop="8dp"
+        android:textSize="20sp"
+        android:text="2016.02.12 15:00 - 16:00" />
+
+    <TextView
+        android:id="@+id/chListPatientNumbers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:textSize="20sp"
+        android:text="12/20"
+        android:layout_alignBaseline="@+id/chListViewInterval"
+        android:layout_alignBottom="@+id/chListViewInterval"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+
+</RelativeLayout>

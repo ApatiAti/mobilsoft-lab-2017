@@ -37,7 +37,8 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             >
 
             <ImageView
@@ -52,6 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.8"
+                android:paddingTop="7dp"
                 android:ems="10"
                 android:onClick="showAppointmentList"
                 android:text="@string/navigation_appointment"
@@ -61,7 +63,8 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="10dp" >
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp" >
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -75,6 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.8"
+                android:paddingTop="7dp"
                 android:ems="10"
                 android:text="@string/navigation_consultationHour"
                 android:textColor="@android:color/black"
@@ -91,7 +95,8 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="@dimen/table_padding_top">
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
 
             <ImageView
                 android:id="@+id/imageView3"
@@ -105,6 +110,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.8"
+                android:paddingTop="7dp"
                 android:ems="10"
                 android:text="@string/navigation_logout"
                 android:textColor="@android:color/black"

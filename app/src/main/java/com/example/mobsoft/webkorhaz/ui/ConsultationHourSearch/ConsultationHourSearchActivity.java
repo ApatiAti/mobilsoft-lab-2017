@@ -1,24 +1,31 @@
 package com.example.mobsoft.webkorhaz.ui.ConsultationHourSearch;
 
-import android.database.DataSetObservable;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.ScrollingTabContainerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mobsoft.webkorhaz.MobSoftApplication;
 import com.example.mobsoft.webkorhaz.R;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDTO;
+import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDtoList;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourSearch;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourType;
 import com.example.mobsoft.webkorhaz.model.dto.DepartmentData;
+import com.example.mobsoft.webkorhaz.ui.MySlideDateTimeListener;
+import com.example.mobsoft.webkorhaz.ui.consultationHourList.ConsultationHourListActivity;
+import com.github.jjobes.slidedatetimepicker.SlideDateTimeListener;
+import com.github.jjobes.slidedatetimepicker.SlideDateTimePicker;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,11 +38,16 @@ import javax.inject.Inject;
 
 public class ConsultationHourSearchActivity extends AppCompatActivity implements ConsultationHourSearchScreen {
 
+    private SimpleDateFormat simpleDateFormat;
+
     List<DepartmentData> departmentDataList = new ArrayList<>();
     Map<Long, List<ConsultationHourType>> departmentTypeMap = new HashMap<>();
 
     Spinner spinnerDepartmentName;
     Spinner spinnerTypeName;
+
+    MySlideDateTimeListener startDateListener;
+    MySlideDateTimeListener endDateListener;
 
     @Inject
     ConsultationHourSearchPresenter consultationHourSearchPresenter;
@@ -50,6 +62,20 @@ public class ConsultationHourSearchActivity extends AppCompatActivity implements
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         // Sets the Toolbar to act as the ActionBar
         setSupportActionBar(toolbar);
+
+
+        simpleDateFormat = (SimpleDateFormat) android.text.format.DateFormat.getDateFormat(getApplicationContext());
+
+        TextView startDateTextView = (TextView) findViewById(R.id.chsearchDateBegin);
+        TextView endDateTextView = (TextView) findViewById(R.id.chsearchDateEnd);
+
+        Date sysdate = new Date();
+        startDateTextView.setText(simpleDateFormat.format(sysdate));
+        endDateTextView.setText(simpleDateFormat.format(sysdate));
+
+
+        startDateListener = new MySlideDateTimeListener(startDateTextView, simpleDateFormat);
+        endDateListener = new MySlideDateTimeListener(endDateTextView, simpleDateFormat);
 
         creatingSpinners();
     }
@@ -72,7 +98,7 @@ public class ConsultationHourSearchActivity extends AppCompatActivity implements
     }
 
     public void initializingTypeNameSpinner(){
-        Long departmentId = ((DepartmentData) spinnerDepartmentName.getSelectedItem()).getDepartmentId();
+        Long departmentId = getSelectedDepartmentData().getDepartmentId();
         List<ConsultationHourType> consultationHourTypes = departmentTypeMap.get(departmentId);
 
 
@@ -81,6 +107,10 @@ public class ConsultationHourSearchActivity extends AppCompatActivity implements
         consultationTypeArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTypeName.setAdapter(consultationTypeArrayAdapter);
 
+    }
+
+    private DepartmentData getSelectedDepartmentData() {
+        return (DepartmentData) spinnerDepartmentName.getSelectedItem();
     }
 
     @Override
@@ -114,15 +144,28 @@ public class ConsultationHourSearchActivity extends AppCompatActivity implements
         }
     }
 
+    public void searchConsultationHour(View view) {
+        DepartmentData selectedDepartmentData = getSelectedDepartmentData();
+        ConsultationHourType selectedConsultationHourType = getSelectedConsultationHourType();
 
-    public void searchConsultationHour() {
-        // navigálás tovább az adatokkal.
-//        consultationHourSearchPresenter.search(new ConsultationHourSearch());
+        ConsultationHourSearch consultationHourSearch = new ConsultationHourSearch();
+        consultationHourSearch.setBeginDate(startDateListener.getSelectedDate());
+        consultationHourSearch.setEndDate(startDateListener.getSelectedDate());
+        consultationHourSearch.setDepartment(selectedDepartmentData.getDepartmentName());
+        consultationHourSearch.setType(selectedConsultationHourType.getType());
 
-        String departmentName = ((DepartmentData) spinnerDepartmentName.getSelectedItem()).getDepartmentName();
-        String chTypeName= ((ConsultationHourType) spinnerTypeName.getSelectedItem()).getType();
+        consultationHourSearchPresenter.search(consultationHourSearch);
+
+        String departmentName = selectedDepartmentData.getDepartmentName();
+        String chTypeName = selectedConsultationHourType.getType();
         Toast.makeText(this, "Sikeres keresés: " + departmentName + " ; " + chTypeName, Toast.LENGTH_SHORT).show();
+
     }
+
+    private ConsultationHourType getSelectedConsultationHourType() {
+        return (ConsultationHourType)spinnerTypeName.getSelectedItem();
+    }
+
 
     @Override
     public void loadDepartmentData(List<DepartmentData> dataList) {
@@ -143,7 +186,32 @@ public class ConsultationHourSearchActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void showSearchResults(List<ConsultationHourDTO> consultationHourDTOs) {
-
+    public void showSearchResults(List<ConsultationHourDTO> consultationHourDTOList) {
+        Intent intent = new Intent(this, ConsultationHourListActivity.class);
+        intent.putExtra(getString(R.string.resource_intent_consultationHour), new ConsultationHourDtoList(consultationHourDTOList));
+        startActivity(intent);
     }
+
+
+    public void selectDateTime(View view) {
+        SlideDateTimeListener listener;
+        if (view.getId() ==  R.id.chsearchDateBegin ){
+            listener = startDateListener;
+        } else {
+            listener = endDateListener;
+        }
+
+        new SlideDateTimePicker.Builder(getSupportFragmentManager())
+                .setListener(listener)
+                .setInitialDate(new Date())
+                .setMinDate(new Date())
+                //.setMaxDate(maxDate)
+                .setIs24HourTime(true)
+                .setTheme(SlideDateTimePicker.HOLO_LIGHT)
+//                .setIndicatorColor(Color.parseColor("#990000"))
+                .build()
+                .show();
+    }
+
+
 }
