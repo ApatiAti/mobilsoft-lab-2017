@@ -4,6 +4,7 @@
     <string name="title_activity_login">WebKorház</string>
     <string name="title_activity_main">Időpontok</string>
     <string name="title_activity_navigation">A korház alkalmazás</string>
+    <string name="title_activity_consultationHourSearch">Rendelés keresés</string>
 
     <string name="login_welcome">Üdvözöljük!</string>
     <string name="login_username">Felhasználó név</string>
@@ -20,6 +21,11 @@
     <string name="navigation_logout">Kijelentkezés</string>
     <string name="navigation_settings">Beállítások</string>
     <string name="navigation_error">Hiba történt a kijelentkezés közben\n</string>
+
+    <string name="consultationHourSearch_search">Keresés</string>
+    <string name="consultationHourSearch_department">Osztály</string>
+    <string name="consultationHourSearch_type">Rendelés típus</string>
+    <string name="consultationHourSearch_date_interval">Idő intervallum</string>
 
 
 </resources>

@@ -3,18 +3,16 @@ package com.example.mobsoft.webkorhaz.ui.ConsultationHourSearch;
 import android.util.Log;
 
 import com.example.mobsoft.webkorhaz.interactor.consultationhour.ConsultationHourInteractor;
+import com.example.mobsoft.webkorhaz.interactor.consultationhour.events.GetDepartmentsDataEvent;
 import com.example.mobsoft.webkorhaz.interactor.consultationhour.events.SearchConsultationHourEvent;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourSearch;
 import com.example.mobsoft.webkorhaz.ui.Presenter;
-import com.example.mobsoft.webkorhaz.ui.main.MainScreen;
-import com.google.common.eventbus.Subscribe;
 
 import java.util.concurrent.Executor;
 
 import javax.inject.Inject;
 
 import de.greenrobot.event.EventBus;
-import de.greenrobot.event.ThreadMode;
 
 import static com.example.mobsoft.webkorhaz.MobSoftApplication.injector;
 
@@ -48,7 +46,6 @@ public class ConsultationHourSearchPresenter extends Presenter<ConsultationHourS
     public void detachScreen(){
         bus.unregister(this);
         super.detachScreen();
-        onEventMainThread(null);
     }
 
     public void search(final ConsultationHourSearch consultationHourSearch){
@@ -59,6 +56,16 @@ public class ConsultationHourSearchPresenter extends Presenter<ConsultationHourS
             }
         });
     }
+
+    public void getDepartmentsDataFromServer(){
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                consultationHourInteractor.getDepartmentsDataFromServer();
+            }
+        });
+    }
+
 
     /**
      * {@link SearchConsultationHourEvent} eventeket a {@link EventBus}-ról feldolgozó metódus. Android UI szálát hasznélja a feldolgozásra
@@ -74,6 +81,24 @@ public class ConsultationHourSearchPresenter extends Presenter<ConsultationHourS
         } else {
             if (screen != null) {
                 screen.showSearchResults(event.getConsultationHourDTOs());
+            }
+        }
+    }
+
+    /**
+     * {@link GetDepartmentsDataEvent} eventeket a {@link EventBus}-ról feldolgozó metódus. Android UI szálát hasznélja a feldolgozásra
+     * @param event
+     */
+    public void onEventMainThread(GetDepartmentsDataEvent event) {
+        if (event.getThrowable() != null) {
+            event.getThrowable().printStackTrace();
+            if (screen != null) {
+                screen.showErrorMessage("error");
+            }
+            Log.e("Networking", "Error at login in", event.getThrowable());
+        } else {
+            if (screen != null) {
+                screen.loadDepartmentData(event.getDepartmentData());
             }
         }
     }

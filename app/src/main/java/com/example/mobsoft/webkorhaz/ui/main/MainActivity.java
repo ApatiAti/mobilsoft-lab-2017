@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
     protected void onStart() {
         super.onStart();
         mainPresenter.attachScreen(this);
-
+        // TODO ez így nem jó
         mainPresenter.loadAppointmentFromDb();
     }
 

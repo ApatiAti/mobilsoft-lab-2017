@@ -37,6 +37,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.navigation.NavigationActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.ConsultationHourSearch.ConsultationHourSearchActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="@string/title_activity_consultationHourSearch"/>
+
     </application>
 
 </manifest>
