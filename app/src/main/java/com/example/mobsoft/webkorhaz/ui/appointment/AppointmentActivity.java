@@ -33,6 +33,11 @@ public class AppointmentActivity extends AppCompatActivity implements Appointmen
     Appointment oldAppointment;
     Appointment activeAppointment;
 
+    EditText editTextDoctor;
+    EditText editTextRoom;
+    EditText editTextDate;
+    EditText editTextComplaints;
+
 //    Integer position;
 
     @Inject
@@ -53,19 +58,23 @@ public class AppointmentActivity extends AppCompatActivity implements Appointmen
 //        position = (Integer) getIntent().getSerializableExtra(getString(R.string.resource_intent_appointment_position));
         refreshAppointmentFromOldValue();
 
-        EditText editTextDoctor = (EditText) findViewById(R.id.appointmentEditDoctor);
-        EditText editTextRoom = (EditText) findViewById(R.id.appointmentEditRoom);
-        EditText editTextDate = (EditText) findViewById(R.id.appointmentEditDate);
-        EditText editTextComplaints = (EditText) findViewById(R.id.appointmentEditComplaints);
+        editTextDoctor = (EditText) findViewById(R.id.appointmentEditDoctor);
+        editTextRoom = (EditText) findViewById(R.id.appointmentEditRoom);
+        editTextDate = (EditText) findViewById(R.id.appointmentEditDate);
+        editTextComplaints = (EditText) findViewById(R.id.appointmentEditComplaints);
 
+        refreshAppointmentView();
+
+        initToolBar(activeAppointment);
+    }
+
+    private void refreshAppointmentView() {
         String dateInterval = fullDateTimeFormat.format(activeAppointment.getBeginDate()) +  " - " + timeFormat.format(activeAppointment.getEndDate());
 
         editTextDoctor.setText(activeAppointment.getDoctorsName());
         editTextRoom.setText(activeAppointment.getRoom());
         editTextDate.setText(dateInterval);
         editTextComplaints.setText(activeAppointment.getComplaint());
-
-        initToolBar(activeAppointment);
     }
 
     private void initToolBar(Appointment appointment) {
@@ -128,8 +137,9 @@ public class AppointmentActivity extends AppCompatActivity implements Appointmen
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
-            case R.id.miRefresh:
+            case R.id.miReload:
                 refreshAppointmentFromOldValue();
+                refreshAppointmentView();
                 return true;
             case R.id.miSave:
                 appointmentPresenter.saveAppointment(activeAppointment);
