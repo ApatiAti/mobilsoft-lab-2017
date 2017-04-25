@@ -1,4 +1,7 @@
-package com.example.mobsoft.webkorhaz.model.dto;
+package com.example.mobsoft.webkorhaz.model;
+
+import com.orm.SugarRecord;
+import com.orm.dsl.Table;
 
 import java.io.Serializable;
 import java.util.List;
@@ -6,16 +9,17 @@ import java.util.List;
 /**
  * Created by Apati on 2017.04.24..
  */
-
-public class DepartmentData implements Serializable {
+@Table
+public class Department implements Serializable {
+    public Long id;
     public Long departmentId;
     public String departmentName;
     public List<ConsultationHourType> consultationHourTypeList;
 
-    public DepartmentData() {
+    public Department() {
     }
 
-    public DepartmentData(Long departmentId, String departmentName, List<ConsultationHourType> consultationHourTypeList) {
+    public Department(Long departmentId, String departmentName, List<ConsultationHourType> consultationHourTypeList) {
         this.departmentId = departmentId;
         this.departmentName = departmentName;
         this.consultationHourTypeList = consultationHourTypeList;
@@ -24,6 +28,14 @@ public class DepartmentData implements Serializable {
     @Override
     public String toString() {
         return departmentName;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getDepartmentId() {

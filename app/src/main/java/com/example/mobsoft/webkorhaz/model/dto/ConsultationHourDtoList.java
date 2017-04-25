@@ -8,17 +8,17 @@ import java.util.List;
  */
 
 public class ConsultationHourDtoList implements Serializable{
-    List<ConsultationHourDTO> list;
+    List<ConsultationHourDto> list;
 
-    public ConsultationHourDtoList(List<ConsultationHourDTO> list) {
+    public ConsultationHourDtoList(List<ConsultationHourDto> list) {
         this.list = list;
     }
 
-    public List<ConsultationHourDTO> getList() {
+    public List<ConsultationHourDto> getList() {
         return list;
     }
 
-    public void setList(List<ConsultationHourDTO> list) {
+    public void setList(List<ConsultationHourDto> list) {
         this.list = list;
     }
 }

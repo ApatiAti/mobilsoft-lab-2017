@@ -1,6 +1,7 @@
 package com.example.mobsoft.webkorhaz.model;
 
-import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDTO;
+import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDto;
+import com.orm.SugarRecord;
 import com.orm.dsl.Table;
 
 import java.io.Serializable;
@@ -11,36 +12,33 @@ import java.util.Date;
  */
 @Table
 public class Appointment implements Serializable {
-    /* TODO ez nem lesz jó mivel a szerver az consultationOHour-okat és appointment-ekete tárol
-    mind a kettőt el kéne tárolni hasonlóan mitn a szerver oldalon.
-    Továbbá ameg kell oldani azt hogy a user-enként külön legyenek eltárolva a telóban a dolgok
-    */
     private Long id = null;
+    private Long appointmentId;
     private Date beginDate;
     private Date endDate;
     private String room;
     private String doctorsName;
-    private String departmentName;
-    private String chType;
-
     private String complaint;
-    private Long patientId;
-    private Long consultationHourId; // ez tényleg kell?
+    private User patient;
+    private Long consultationHourId;
+
+    // TODO department-hez kell csatolni
+    private Department department;
+    private ConsultationHourType consultationHourType;
 
     public Appointment() {
     }
 
-    public Appointment(Long id, Date beginDate, Date endDate, String room, String doctorsName, String departmentName, String complaint, Long patientId, Long consultationHourId, String chType) {
-        this.id = id;
+    public Appointment(Date beginDate, Date endDate, String room, String doctorsName, Department department, String complaint, User patient, Long consultationHourId, ConsultationHourType consultationHourType) {
         this.beginDate = beginDate;
         this.endDate = endDate;
         this.room = room;
         this.doctorsName = doctorsName;
-        this.departmentName = departmentName;
+        this.department = department;
         this.complaint = complaint;
-        this.patientId = patientId;
+        this.patient = patient;
         this.consultationHourId = consultationHourId;
-        this.chType = chType;
+        this.consultationHourType = consultationHourType;
     }
 
     public Appointment(Appointment oldAppointment) {
@@ -49,24 +47,23 @@ public class Appointment implements Serializable {
         this.endDate = oldAppointment.getEndDate();
         this.room = oldAppointment.getRoom();
         this.doctorsName = oldAppointment.getDoctorsName();
-        this.departmentName = oldAppointment.getDepartmentName();
+        this.department = oldAppointment.getDepartment();
         this.complaint = oldAppointment.getComplaint();
-        this.patientId = oldAppointment.getPatientId();
+        this.patient = oldAppointment.getPatient();
         this.consultationHourId = oldAppointment.getConsultationHourId();
-        this.chType = oldAppointment.getChType();
+        this.consultationHourType = oldAppointment.getConsultationHourType();
     }
 
-    public Appointment(ConsultationHourDTO item) {
-//        this.id = oldAppointment.getId();
+    public Appointment(ConsultationHourDto item) {
         this.beginDate = item.getBeginDate();
         this.endDate = item.getEndDate();
         this.room = "Ib025";
         this.doctorsName = "Doktor";
-        this.departmentName = "department";
+        this.department = new Department(1l, "Valami", null);
         this.complaint = "";
-        this.patientId = 123l;
+        this.patient = new User("Kovács valaki", "password");
         this.consultationHourId = 1l;
-        this.chType = item.getTpye();
+        this.consultationHourType = new ConsultationHourType(20l, "lábcuc");
     }
 
     public Long getId() {
@@ -75,6 +72,14 @@ public class Appointment implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getAppointmentId() {
+        return appointmentId;
+    }
+
+    public void setAppointmentId(Long appointmentId) {
+        this.appointmentId = appointmentId;
     }
 
     public Date getBeginDate() {
@@ -109,14 +114,6 @@ public class Appointment implements Serializable {
         this.doctorsName = doctorsName;
     }
 
-    public String getDepartmentName() {
-        return departmentName;
-    }
-
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName;
-    }
-
     public String getComplaint() {
         return complaint;
     }
@@ -125,12 +122,12 @@ public class Appointment implements Serializable {
         this.complaint = complaint;
     }
 
-    public Long getPatientId() {
-        return patientId;
+    public User getPatient() {
+        return patient;
     }
 
-    public void setPatientId(Long patientId) {
-        this.patientId = patientId;
+    public void setPatient(User patient) {
+        this.patient = patient;
     }
 
     public Long getConsultationHourId() {
@@ -141,27 +138,19 @@ public class Appointment implements Serializable {
         this.consultationHourId = consultationHourId;
     }
 
-    public String getChType() {
-        return chType;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setChType(String chType) {
-        this.chType = chType;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Appointment that = (Appointment) o;
-
-        return id != null ? id.equals(that.id) : that.id == null;
-
+    public ConsultationHourType getConsultationHourType() {
+        return consultationHourType;
     }
 
-    @Override
-    public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+    public void setConsultationHourType(ConsultationHourType consultationHourType) {
+        this.consultationHourType = consultationHourType;
     }
 }

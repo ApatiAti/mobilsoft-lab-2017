@@ -8,7 +8,8 @@ import java.util.Date;
  */
 
 public class ConsultationHourDto implements Serializable {
-    // TODO nem kell departmentName de kell ID attr
+    // TODO nem departmentName mert Department lesz a keresésnél és onnan azt átadjuk az appointmentnek
+    //      kell ID attr
     //    public String departmentName;
     public String tpye;
     public Date beginDate;

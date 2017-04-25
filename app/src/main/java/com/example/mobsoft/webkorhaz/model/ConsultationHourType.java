@@ -1,11 +1,13 @@
-package com.example.mobsoft.webkorhaz.model.dto;
+package com.example.mobsoft.webkorhaz.model;
+
+import com.orm.dsl.Table;
 
 import java.io.Serializable;
 
 /**
  * Created by Apati on 2017.04.24..
  */
-
+@Table
 public class ConsultationHourType implements Serializable{
     private Long id;
     private String type;
