@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.example.mobsoft.webkorhaz.MobSoftApplication;
 import com.example.mobsoft.webkorhaz.R;
-import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDTO;
+import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDto;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDtoList;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourSearch;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourType;
@@ -151,7 +151,7 @@ public class ConsultationHourSearchActivity extends AppCompatActivity implements
         ConsultationHourSearch consultationHourSearch = new ConsultationHourSearch();
         consultationHourSearch.setBeginDate(startDateListener.getSelectedDate());
         consultationHourSearch.setEndDate(startDateListener.getSelectedDate());
-        consultationHourSearch.setDepartment(selectedDepartmentData.getDepartmentName());
+        consultationHourSearch.setDepartmentName(selectedDepartmentData.getDepartmentName());
         consultationHourSearch.setType(selectedConsultationHourType.getType());
 
         consultationHourSearchPresenter.search(consultationHourSearch);
@@ -186,9 +186,9 @@ public class ConsultationHourSearchActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void showSearchResults(List<ConsultationHourDTO> consultationHourDTOList) {
+    public void showSearchResults(List<ConsultationHourDto> consultationHourDtoList) {
         Intent intent = new Intent(this, ConsultationHourListActivity.class);
-        intent.putExtra(getString(R.string.resource_intent_consultationHour), new ConsultationHourDtoList(consultationHourDTOList));
+        intent.putExtra(getString(R.string.resource_intent_consultationHour), new ConsultationHourDtoList(consultationHourDtoList));
         startActivity(intent);
     }
 

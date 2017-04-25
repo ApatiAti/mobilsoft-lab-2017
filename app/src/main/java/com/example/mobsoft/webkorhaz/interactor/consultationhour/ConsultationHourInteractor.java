@@ -3,7 +3,7 @@ package com.example.mobsoft.webkorhaz.interactor.consultationhour;
 import com.example.mobsoft.webkorhaz.MobSoftApplication;
 import com.example.mobsoft.webkorhaz.interactor.consultationhour.events.GetDepartmentsDataEvent;
 import com.example.mobsoft.webkorhaz.interactor.consultationhour.events.SearchConsultationHourEvent;
-import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDTO;
+import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDto;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourSearch;
 import com.example.mobsoft.webkorhaz.model.dto.DepartmentData;
 import com.example.mobsoft.webkorhaz.network.HttpNetwork;
@@ -32,8 +32,8 @@ public class ConsultationHourInteractor {
     public void searchConsultationHour(ConsultationHourSearch searchParam){
         SearchConsultationHourEvent event = new SearchConsultationHourEvent();
         try {
-            List<ConsultationHourDTO> consultationHourDTOList = HttpNetwork.seachConsultationHour(searchParam);
-            event.setConsultationHourDTOs(consultationHourDTOList);
+            List<ConsultationHourDto> consultationHourDtoList = HttpNetwork.seachConsultationHour(searchParam);
+            event.setConsultationHourDTOs(consultationHourDtoList);
             bus.post(event);
         } catch (Exception e){
             event.setThrowable(e);

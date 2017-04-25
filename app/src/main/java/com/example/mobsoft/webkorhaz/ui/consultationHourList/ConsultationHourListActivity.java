@@ -12,9 +12,8 @@ import android.view.View;
 
 import com.example.mobsoft.webkorhaz.MobSoftApplication;
 import com.example.mobsoft.webkorhaz.R;
-import com.example.mobsoft.webkorhaz.interactor.appointment.AppointmentInteractor;
 import com.example.mobsoft.webkorhaz.model.Appointment;
-import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDTO;
+import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDto;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDtoList;
 import com.example.mobsoft.webkorhaz.ui.appointment.AppointmentActivity;
 import com.example.mobsoft.webkorhaz.ui.main.RecyclerTouchListener;
@@ -38,7 +37,7 @@ public class ConsultationHourListActivity extends AppCompatActivity implements C
 
     RecyclerView recyclerView;
     ConsultationHourListAdapter consultationHourListAdapter;
-    private List<ConsultationHourDTO> consultationHourDtoList = new ArrayList<>();
+    private List<ConsultationHourDto> consultationHourDtoList = new ArrayList<>();
 
     @Inject
     ConsultationHourListPresenter consultationHourListPresenter;
@@ -82,7 +81,7 @@ public class ConsultationHourListActivity extends AppCompatActivity implements C
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                ConsultationHourDTO item = consultationHourDtoList.get(position);
+                ConsultationHourDto item = consultationHourDtoList.get(position);
                 Appointment newAppointment = new Appointment(item);
                 Intent intent = new Intent(ConsultationHourListActivity.this, AppointmentActivity.class);
                 intent.putExtra(getString(R.string.resource_intent_appointment), newAppointment);

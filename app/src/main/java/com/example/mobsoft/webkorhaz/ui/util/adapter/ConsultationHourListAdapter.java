@@ -1,8 +1,5 @@
 package com.example.mobsoft.webkorhaz.ui.util.adapter;
 
-import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,10 +7,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.mobsoft.webkorhaz.R;
-import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDTO;
+import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDto;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -24,7 +20,7 @@ public class ConsultationHourListAdapter extends RecyclerView.Adapter<Consultati
 
     DateFormat fullDateTimeFormat;
     DateFormat timeFormat;
-    List<ConsultationHourDTO> consultationHourDTOList;
+    List<ConsultationHourDto> consultationHourDtoList;
 
 
 
@@ -41,8 +37,8 @@ public class ConsultationHourListAdapter extends RecyclerView.Adapter<Consultati
         }
     }
 
-    public ConsultationHourListAdapter(List<ConsultationHourDTO> consultationHourDTOList, DateFormat fullDateTimeFormat, DateFormat timeFormat) {
-        this.consultationHourDTOList = consultationHourDTOList;
+    public ConsultationHourListAdapter(List<ConsultationHourDto> consultationHourDtoList, DateFormat fullDateTimeFormat, DateFormat timeFormat) {
+        this.consultationHourDtoList = consultationHourDtoList;
         this.fullDateTimeFormat = fullDateTimeFormat;
         this.timeFormat = timeFormat;
     }
@@ -55,7 +51,7 @@ public class ConsultationHourListAdapter extends RecyclerView.Adapter<Consultati
 
     @Override
     public void onBindViewHolder(ConsultationHourDtoViewHolder holder, int position) {
-        ConsultationHourDTO item = consultationHourDTOList.get(position);
+        ConsultationHourDto item = consultationHourDtoList.get(position);
 
         String date = fullDateTimeFormat.format(item.getBeginDate()) + " - " + timeFormat.format(item.getEndDate()) ;
         String patientNumbers = item.getAvailable() + " / " + item.getMaxNumberOfPatient();
@@ -67,7 +63,7 @@ public class ConsultationHourListAdapter extends RecyclerView.Adapter<Consultati
 
     @Override
     public int getItemCount() {
-        return consultationHourDTOList.size();
+        return consultationHourDtoList.size();
     }
 
 }

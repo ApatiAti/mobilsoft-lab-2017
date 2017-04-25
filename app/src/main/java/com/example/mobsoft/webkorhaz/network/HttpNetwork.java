@@ -2,7 +2,7 @@ package com.example.mobsoft.webkorhaz.network;
 
 import com.example.mobsoft.webkorhaz.model.Appointment;
 import com.example.mobsoft.webkorhaz.model.User;
-import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDTO;
+import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDto;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourSearch;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourType;
 import com.example.mobsoft.webkorhaz.model.dto.DepartmentData;
@@ -21,9 +21,9 @@ public class HttpNetwork {
         return user;
     }
 
-    public static List<ConsultationHourDTO> seachConsultationHour(ConsultationHourSearch searchParam) {
-        List<ConsultationHourDTO> list = new ArrayList<>();
-        ConsultationHourDTO dto = new ConsultationHourDTO();
+    public static List<ConsultationHourDto> seachConsultationHour(ConsultationHourSearch searchParam) {
+        List<ConsultationHourDto> list = new ArrayList<>();
+        ConsultationHourDto dto = new ConsultationHourDto();
         Date date = new Date();
         dto.setBeginDate(date);
         dto.setEndDate(new Date(date.getTime()+ 1000*60*60));

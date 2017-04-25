@@ -7,8 +7,8 @@ import java.util.Date;
  * Created by Apati on 2017.04.05..
  */
 
-public class ConsultationHourDTO implements Serializable {
-    // nem kell mert ott lesz az előző oldalról
+public class ConsultationHourDto implements Serializable {
+    // TODO nem kell departmentName de kell ID attr
     //    public String departmentName;
     public String tpye;
     public Date beginDate;
@@ -16,7 +16,7 @@ public class ConsultationHourDTO implements Serializable {
     public int maxNumberOfPatient;
     public int available;
 
-    public ConsultationHourDTO() {
+    public ConsultationHourDto() {
     }
 
 //    public String getDepartmentName() {

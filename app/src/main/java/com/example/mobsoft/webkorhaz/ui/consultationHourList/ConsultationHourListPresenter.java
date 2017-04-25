@@ -1,6 +1,6 @@
 package com.example.mobsoft.webkorhaz.ui.consultationHourList;
 
-import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDTO;
+import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDto;
 import com.example.mobsoft.webkorhaz.ui.Presenter;
 
 import java.util.List;
@@ -41,7 +41,7 @@ public class ConsultationHourListPresenter extends Presenter<ConsultationHourLis
         super.detachScreen();
     }
 
-    public void showConsultationHourList(List<ConsultationHourDTO> consultationHourList){
+    public void showConsultationHourList(List<ConsultationHourDto> consultationHourList){
 
     }
 }
