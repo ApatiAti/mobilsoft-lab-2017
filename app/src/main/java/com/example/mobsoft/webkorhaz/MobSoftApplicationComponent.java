@@ -6,6 +6,7 @@ import com.example.mobsoft.webkorhaz.interactor.appointment.AppointmentInteracto
 import com.example.mobsoft.webkorhaz.interactor.consultationhour.ConsultationHourInteractor;
 import com.example.mobsoft.webkorhaz.interactor.login.LoginInteractor;
 import com.example.mobsoft.webkorhaz.interactor.todo.FavouritesInteractor;
+import com.example.mobsoft.webkorhaz.network.NetworkModule;
 import com.example.mobsoft.webkorhaz.repository.RepositoryModule;
 import com.example.mobsoft.webkorhaz.ui.ConsultationHourSearch.ConsultationHourSearchActivity;
 import com.example.mobsoft.webkorhaz.ui.ConsultationHourSearch.ConsultationHourSearchPresenter;
@@ -30,7 +31,7 @@ import dagger.Component;
  */
 
 @Singleton
-@Component(modules = {UIModule.class, RepositoryModule.class, InteractorModule.class})
+@Component(modules = {UIModule.class, RepositoryModule.class, InteractorModule.class, NetworkModule.class})
 public interface MobSoftApplicationComponent {
 
     /**

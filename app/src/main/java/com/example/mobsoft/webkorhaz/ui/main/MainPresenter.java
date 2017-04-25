@@ -6,6 +6,8 @@ import com.example.mobsoft.webkorhaz.interactor.appointment.AppointmentInteracto
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointmentListFromDbEvent;
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointmentListFromServerEvents;
 import com.example.mobsoft.webkorhaz.interactor.todo.FavouritesInteractor;
+import com.example.mobsoft.webkorhaz.interactor.todo.events.GetFavouritesEvent;
+import com.example.mobsoft.webkorhaz.model.Todo;
 import com.example.mobsoft.webkorhaz.ui.Presenter;
 
 
@@ -94,6 +96,22 @@ public class MainPresenter extends Presenter<MainScreen> {
         });
     }
 
+    // Only for test
+    public void onEventMainThread(GetFavouritesEvent event) {
+        if (event.getThrowable() != null) {
+            event.getThrowable().printStackTrace();
+            if (screen != null) {
+                screen.showErrorAtRefreshFromServer("error");
+            }
+            Log.e("Networking", "Error reading favourites", event.getThrowable());
+        } else {
+            if (screen != null) {
+                for(Todo t : event.getTodos()){
+                    screen.showErrorAtRefreshFromServer(t.getName());;
+                }
+            }
+        }
+    }
 
     /**
      * {@link LoadAppointmentListFromDbEvent} eventeket a {@link EventBus}-ról feldolgozó metódus. Android UI szálát hasznélja a feldolgozásra
