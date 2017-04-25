@@ -17,6 +17,12 @@ import static com.example.mobsoft.webkorhaz.mock.interceptors.MockHelper.makeRes
 
 public class MockInterceptor implements Interceptor {
 
+	/**
+	 * Elkapott Http kérések ide érkeznek be és itt tudjuk eldönteni hogy mockoljuk ki őket.
+	 * @param chain
+	 * @return
+	 * @throws IOException
+	 */
 	@Override
 	public Response intercept(Chain chain) throws IOException {
 		return process(chain.request());

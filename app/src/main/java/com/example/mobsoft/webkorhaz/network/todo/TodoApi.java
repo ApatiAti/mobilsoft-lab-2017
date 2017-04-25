@@ -22,6 +22,6 @@ public interface TodoApi {
   );
 
   @POST
-  Call<Void> getVanENetHu();
+  Call<String> getVanENetHu();
 
 }

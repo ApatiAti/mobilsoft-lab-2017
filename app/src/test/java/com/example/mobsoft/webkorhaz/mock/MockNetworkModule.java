@@ -26,6 +26,11 @@ public class MockNetworkModule {
 	}
 
 
+	/**
+	 *  OKHttpClient-hez interceptort ad mely interceptor elkapja a kérést és segítségével feltudjuk dolgozni
+	 * @param builder
+	 * @return
+	 */
 	@Provides
 	@Singleton
 	public OkHttpClient provideOkHttpClient(OkHttpClient.Builder builder) {
@@ -33,6 +38,7 @@ public class MockNetworkModule {
 		builder.interceptors().add(3, new Interceptor() {
 			@Override
 			public Response intercept(Chain chain) throws IOException {
+				// TODO ezt kiszedni és helyére már a MockInterceport rakni
 				Request request = chain.request();
 				return MockHttpServer.call(request);
 			}

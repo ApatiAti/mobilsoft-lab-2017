@@ -112,7 +112,8 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
                 navigateToNavigationActivity();
                 return true;
             case R.id.miRefresh:
-                Toast.makeText(this, "//TODO Refresh!\n" , Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "//TODO Refresh!\n" , Toast.LENGTH_SHORT).show();
+                mainPresenter.testNetwork();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

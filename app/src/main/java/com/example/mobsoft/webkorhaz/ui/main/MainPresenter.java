@@ -107,7 +107,7 @@ public class MainPresenter extends Presenter<MainScreen> {
         } else {
             if (screen != null) {
                 for(Todo t : event.getTodos()){
-                    screen.showErrorAtRefreshFromServer(t.getName());;
+                    screen.showErrorAtRefreshFromServer(t.getName());
                 }
             }
         }
@@ -147,5 +147,14 @@ public class MainPresenter extends Presenter<MainScreen> {
                 screen.showAppointments(event.getAppointments());
             }
         }
+    }
+
+    public void testNetwork() {
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                favouritesInteractor.testNetwork();
+            }
+        });
     }
 }

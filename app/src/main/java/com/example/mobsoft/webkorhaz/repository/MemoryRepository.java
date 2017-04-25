@@ -39,6 +39,8 @@ public class MemoryRepository implements Repository {
 		appointmentList = new ArrayList<>();
 		appointmentList.add(flight1);
 		appointmentList.add(flight2);
+
+		openTodoRepo(context);
 	}
 
 	@Override
