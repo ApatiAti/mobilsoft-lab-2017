@@ -3,6 +3,7 @@ package com.example.mobsoft.webkorhaz.network.todo;
 
 import com.example.mobsoft.webkorhaz.model.Todo;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.*;
 
@@ -21,7 +22,7 @@ public interface TodoApi {
     @Body Todo data
   );
 
-  @POST
-  Call<String> getVanENetHu();
+  @GET
+  Call<ResponseBody> getVanENetHu(@Url String url);
 
 }

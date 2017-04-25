@@ -1,5 +1,9 @@
 package com.example.mobsoft.webkorhaz.interactor.todo;
 
+
+
+import android.util.Log;
+
 import com.example.mobsoft.webkorhaz.MobSoftApplication;
 import com.example.mobsoft.webkorhaz.interactor.todo.events.GetFavouritesEvent;
 import com.example.mobsoft.webkorhaz.interactor.todo.events.RemoveFavouriteEvent;
@@ -14,6 +18,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import de.greenrobot.event.EventBus;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -80,12 +85,15 @@ public class FavouritesInteractor {
     public void testNetwork() {
         GetFavouritesEvent event = new GetFavouritesEvent();
         try {
-            Call<String> result = todoApi.getVanENetHu();
-            Response<String> httpPage = result.execute();
+            Call<ResponseBody> result = todoApi.getVanENetHu("www.vanenet.hu");
+            Response<ResponseBody> httpPage = result.execute();
             List<Todo> todos = new ArrayList<>();
             Todo todo = new Todo();
 
-            todo.setName(httpPage.body());
+            todo.setName(httpPage.body().string());
+            Log.e("API", httpPage.body().string());
+
+            todos.add(todo);
             event.setTodos(todos);
 
             bus.post(event);
