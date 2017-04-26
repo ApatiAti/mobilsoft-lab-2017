@@ -42,7 +42,7 @@ public class LoginActivity  extends AppCompatActivity implements LoginScreen {
                 EditText editPassword= (EditText) findViewById(R.id.loginEditUsername);
 
                 User user = new User(editTextUsername.getText().toString(), editPassword.getText().toString());
-
+//                loginSucces(user);
                 loginPresenter.startLogin(user);
             }
         });
@@ -68,9 +68,10 @@ public class LoginActivity  extends AppCompatActivity implements LoginScreen {
     }
 
     @Override
-    public void loginSucces() {
-//        Toast.makeText(this, "Sikeres login", Toast.LENGTH_SHORT).show();
+    public void loginSucces(User currentUser) {
+        ((MobSoftApplication) getApplication()).setCurrentUser(currentUser);
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
 }

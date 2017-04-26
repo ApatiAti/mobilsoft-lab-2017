@@ -5,12 +5,19 @@ import com.example.mobsoft.webkorhaz.interactor.login.events.LoginEvent;
 import com.example.mobsoft.webkorhaz.interactor.login.events.LogoutEvent;
 import com.example.mobsoft.webkorhaz.model.User;
 import com.example.mobsoft.webkorhaz.network.HttpNetwork;
+import com.example.mobsoft.webkorhaz.network.NetworkConfig;
+import com.example.mobsoft.webkorhaz.network.todo.LoginApi;
 import com.example.mobsoft.webkorhaz.repository.Repository;
 
+
+import java.net.HttpURLConnection;
 
 import javax.inject.Inject;
 
 import de.greenrobot.event.EventBus;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.http.HTTP;
 
 /**
  * Created by Apati on 2017.04.04..
@@ -18,6 +25,8 @@ import de.greenrobot.event.EventBus;
 
 public class LoginInteractor {
 
+    @Inject
+    LoginApi loginApi;
     @Inject
     Repository repository;
     @Inject
@@ -31,16 +40,30 @@ public class LoginInteractor {
      * Bejelentkezési próba
      */
     public void login(User user){
+        Call<Void> activeUser = preperaLoginCall(user);
         LoginEvent event = new LoginEvent();
         try {
-            User activeUser = HttpNetwork.startLogin(user);
-            // user and activeUser must be merged.
-            event.setUser(activeUser);
-            bus.post(event);
+//            Response<Void> response = activeUser.execute();
+//            int responseCode = response.code();
+            int responseCode = 200;
+            if (responseCode == HttpURLConnection.HTTP_OK ||
+                    responseCode == HttpURLConnection.HTTP_MOVED_PERM) {
+                user = repository.saveUser(user);
+
+                event.setUser(user);
+                bus.post(event);
+            } else {
+                throw new Exception("Result code is not 200 or 301");
+            }
         } catch (Exception e){
             event.setThrowable(e);
             bus.post(event);
         }
+    }
+
+    private Call<Void> preperaLoginCall(User user) {
+
+        return loginApi.loginPost(NetworkConfig.LOGIN_URL, user.getUsername(), user.getPassword());
     }
 
 

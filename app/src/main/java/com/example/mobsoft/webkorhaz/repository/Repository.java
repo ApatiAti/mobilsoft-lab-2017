@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.example.mobsoft.webkorhaz.model.Appointment;
 import com.example.mobsoft.webkorhaz.model.Todo;
+import com.example.mobsoft.webkorhaz.model.User;
 
 import java.util.List;
 
@@ -34,4 +35,6 @@ public interface Repository {
     void removeFavourite(Todo todo);
 
     boolean isInDB(Todo todo);
+
+    User saveUser(User user);
 }

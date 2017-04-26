@@ -4,8 +4,10 @@ import android.content.Context;
 
 import com.example.mobsoft.webkorhaz.model.Appointment;
 import com.example.mobsoft.webkorhaz.model.Todo;
+import com.example.mobsoft.webkorhaz.model.User;
 import com.orm.SugarContext;
 import com.orm.SugarRecord;
+import com.orm.query.Condition;
 import com.orm.query.Select;
 
 import java.util.ArrayList;
@@ -86,6 +88,17 @@ public class SugarOrmRepository implements Repository {
     @Override
     public boolean isInDB(Todo flight) {
         return SugarRecord.findById(Todo.class, flight.getId()) != null;
+    }
+
+    @Override
+    public User saveUser(User user) {
+        User dbUser = Select.from(User.class).where(Condition.prop("username").eq(user.getUsername())).first();
+        if (dbUser == null){
+            long id = SugarRecord.save(user);
+            user.setId(id);
+            return user;
+        }
+        return dbUser;
     }
 
 }

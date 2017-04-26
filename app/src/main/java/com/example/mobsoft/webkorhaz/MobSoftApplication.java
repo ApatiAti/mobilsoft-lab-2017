@@ -2,6 +2,7 @@ package com.example.mobsoft.webkorhaz;
 
 import android.app.Application;
 
+import com.example.mobsoft.webkorhaz.model.User;
 import com.example.mobsoft.webkorhaz.repository.Repository;
 import com.example.mobsoft.webkorhaz.ui.UIModule;
 
@@ -12,6 +13,11 @@ import javax.inject.Inject;
  */
 
 public class MobSoftApplication extends Application {
+
+    /**
+     * Stores the current logged user
+     */
+    private User currentUser;
 
     @Inject
     Repository repository;
@@ -36,6 +42,16 @@ public class MobSoftApplication extends Application {
                         ).build();
 
         injector.inject(this);
+
+        currentUser = null;
         repository.open(getApplicationContext());
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
     }
 }

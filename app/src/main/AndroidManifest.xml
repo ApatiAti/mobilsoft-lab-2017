@@ -14,13 +14,13 @@
             android:value="mobsoftlab.db" />
         <meta-data
             android:name="VERSION"
-            android:value="1" />
+            android:value="2" />
         <meta-data
             android:name="QUERY_LOG"
             android:value="true" />
         <meta-data
             android:name="DOMAIN_PACKAGE_NAME"
-            android:value="hu.bme.aut.mobsoft.mobsoftlab.model" />
+            android:value="com.example.mobsoft.webkorhaz" />
 
         <activity android:name=".ui.login.LoginActivity"
             android:label="@string/title_activity_login"
@@ -31,6 +31,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".ui.main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:label="@string/title_activity_main"/>

@@ -1,5 +1,6 @@
 package com.example.mobsoft.webkorhaz.network;
 
+import com.example.mobsoft.webkorhaz.network.todo.LoginApi;
 import com.example.mobsoft.webkorhaz.network.todo.TodoApi;
 import com.example.mobsoft.webkorhaz.utils.GsonHelper;
 
@@ -38,6 +39,13 @@ public class NetworkModule {
     @Singleton
     public TodoApi provideATodoApi(Retrofit retrofit) {
         return retrofit.create(TodoApi.class);
+    }
+
+
+    @Provides
+    @Singleton
+    public LoginApi provideLoginApi(Retrofit retrofit) {
+        return retrofit.create(LoginApi.class);
     }
 
 

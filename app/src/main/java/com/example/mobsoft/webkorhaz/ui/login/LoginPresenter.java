@@ -21,6 +21,7 @@ import static com.example.mobsoft.webkorhaz.MobSoftApplication.injector;
 
 public class LoginPresenter extends Presenter<LoginScreen> {
 
+    public static final String LOGIN_PRESENTER = "LoginPresenter";
     @Inject
     LoginInteractor loginInteractor;
 
@@ -67,12 +68,16 @@ public class LoginPresenter extends Presenter<LoginScreen> {
             if (screen != null) {
                 screen.loginError();
             }
-            Log.e("Networking", "Error at login in", event.getThrowable());
+            Log.e(LOGIN_PRESENTER, "Error at login in", event.getThrowable());
         } else {
-            // TODO user mentése
-            if (screen != null) {
-                screen.loginSucces();
+            User user = event.getUser();
+            if (user != null && screen != null) {
+                screen.loginSucces(user);
+            } else {
+                screen.loginError();
+                Log.e(LOGIN_PRESENTER, "Error at login in", event.getThrowable());
             }
         }
     }
+
 }
