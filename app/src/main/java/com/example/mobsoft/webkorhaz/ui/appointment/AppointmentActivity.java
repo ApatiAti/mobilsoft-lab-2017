@@ -1,6 +1,5 @@
 package com.example.mobsoft.webkorhaz.ui.appointment;
 
-import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -79,7 +78,7 @@ public class AppointmentActivity extends AppCompatActivity implements Appointmen
 
     private void initToolBar(Appointment appointment) {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(appointment.getDepartmentName());
+        toolbar.setTitle(appointment.getDepartment().getDepartmentName());
         toolbar.setNavigationIcon(R.drawable.ic_back_arrow);
         setSupportActionBar(toolbar);
 

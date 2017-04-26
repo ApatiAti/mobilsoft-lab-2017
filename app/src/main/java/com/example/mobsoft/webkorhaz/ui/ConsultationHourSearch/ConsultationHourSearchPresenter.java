@@ -98,7 +98,7 @@ public class ConsultationHourSearchPresenter extends Presenter<ConsultationHourS
             Log.e("Networking", "Error at login in", event.getThrowable());
         } else {
             if (screen != null) {
-                screen.loadDepartmentData(event.getDepartmentData());
+                screen.loadDepartmentData(event.getDepartment());
             }
         }
     }

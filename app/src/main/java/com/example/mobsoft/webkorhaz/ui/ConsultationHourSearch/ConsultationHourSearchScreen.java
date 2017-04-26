@@ -1,7 +1,7 @@
 package com.example.mobsoft.webkorhaz.ui.ConsultationHourSearch;
 
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDto;
-import com.example.mobsoft.webkorhaz.model.dto.DepartmentData;
+import com.example.mobsoft.webkorhaz.model.Department;
 
 import java.util.List;
 
@@ -14,5 +14,5 @@ public interface ConsultationHourSearchScreen {
 
     void showSearchResults(List<ConsultationHourDto> consultationHourDtoList);
 
-    void loadDepartmentData(List<DepartmentData> data);
+    void loadDepartmentData(List<Department> data);
 }

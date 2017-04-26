@@ -5,7 +5,7 @@ import com.example.mobsoft.webkorhaz.interactor.consultationhour.events.GetDepar
 import com.example.mobsoft.webkorhaz.interactor.consultationhour.events.SearchConsultationHourEvent;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDto;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourSearch;
-import com.example.mobsoft.webkorhaz.model.dto.DepartmentData;
+import com.example.mobsoft.webkorhaz.model.Department;
 import com.example.mobsoft.webkorhaz.network.HttpNetwork;
 import com.example.mobsoft.webkorhaz.repository.Repository;
 
@@ -44,8 +44,8 @@ public class ConsultationHourInteractor {
     public void getDepartmentsDataFromServer() {
         GetDepartmentsDataEvent event = new GetDepartmentsDataEvent();
         try {
-            List<DepartmentData> departmentDataList = HttpNetwork.getDepartmentData();
-            event.setDepartmentData(departmentDataList);
+            List<Department> departmentList = HttpNetwork.getDepartmentData();
+            event.setDepartment(departmentList);
             bus.post(event);
         } catch (Exception e){
             event.setThrowable(e);

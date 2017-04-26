@@ -16,8 +16,8 @@ import com.example.mobsoft.webkorhaz.R;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDto;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDtoList;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourSearch;
-import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourType;
-import com.example.mobsoft.webkorhaz.model.dto.DepartmentData;
+import com.example.mobsoft.webkorhaz.model.ConsultationHourType;
+import com.example.mobsoft.webkorhaz.model.Department;
 import com.example.mobsoft.webkorhaz.ui.MySlideDateTimeListener;
 import com.example.mobsoft.webkorhaz.ui.consultationHourList.ConsultationHourListActivity;
 import com.github.jjobes.slidedatetimepicker.SlideDateTimeListener;
@@ -40,7 +40,7 @@ public class ConsultationHourSearchActivity extends AppCompatActivity implements
 
     static SimpleDateFormat simpleDateFormat;
 
-    List<DepartmentData> departmentDataList = new ArrayList<>();
+    List<Department> departmentList = new ArrayList<>();
     Map<Long, List<ConsultationHourType>> departmentTypeMap = new HashMap<>();
 
     Spinner spinnerDepartmentName;
@@ -109,8 +109,8 @@ public class ConsultationHourSearchActivity extends AppCompatActivity implements
 
     }
 
-    private DepartmentData getSelectedDepartmentData() {
-        return (DepartmentData) spinnerDepartmentName.getSelectedItem();
+    private Department getSelectedDepartmentData() {
+        return (Department) spinnerDepartmentName.getSelectedItem();
     }
 
     @Override
@@ -129,14 +129,14 @@ public class ConsultationHourSearchActivity extends AppCompatActivity implements
     }
 
     private void initializingSpinners(){
-        if (!departmentDataList.isEmpty()) {
+        if (!departmentList.isEmpty()) {
 
-            ArrayAdapter<DepartmentData> departmentDataArrayAdapter =
-                    new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, departmentDataList);
+            ArrayAdapter<Department> departmentDataArrayAdapter =
+                    new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, departmentList);
             departmentDataArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinnerDepartmentName.setAdapter(departmentDataArrayAdapter);
 
-            DepartmentData key = departmentDataList.get(0);
+            Department key = departmentList.get(0);
             if (key != null) {
                 spinnerDepartmentName.setSelection(0);
                 initializingTypeNameSpinner();
@@ -145,18 +145,18 @@ public class ConsultationHourSearchActivity extends AppCompatActivity implements
     }
 
     public void searchConsultationHour(View view) {
-        DepartmentData selectedDepartmentData = getSelectedDepartmentData();
+        Department selectedDepartment = getSelectedDepartmentData();
         ConsultationHourType selectedConsultationHourType = getSelectedConsultationHourType();
 
         ConsultationHourSearch consultationHourSearch = new ConsultationHourSearch();
         consultationHourSearch.setBeginDate(startDateListener.getSelectedDate());
         consultationHourSearch.setEndDate(startDateListener.getSelectedDate());
-        consultationHourSearch.setDepartmentName(selectedDepartmentData.getDepartmentName());
+        consultationHourSearch.setDepartmentName(selectedDepartment.getDepartmentName());
         consultationHourSearch.setType(selectedConsultationHourType.getType());
 
         consultationHourSearchPresenter.search(consultationHourSearch);
 
-        String departmentName = selectedDepartmentData.getDepartmentName();
+        String departmentName = selectedDepartment.getDepartmentName();
         String chTypeName = selectedConsultationHourType.getType();
         Toast.makeText(this, "Sikeres keresés: " + departmentName + " ; " + chTypeName, Toast.LENGTH_SHORT).show();
 
@@ -168,13 +168,13 @@ public class ConsultationHourSearchActivity extends AppCompatActivity implements
 
 
     @Override
-    public void loadDepartmentData(List<DepartmentData> dataList) {
+    public void loadDepartmentData(List<Department> dataList) {
         Map<Long, List<ConsultationHourType>> newMap = new HashMap<>();
-        for (DepartmentData data : dataList){
+        for (Department data : dataList){
             newMap.put(data.getDepartmentId(), data.getConsultationHourTypeList());
         }
 
-        departmentDataList = dataList;
+        departmentList = dataList;
         departmentTypeMap = newMap;
 
         initializingSpinners();

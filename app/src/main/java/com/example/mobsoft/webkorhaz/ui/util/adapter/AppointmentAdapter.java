@@ -1,7 +1,6 @@
 package com.example.mobsoft.webkorhaz.ui.util.adapter;
 
 import android.support.v7.widget.RecyclerView;
-import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +54,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
     @Override
     public void onBindViewHolder(AppointmentViewHolder holder, int position) {
         Appointment appointment = appointmentList.get(position);
-        holder.textViewDepartment.setText(appointment.getDepartmentName());
+        holder.textViewDepartment.setText(appointment.getDepartment().getDepartmentName());
         holder.textViewDate.setText(dateFormat.format(appointment.getBeginDate()));
         holder.textViewRoom.setText(appointment.getRoom());
     }

@@ -3,7 +3,10 @@ package com.example.mobsoft.webkorhaz.repository;
 import android.content.Context;
 
 import com.example.mobsoft.webkorhaz.model.Appointment;
+import com.example.mobsoft.webkorhaz.model.ConsultationHourType;
+import com.example.mobsoft.webkorhaz.model.Department;
 import com.example.mobsoft.webkorhaz.model.Todo;
+import com.example.mobsoft.webkorhaz.model.User;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -27,14 +30,20 @@ public class MemoryRepository implements Repository {
 		c.add(Calendar.HOUR_OF_DAY, +2);
 		Date endDate = c.getTime();
 
-		Appointment flight1 = new Appointment(1L, beginDate, endDate, "Ib025", "Dr Doktor", "Szemészet", "Fáj fejem", 11L, 12L, "Valami típus");
+		Appointment flight1 = new Appointment(beginDate, endDate, "Ib025", "Dr Doktor"
+				, new Department(100L, "Szemészet", null), "Fáj fejem"
+				, new User("Valaki kovács", ""), 12L
+				, new ConsultationHourType(1000L, "Valami típus"));
 
 		c.add(Calendar.DAY_OF_YEAR, +1);
 		beginDate = c.getTime();
 		c.add(Calendar.HOUR_OF_DAY, +1);
 		endDate = c.getTime();
 
-		Appointment flight2 = new Appointment(2L, beginDate, endDate, "EB01", "Dr Doktor", "Ortopédia", "Cucc fejem", 15L, 17L, "láb cucc");
+		Appointment flight2 = new Appointment(beginDate, endDate, "EB01", "Dr Doktor"
+				, new Department(102L, "Ortopédia", null), "Cucc fejem"
+				, new User("Károly", ""), 17L
+				, new ConsultationHourType(1002L, "láb cucc"));
 
 		appointmentList = new ArrayList<>();
 		appointmentList.add(flight1);
@@ -121,6 +130,11 @@ public class MemoryRepository implements Repository {
 	@Override
 	public boolean isInDB(Todo flight) {
 		return todos.contains(flight);
+	}
+
+	@Override
+	public User saveUser(User user) {
+		return null;
 	}
 
 }

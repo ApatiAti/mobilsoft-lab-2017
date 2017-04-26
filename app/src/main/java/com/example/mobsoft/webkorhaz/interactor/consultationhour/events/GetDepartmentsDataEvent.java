@@ -1,6 +1,6 @@
 package com.example.mobsoft.webkorhaz.interactor.consultationhour.events;
 
-import com.example.mobsoft.webkorhaz.model.dto.DepartmentData;
+import com.example.mobsoft.webkorhaz.model.Department;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class GetDepartmentsDataEvent {
     private int code;
-    private List<DepartmentData> DepartmentData;
+    private List<Department> Department;
     private Throwable throwable;
 
     //<editor-fold desc="Constructors|Getters|Setters">
@@ -26,12 +26,12 @@ public class GetDepartmentsDataEvent {
         this.code = code;
     }
 
-    public List<DepartmentData> getDepartmentData() {
-        return DepartmentData;
+    public List<Department> getDepartment() {
+        return Department;
     }
 
-    public void setDepartmentData(List<DepartmentData> departmentData) {
-        DepartmentData = departmentData;
+    public void setDepartment(List<Department> department) {
+        Department = department;
     }
 
     public Throwable getThrowable() {
