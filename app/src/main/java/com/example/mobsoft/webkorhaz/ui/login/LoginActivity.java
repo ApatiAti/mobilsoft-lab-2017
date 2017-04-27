@@ -34,15 +34,21 @@ public class LoginActivity  extends AppCompatActivity implements LoginScreen {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        EditText editTextUsername = (EditText) findViewById(R.id.loginEditUsername);
+        EditText editPassword= (EditText) findViewById(R.id.loginEditPassword);
+
+        editTextUsername.setText("beteg1");
+        editPassword.setText("admin");
+
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EditText editTextUsername = (EditText) findViewById(R.id.loginEditUsername);
-                EditText editPassword= (EditText) findViewById(R.id.loginEditUsername);
+                EditText editPassword= (EditText) findViewById(R.id.loginEditPassword);
 
                 User user = new User(editTextUsername.getText().toString(), editPassword.getText().toString());
-//                loginSucces(user);
+
                 loginPresenter.startLogin(user);
             }
         });

@@ -43,9 +43,9 @@ public class LoginInteractor {
         Call<Void> activeUser = preperaLoginCall(user);
         LoginEvent event = new LoginEvent();
         try {
-//            Response<Void> response = activeUser.execute();
-//            int responseCode = response.code();
-            int responseCode = 200;
+            Response<Void> response = activeUser.execute();
+            int responseCode = response.code();
+
             if (responseCode == HttpURLConnection.HTTP_OK ||
                     responseCode == HttpURLConnection.HTTP_MOVED_PERM) {
                 user = repository.saveUser(user);
