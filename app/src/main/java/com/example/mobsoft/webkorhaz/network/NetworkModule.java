@@ -1,5 +1,7 @@
 package com.example.mobsoft.webkorhaz.network;
 
+import com.example.mobsoft.webkorhaz.network.interceptors.JSessionInterceptor;
+import com.example.mobsoft.webkorhaz.network.todo.AppointmentApi;
 import com.example.mobsoft.webkorhaz.network.todo.LoginApi;
 import com.example.mobsoft.webkorhaz.network.todo.TodoApi;
 import com.example.mobsoft.webkorhaz.utils.GsonHelper;
@@ -25,14 +27,17 @@ public class NetworkModule {
     @Provides
     @Singleton
     public OkHttpClient provideOkHttpClient(OkHttpClient.Builder builder) {
-        return builder.build();
+        return builder
+                .addInterceptor(new JSessionInterceptor())  // Application interceptor
+                .build();
     }
 
     @Provides
     @Singleton
     public Retrofit provideRetrofit(OkHttpClient client) {
         return new Retrofit.Builder().baseUrl(NetworkConfig.SERVICE_ENDPOINT).client(client)
-                .addConverterFactory(GsonConverterFactory.create(GsonHelper.getGson())).build();
+                .addConverterFactory(GsonConverterFactory.create(GsonHelper.getGson()))
+                .build();
     }
 
     @Provides
