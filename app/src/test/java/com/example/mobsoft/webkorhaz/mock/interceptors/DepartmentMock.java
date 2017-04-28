@@ -19,7 +19,7 @@ import okhttp3.Headers;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class DepartmentMock implements NetworkMockInterface {
+public class DepartmentMock {
     public static String DEPARTMENT_URL = "getDepartmentsAndTypes";
 
     public static Response process(Request request) {
