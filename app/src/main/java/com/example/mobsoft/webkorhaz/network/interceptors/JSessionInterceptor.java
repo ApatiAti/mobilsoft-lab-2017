@@ -14,8 +14,9 @@ import okhttp3.Response;
 
 public class JSessionInterceptor implements Interceptor{
 
-    public static final String HEADER_COOKIES = "Cookies";
-    public static final String HEADET_SET_COOKIES = "Set-Cookie";
+    public static final String HEADER_COOKIES = "Cookie";
+    public static final String HEADER_SET_COOKIES = "Set-Cookie";
+    public static final String JSESSIONID_STRING = "JSESSIONID=";
     public static final String JSESSIONID_REGEXP = "(JSESSIONID=)([^;]*)[;|\\s]";
     public static Pattern pattern;
     private String jsessionId = null;
@@ -41,19 +42,23 @@ public class JSessionInterceptor implements Interceptor{
     private Request includeJSessionId(Request request) {
         String cookies = request.header(HEADER_COOKIES);
 
-        if (cookies != null) {
-            Matcher matcher = pattern.matcher(cookies);
-
-            if (!hasJSessionIdCookie(cookies, matcher) && jsessionId != null) {
-                request = request.newBuilder().addHeader(HEADER_COOKIES, JSESSIONID_REGEXP + jsessionId + "; " + cookies).build();
+        if (jsessionId != null) {
+            String newCookieString;
+            if (cookies != null) {
+                newCookieString = JSESSIONID_STRING + jsessionId + "; " + cookies;
+            } else {
+                newCookieString = JSESSIONID_STRING + jsessionId;
             }
+
+            request = request.newBuilder().addHeader(HEADER_COOKIES, newCookieString).build();
         }
         return request;
     }
 
 
     private void extractJSessoinId(Response response) {
-        String cookies = response.priorResponse().header(HEADET_SET_COOKIES);
+        String cookies = response.header(HEADER_SET_COOKIES);
+
 
         if (cookies != null) {
             Matcher matcher = pattern.matcher(cookies);
