@@ -2,13 +2,19 @@ package com.example.mobsoft.webkorhaz.mock.interceptors;
 
 import android.net.Uri;
 
-import com.example.mobsoft.webkorhaz.model.Appointment;
-import com.example.mobsoft.webkorhaz.model.Department;
 import com.example.mobsoft.webkorhaz.network.NetworkConfig;
 import com.example.mobsoft.webkorhaz.repository.MemoryRepository;
 import com.example.mobsoft.webkorhaz.utils.GsonHelper;
 
-import java.util.List;
+import okhttp3.Headers;
+import okhttp3.MediaType;
+import okhttp3.Protocol;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
+import okio.Buffer;
+import okio.BufferedSource;
+import okio.Okio;
 
 import static com.example.mobsoft.webkorhaz.mock.interceptors.MockHelper.makeResponse;
 
@@ -28,14 +34,16 @@ public class ConsultationHourMock {
 
 
 
-        if (uri.getPath().equals(NetworkConfig.ENDPOINT_PREFIX + CONSULTATIO_HOUR_URL
-                && request.method().equals("POST"))) {
+        if (uri.getPath().equals(NetworkConfig.ENDPOINT_PREFIX + CONSULTATIO_HOUR_URL)
+                && request.method().equals("POST")) {
 
-//            responseString = GsonHelper.getGson().toJson(departments);
+            responseString = GsonHelper.getGson().toJson("");
             responseCode = 200;
+        } else {
+            responseString = "ERROR";
+            responseCode = 503;
         }
 
         return makeResponse(request, headers, responseCode, responseString);
     }
-}
 }

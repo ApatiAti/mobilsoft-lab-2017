@@ -6,6 +6,7 @@ import com.example.mobsoft.webkorhaz.interactor.appointment.AppointmentInteracto
 import com.example.mobsoft.webkorhaz.interactor.consultationhour.ConsultationHourInteractor;
 import com.example.mobsoft.webkorhaz.interactor.login.LoginInteractor;
 import com.example.mobsoft.webkorhaz.interactor.todo.FavouritesInteractor;
+import com.example.mobsoft.webkorhaz.network.NetworkModule;
 import com.example.mobsoft.webkorhaz.repository.RepositoryModule;
 import com.example.mobsoft.webkorhaz.ui.ConsultationHourSearch.ConsultationHourSearchActivity;
 import com.example.mobsoft.webkorhaz.ui.ConsultationHourSearch.ConsultationHourSearchPresenter;
@@ -13,6 +14,7 @@ import com.example.mobsoft.webkorhaz.ui.UIModule;
 import com.example.mobsoft.webkorhaz.ui.appointment.AppointmentActivity;
 import com.example.mobsoft.webkorhaz.ui.appointment.AppointmentPresenter;
 import com.example.mobsoft.webkorhaz.ui.consultationHourList.ConsultationHourListActivity;
+import com.example.mobsoft.webkorhaz.ui.consultationHourList.ConsultationHourListPresenter;
 import com.example.mobsoft.webkorhaz.ui.login.LoginActivity;
 import com.example.mobsoft.webkorhaz.ui.login.LoginPresenter;
 import com.example.mobsoft.webkorhaz.ui.main.MainActivity;
@@ -28,7 +30,7 @@ import dagger.Component;
  */
 
 @Singleton
-@Component(modules = {UIModule.class, RepositoryModule.class, InteractorModule.class})
+@Component(modules = {UIModule.class, RepositoryModule.class, InteractorModule.class, NetworkModule.class})
 public interface MobSoftApplicationComponent {
 
     /**
@@ -57,6 +59,8 @@ public interface MobSoftApplicationComponent {
     void inject(AppointmentPresenter appointmentPresenter);
 
     void inject(ConsultationHourSearchPresenter consultationHourSearchPresenter);
+
+    void inject(ConsultationHourListPresenter consultationHourListPresenter);
 
     /**
      * Interractors

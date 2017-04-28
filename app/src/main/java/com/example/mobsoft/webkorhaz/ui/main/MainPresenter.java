@@ -69,7 +69,7 @@ public class MainPresenter extends Presenter<MainScreen> {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                appointmentInteractor.loadAppointmentsFromDb();
+                appointmentInteractor.loadAppointmentsFromDb(currentUser);
             }
         });
     }
@@ -81,7 +81,7 @@ public class MainPresenter extends Presenter<MainScreen> {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                appointmentInteractor.reloadAppoinmentListFromServer(user.getPatientId());
+                appointmentInteractor.reloadAppoinmentListFromServer(user);
             }
         });
     }

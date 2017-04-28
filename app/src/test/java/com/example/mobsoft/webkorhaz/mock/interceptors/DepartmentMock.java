@@ -12,7 +12,6 @@ import java.util.List;
 
 import static com.example.mobsoft.webkorhaz.mock.interceptors.MockHelper.makeResponse;
 
-package com.example.mobsoft.webkorhaz.mock.interceptors;
 
 
 import okhttp3.Headers;
@@ -35,11 +34,14 @@ public class DepartmentMock {
 
 
 
-        if (uri.getPath().equals(NetworkConfig.ENDPOINT_PREFIX + DEPARTMENT_URL
-                && request.method().equals("GET"))) {
+        if (uri.getPath().equals(NetworkConfig.ENDPOINT_PREFIX + DEPARTMENT_URL)
+                && request.method().equals("GET")) {
             List<Department> departments = memoryRepository.getDepartments();
             responseString = GsonHelper.getGson().toJson(departments);
             responseCode = 200;
+        } else {
+            responseString = "ERROR";
+            responseCode = 503;
         }
 
         return makeResponse(request, headers, responseCode, responseString);

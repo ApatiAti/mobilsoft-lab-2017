@@ -3,6 +3,7 @@ package com.example.mobsoft.webkorhaz.mock.interceptors;
 import android.net.Uri;
 
 import com.example.mobsoft.webkorhaz.model.Appointment;
+import com.example.mobsoft.webkorhaz.model.User;
 import com.example.mobsoft.webkorhaz.network.NetworkConfig;
 import com.example.mobsoft.webkorhaz.repository.MemoryRepository;
 import com.example.mobsoft.webkorhaz.utils.GsonHelper;
@@ -10,8 +11,6 @@ import com.example.mobsoft.webkorhaz.utils.GsonHelper;
 import java.util.List;
 
 import static com.example.mobsoft.webkorhaz.mock.interceptors.MockHelper.makeResponse;
-
-package com.example.mobsoft.webkorhaz.mock.interceptors;
 
 
 import okhttp3.Headers;
@@ -25,7 +24,7 @@ public class AppointmentMock {
     public static Response process(Request request) {
         Uri uri = Uri.parse(request.url().toString());
 
-        Appointment appointment = null
+        Appointment appointment = null;
         String responseString;
         int responseCode;
 
@@ -60,13 +59,19 @@ public class AppointmentMock {
                     responseCode = 200;
                     break;
                 default:
+                    responseString = "ERROR";
+                    responseCode = 403;
                     break;
             }
-        } else if (uri.getPath().equals(NetworkConfig.ENDPOINT_PREFIX + APPOINTMENT_LIST_URL
-                    && request.method().equals("POST"))) {
-            List<Appointment> appointments = memoryRepository.getAppointments(1L);
+        } else if (uri.getPath().equals(NetworkConfig.ENDPOINT_PREFIX + APPOINTMENT_LIST_URL)
+                    && request.method().equals("POST")) {
+            User currentUser = null;
+            List<Appointment> appointments = memoryRepository.getAppointments(currentUser);
             responseString = GsonHelper.getGson().toJson(appointments);
             responseCode = 200;
+        } else {
+            responseString = "ERROR";
+            responseCode = 403;
         }
 
         return makeResponse(request, headers, responseCode, responseString);

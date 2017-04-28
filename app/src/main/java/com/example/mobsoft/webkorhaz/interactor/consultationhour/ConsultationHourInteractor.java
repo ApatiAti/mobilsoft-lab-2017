@@ -35,4 +35,9 @@ public class ConsultationHourInteractor {
             bus.post(event);
         }
     }
+
+
+    public Object getDepartmentsDataFromServer() {
+        return null;
+    }
 }

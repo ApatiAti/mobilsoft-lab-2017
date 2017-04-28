@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import com.example.mobsoft.webkorhaz.MobSoftApplication;
 import com.example.mobsoft.webkorhaz.R;
+import com.example.mobsoft.webkorhaz.model.Department;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDto;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourSearch;
 
@@ -58,6 +59,11 @@ public class ConsultationHourSearchActivity extends AppCompatActivity implements
 
     @Override
     public void showSearchResults(List<ConsultationHourDto> consultationHourDTOs) {
+
+    }
+
+    @Override
+    public void loadDepartmentData(List<Department> department) {
 
     }
 }
