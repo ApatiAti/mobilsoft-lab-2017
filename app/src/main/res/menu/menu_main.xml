@@ -14,4 +14,10 @@
         app:showAsAction="ifRoom|withText"
         android:title="@string/main_menu_refresh">
     </item>
+    <item
+        android:id="@+id/miRefreshDepartment"
+        android:icon="@drawable/ic_refresh_department"
+        app:showAsAction="ifRoom|withText"
+        android:title="@string/main_menu_refresh">
+    </item>
 </menu>

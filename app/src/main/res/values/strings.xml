@@ -15,7 +15,9 @@
     <string name="main_menu_navigation">Navigation</string>
     <string name="main_menu_refresh">Adatok frissítése</string>
 
-    <string name="main_refresh_from_network">Refresh from Server!\n</string>
+    <string name="main_refresh_from_network">Foglalt időpontok frissítése!\n</string>
+    <string name="main_refresh_department_from_network">Korházi osztályok frissítése!\n</string>
+
 
     <string name="navigation_appointment">Foglalások listázása</string>
     <string name="navigation_consultationHour">Rendelés keresés</string>

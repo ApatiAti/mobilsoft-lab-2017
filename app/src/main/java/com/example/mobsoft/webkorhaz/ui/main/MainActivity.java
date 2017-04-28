@@ -120,6 +120,9 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
                 Toast.makeText(this, getString(R.string.main_refresh_from_network) , Toast.LENGTH_SHORT).show();
                 mainPresenter.refreashAppointments(currentUser);
                 return true;
+            case R.id.miRefreshDepartment:
+                Toast.makeText(this, getString(R.string.main_refresh_department_from_network) , Toast.LENGTH_SHORT).show();
+                mainPresenter.refreshDepartmentData();
             default:
                 return super.onOptionsItemSelected(item);
         }
