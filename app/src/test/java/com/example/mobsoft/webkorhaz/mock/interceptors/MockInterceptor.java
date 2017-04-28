@@ -38,6 +38,8 @@ public class MockInterceptor implements Interceptor {
 
 		if (uri.getPath().startsWith(NetworkConfig.ENDPOINT_PREFIX + "Todos")) {
 			return TodoMock.process(request);
+		} else if (uri.getPath().startsWith(NetworkConfig.ENDPOINT_PREFIX + AppointmentMock.APPOINTMENT_URL)) {
+			return AppointmentMock.process(request);
 		}
 
 		return makeResponse(request, headers, 404, "Unknown");

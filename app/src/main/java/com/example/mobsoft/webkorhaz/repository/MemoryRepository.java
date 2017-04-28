@@ -19,9 +19,21 @@ public class MemoryRepository implements Repository {
 	private static final long MINUTE = 60 * 1000;
 
 	public static List<Appointment> appointmentList;
+	public static List<Department> departmentList;
+	public static List<User> userList;
+	public static List<ConsultationHourType> consultiConsultationHourTypeList;
 
 	@Override
 	public void open(Context context) {
+		createDepartmentsAndCHTypes();
+		createUser();
+		createConsultationHourTypes();
+		createAppointment();
+
+		openTodoRepo(context);
+	}
+
+	private void createAppointment() {
 		Calendar c = Calendar.getInstance();
 		c.setTime(new Date());
 		c.add(Calendar.DAY_OF_YEAR, +2);
@@ -31,9 +43,10 @@ public class MemoryRepository implements Repository {
 		Date endDate = c.getTime();
 
 		Appointment flight1 = new Appointment(beginDate, endDate, "Ib025", "Dr Doktor"
-				, new Department(100L, "Szemészet", null), "Fáj fejem"
-				, new User("Valaki kovács", ""), 12L
-				, new ConsultationHourType(1000L, "Valami típus"));
+				, departmentList.get(0), "Fáj fejem"
+				, userList.get(0), 12L
+				, consultiConsultationHourTypeList.get(0));
+		flight1.setId(11L);
 
 		c.add(Calendar.DAY_OF_YEAR, +1);
 		beginDate = c.getTime();
@@ -41,15 +54,44 @@ public class MemoryRepository implements Repository {
 		endDate = c.getTime();
 
 		Appointment flight2 = new Appointment(beginDate, endDate, "EB01", "Dr Doktor"
-				, new Department(102L, "Ortopédia", null), "Cucc fejem"
-				, new User("Károly", ""), 17L
-				, new ConsultationHourType(1002L, "láb cucc"));
+				, departmentList.get(1), "Szem baj"
+				, userList.get(1), 17L
+				, consultiConsultationHourTypeList.get(1));
+		flight2.setId(12L);
 
 		appointmentList = new ArrayList<>();
 		appointmentList.add(flight1);
 		appointmentList.add(flight2);
+	}
 
-		openTodoRepo(context);
+	private void createUser() {
+		userList.add(new User(1l, "beteg1", ""));
+		userList.add(new User(2l, "Károly", ""));
+	}
+
+	private void createDepartmentsAndCHTypes() {
+
+		List<ConsultationHourType> chtypeList = new ArrayList<>();
+		chtypeList.add(consultiConsultationHourTypeList.get(0));
+		chtypeList.add(consultiConsultationHourTypeList.get(1));
+
+		departmentList.add(new Department(100L, "Ortopédia", chtypeList));
+
+		List<ConsultationHourType> chtypeList2 = new ArrayList<>();
+		chtypeList2.add(consultiConsultationHourTypeList.get(0));
+		chtypeList2.add(consultiConsultationHourTypeList.get(2));
+
+		departmentList.add(new Department(101L, "Szemészet", chtypeList2));
+	}
+
+	private void createConsultationHourTypes() {
+		ConsultationHourType chtype1 = new ConsultationHourType(1000L, 1L, "Valami típus");
+		ConsultationHourType chtype2 = new ConsultationHourType(1002L, 2L, "láb cucc");
+		ConsultationHourType chtype3 = new ConsultationHourType(1002L, 3L, "Szem cucc");
+
+		consultiConsultationHourTypeList.add(chtype1);
+		consultiConsultationHourTypeList.add(chtype2);
+		consultiConsultationHourTypeList.add(chtype3);
 	}
 
 	@Override
@@ -75,7 +117,7 @@ public class MemoryRepository implements Repository {
 	}
 
 	@Override
-	public void updateAppointment(List<Appointment> appointments) {
+	public void updateAppointment(Appointment appointment) {
 		return;
 	}
 
@@ -85,13 +127,25 @@ public class MemoryRepository implements Repository {
 	}
 
 	@Override
-	public Appointment getAppointmentById(Long appointmentId, long userId) {
+	public Appointment getAppointmentByAppointmentId(Long appointmentId, long userId) {
+		for (Appointment appointment: appointmentList) {
+			if (appointment.getAppointmentId().equals(appointmentId)){
+				return appointment;
+			}
+		}
 		return null;
+	}
+
+
+	@Override
+	public void deleteAppointment(Appointment appointment) {
+		Appointment dbAppointment = getAppointmentByAppointmentId(appointment.getAppointmentId() , 1L);
+		appointmentList.remove(dbAppointment);
 	}
 
 	@Override
 	public void deleteAllAppointement(Long id) {
-
+		appointmentList.clear();
 	}
 
 	@Override
@@ -100,10 +154,26 @@ public class MemoryRepository implements Repository {
 	}
 
 	@Override
-	public Department getDepartmentByName(Long departmentId) {
+	public Department getDepartmentByDepartmentId(Long departmentId) {
+		for (Department department : departmentList){
+			if (department.getDepartmentId().equals(departmentId)){
+				return department;
+			}
+		}
+
 		return null;
 	}
 
+	@Override
+	public Department getDepartmentByDepartmentName(String departmentName) {
+		for (Department department : departmentList){
+			if (department.getDepartmentName().equals(department)){
+				return department;
+			}
+		}
+
+		return null;
+	}
 
 	/**
 	 *  Labor miatt

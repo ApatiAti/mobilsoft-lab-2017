@@ -39,7 +39,7 @@ public class SugarOrmRepository implements Repository {
     }
 
     @Override
-    public void updateAppointment(List<Appointment> appointments) {
+    public void updateAppointment(Appointment appointment) {
         return;
     }
 
@@ -49,7 +49,7 @@ public class SugarOrmRepository implements Repository {
     }
 
     @Override
-    public Appointment getAppointmentById(Long appointmentId, long userId) {
+    public Appointment getAppointmentByAppointmentId(Long appointmentId, long userId) {
         return Select.from(Appointment.class)
                 .where(Condition.prop("appointmentId").eq(appointmentId))
                     .and(Condition.prop("parient.id").eq(userId)).first();
@@ -61,17 +61,26 @@ public class SugarOrmRepository implements Repository {
     }
 
     @Override
+    public void deleteAppointment(Appointment appointment) {
+        SugarRecord.deleteAll(Appointment.class, " appointement_Id = ?", appointment.getAppointmentId().toString());
+    }
+
+    @Override
     public boolean isInDB(Appointment appointment) {
         return SugarRecord.findById(Appointment.class, appointment.getId()) != null;
     }
 
     @Override
-    public Department getDepartmentByName(Long departmentId) {
+    public Department getDepartmentByDepartmentId(Long departmentId) {
         return Select.from(Department.class)
                 //.where(Condition.prop("departmentId").eq(departmentId))
                 .first();
     }
 
+    @Override
+    public Department getDepartmentByDepartmentName(String departmentName) {
+        return Select.from(Department.class).where(Condition.prop("department_name").eq(departmentName)).first();
+    }
     /**
      *  Labor miatt
      */

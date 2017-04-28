@@ -1,7 +1,6 @@
 package com.example.mobsoft.webkorhaz.model;
 
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDto;
-import com.orm.SugarRecord;
 import com.orm.dsl.Table;
 
 import java.io.Serializable;
@@ -62,7 +61,7 @@ public class Appointment implements Serializable {
         this.complaint = "";
         this.patient = new User("Kovács valaki", "password");
         this.consultationHourId = 1l;
-        this.consultationHourType = new ConsultationHourType(20l, "lábcuc");
+        this.consultationHourType = new ConsultationHourType(20l, 0L, "lábcuc");
     }
 
     public Long getId() {

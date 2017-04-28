@@ -16,8 +16,9 @@ public class ConsultationHourType implements Serializable{
     public ConsultationHourType() {
     }
 
-    public ConsultationHourType(Long id, String type) {
+    public ConsultationHourType(Long id, Long consultationHourTypeId, String type) {
         this.id = id;
+        this.consultationHourTypeId = consultationHourTypeId;
         this.type = type;
     }
 

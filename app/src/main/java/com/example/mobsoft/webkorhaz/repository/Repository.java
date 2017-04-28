@@ -20,17 +20,21 @@ public interface Repository {
 
     void saveAppointment(Appointment appointment);
 
-    void updateAppointment(List<Appointment> appointments);
+    void updateAppointment(Appointment appointment);
 
     void removeAppointment(Appointment appointment);
 
-    Appointment getAppointmentById(Long appointmentId, long userId);
+    Appointment getAppointmentByAppointmentId(Long appointmentId, long userId);
 
     void deleteAllAppointement(Long id);
 
+    void deleteAppointment(Appointment appointment);
+
     boolean isInDB(Appointment appointment);
 
-    Department getDepartmentByName(Long departmentId);
+    Department getDepartmentByDepartmentId(Long departmentId);
+
+    Department getDepartmentByDepartmentName(String departmentName);
 
     List<Todo> getFavourites();
 
