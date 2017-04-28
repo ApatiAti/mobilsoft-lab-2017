@@ -3,21 +3,14 @@ package com.example.mobsoft.webkorhaz.mock.interceptors;
 import android.net.Uri;
 
 import com.example.mobsoft.webkorhaz.network.NetworkConfig;
-import com.example.mobsoft.webkorhaz.repository.MemoryRepository;
 import com.example.mobsoft.webkorhaz.repository.TestMemoryRepository;
 import com.example.mobsoft.webkorhaz.utils.GsonHelper;
 
 import java.net.HttpURLConnection;
 
 import okhttp3.Headers;
-import okhttp3.MediaType;
-import okhttp3.Protocol;
 import okhttp3.Request;
 import okhttp3.Response;
-import okhttp3.ResponseBody;
-import okio.Buffer;
-import okio.BufferedSource;
-import okio.Okio;
 
 import static com.example.mobsoft.webkorhaz.mock.interceptors.MockHelper.makeResponse;
 

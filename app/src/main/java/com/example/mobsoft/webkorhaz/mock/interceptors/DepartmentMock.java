@@ -2,10 +2,8 @@ package com.example.mobsoft.webkorhaz.mock.interceptors;
 
 import android.net.Uri;
 
-import com.example.mobsoft.webkorhaz.model.Appointment;
 import com.example.mobsoft.webkorhaz.model.Department;
 import com.example.mobsoft.webkorhaz.network.NetworkConfig;
-import com.example.mobsoft.webkorhaz.repository.MemoryRepository;
 import com.example.mobsoft.webkorhaz.repository.TestMemoryRepository;
 import com.example.mobsoft.webkorhaz.utils.GsonHelper;
 
