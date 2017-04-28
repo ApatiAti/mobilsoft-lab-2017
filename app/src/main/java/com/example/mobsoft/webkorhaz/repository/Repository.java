@@ -17,7 +17,7 @@ public interface Repository {
 
     void close();
 
-    List<Appointment> getAppointments(User currentUserId);
+    List<Appointment> getAppointments(User user);
 
     void saveAppointment(Appointment appointment);
 

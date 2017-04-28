@@ -3,6 +3,7 @@ package com.example.mobsoft.webkorhaz;
 import com.example.mobsoft.webkorhaz.interactor.InteractorModule;
 import com.example.mobsoft.webkorhaz.mock.MockNetworkModule;
 import com.example.mobsoft.webkorhaz.repository.TestRepositoryModule;
+import com.example.mobsoft.webkorhaz.test.AppointmentTest;
 import com.example.mobsoft.webkorhaz.test.DepartmentTest;
 
 import javax.inject.Singleton;
@@ -16,5 +17,7 @@ import dagger.Component;
 public interface TestComponent extends MobSoftApplicationComponent {
 
     void inject(DepartmentTest departmentTest);
+
+    void inject(AppointmentTest appointmentTest);
 
 }

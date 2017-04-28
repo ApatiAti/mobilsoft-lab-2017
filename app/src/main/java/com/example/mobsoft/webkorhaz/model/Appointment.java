@@ -27,7 +27,8 @@ public class Appointment implements Serializable {
     public Appointment() {
     }
 
-    public Appointment(Date beginDate, Date endDate, String room, String doctorsName, Department department, String complaint, User patient, Long consultationHourId, ConsultationHourType consultationHourType) {
+    public Appointment(Long appointmentId, Date beginDate, Date endDate, String room, String doctorsName, Department department, String complaint, User patient, Long consultationHourId, ConsultationHourType consultationHourType) {
+        this.appointmentId = appointmentId;
         this.beginDate = beginDate;
         this.endDate = endDate;
         this.room = room;

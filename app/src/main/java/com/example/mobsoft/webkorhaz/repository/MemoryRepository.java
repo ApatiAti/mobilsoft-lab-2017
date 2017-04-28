@@ -43,7 +43,7 @@ public class MemoryRepository implements Repository {
 		c.add(Calendar.HOUR_OF_DAY, +2);
 		Date endDate = c.getTime();
 
-		Appointment flight1 = new Appointment(beginDate, endDate, "Ib025", "Dr Doktor"
+		Appointment flight1 = new Appointment(0L, beginDate, endDate, "Ib025", "Dr Doktor"
 				, departmentList.get(0), "Fáj fejem"
 				, userList.get(0), 12L
 				, consultiConsultationHourTypeList.get(0));
@@ -54,7 +54,7 @@ public class MemoryRepository implements Repository {
 		c.add(Calendar.HOUR_OF_DAY, +1);
 		endDate = c.getTime();
 
-		Appointment flight2 = new Appointment(beginDate, endDate, "EB01", "Dr Doktor"
+		Appointment flight2 = new Appointment(0L, beginDate, endDate, "EB01", "Dr Doktor"
 				, departmentList.get(1), "Szem baj"
 				, userList.get(1), 17L
 				, consultiConsultationHourTypeList.get(1));
@@ -105,10 +105,10 @@ public class MemoryRepository implements Repository {
 	}
 
 	@Override
-	public List<Appointment> getAppointments(User currentUser) {
+	public List<Appointment> getAppointments(User user) {
 		List<Appointment> result = new ArrayList<>();
 		for (Appointment appointment : appointmentList) {
-			if (appointment.getPatient().getUsername().equals(currentUser.getUsername())){
+			if (appointment.getPatient().getUsername().equals(user.getUsername())){
 				result.add(appointment);
 			}
 		}

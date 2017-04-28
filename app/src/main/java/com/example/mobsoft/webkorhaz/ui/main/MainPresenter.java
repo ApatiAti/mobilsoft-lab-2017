@@ -82,7 +82,7 @@ public class MainPresenter extends Presenter<MainScreen> {
     /**
      * Szerver oldalról lekérdezi a felhasználó Appointmentjeit
      */
-    public void refreashAppointments(final User user){
+    public void refreashAppointments(final Long userId){
         executor.execute(new Runnable() {
             @Override
             public void run() {

@@ -29,9 +29,9 @@ public class SugarOrmRepository implements Repository {
     }
 
     @Override
-    public List<Appointment> getAppointments(User currentUserId) {
+    public List<Appointment> getAppointments(User user) {
         return Select.from(Appointment.class)
-                .where(Condition.prop("patient").eq(currentUserId.getId())).orderBy("begin_Date").list();
+                .where(Condition.prop("patient").eq(user.getId())).orderBy("begin_Date").list();
     }
 
     @Override
