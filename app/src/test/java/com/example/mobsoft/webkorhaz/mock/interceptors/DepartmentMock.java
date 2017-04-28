@@ -8,6 +8,7 @@ import com.example.mobsoft.webkorhaz.network.NetworkConfig;
 import com.example.mobsoft.webkorhaz.repository.MemoryRepository;
 import com.example.mobsoft.webkorhaz.utils.GsonHelper;
 
+import java.net.HttpURLConnection;
 import java.util.List;
 
 import static com.example.mobsoft.webkorhaz.mock.interceptors.MockHelper.makeResponse;
@@ -18,7 +19,7 @@ import okhttp3.Headers;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class DepartmentMock {
+public class DepartmentMock implements NetworkMockInterface {
     public static String DEPARTMENT_URL = "getDepartmentsAndTypes";
 
     public static Response process(Request request) {
@@ -38,10 +39,10 @@ public class DepartmentMock {
                 && request.method().equals("GET")) {
             List<Department> departments = memoryRepository.getDepartments();
             responseString = GsonHelper.getGson().toJson(departments);
-            responseCode = 200;
+            responseCode = HttpURLConnection.HTTP_OK;
         } else {
             responseString = "ERROR";
-            responseCode = 503;
+            responseCode = HttpURLConnection.HTTP_BAD_REQUEST;
         }
 
         return makeResponse(request, headers, responseCode, responseString);

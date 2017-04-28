@@ -8,6 +8,7 @@ import com.example.mobsoft.webkorhaz.network.NetworkConfig;
 import com.example.mobsoft.webkorhaz.repository.MemoryRepository;
 import com.example.mobsoft.webkorhaz.utils.GsonHelper;
 
+import java.net.HttpURLConnection;
 import java.util.List;
 
 import static com.example.mobsoft.webkorhaz.mock.interceptors.MockHelper.makeResponse;
@@ -38,29 +39,29 @@ public class AppointmentMock {
             switch (request.method()){
                 case "POST":
                     responseString = "Succes";
-                    responseCode = 200;
+                    responseCode = HttpURLConnection.HTTP_OK;
                     break;
                 case "GET":
                     Long appointmentId = null;
                     Appointment appointmentByAppointmentId = memoryRepository.getAppointmentByAppointmentId(appointmentId, 1L);
                     responseString = GsonHelper.getGson().toJson(appointmentByAppointmentId);
-                    responseCode = 200;
+                    responseCode = HttpURLConnection.HTTP_OK;
                     break;
                 case "PUT":
 //                    appointment = null;
                     memoryRepository.updateAppointment(appointment);
                     responseString = "Succes";
-                    responseCode = 200;
+                    responseCode = HttpURLConnection.HTTP_OK;
                     break;
                 case "DELETE":
 //                    appointment =
                     memoryRepository.deleteAppointment(appointment);
                     responseString = "Succes";
-                    responseCode = 200;
+                    responseCode = HttpURLConnection.HTTP_OK;
                     break;
                 default:
                     responseString = "ERROR";
-                    responseCode = 403;
+                    responseCode = HttpURLConnection.HTTP_OK;
                     break;
             }
         } else if (uri.getPath().equals(NetworkConfig.ENDPOINT_PREFIX + APPOINTMENT_LIST_URL)
@@ -68,10 +69,10 @@ public class AppointmentMock {
             User currentUser = null;
             List<Appointment> appointments = memoryRepository.getAppointments(currentUser);
             responseString = GsonHelper.getGson().toJson(appointments);
-            responseCode = 200;
+            responseCode = HttpURLConnection.HTTP_OK;
         } else {
             responseString = "ERROR";
-            responseCode = 403;
+            responseCode = HttpURLConnection.HTTP_BAD_REQUEST;
         }
 
         return makeResponse(request, headers, responseCode, responseString);

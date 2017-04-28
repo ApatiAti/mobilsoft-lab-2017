@@ -7,6 +7,8 @@ import com.example.mobsoft.webkorhaz.network.NetworkConfig;
 import com.example.mobsoft.webkorhaz.repository.MemoryRepository;
 import com.example.mobsoft.webkorhaz.utils.GsonHelper;
 
+import java.net.HttpURLConnection;
+
 import okhttp3.Headers;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -24,15 +26,17 @@ public class TodoMock {
 
 		if (uri.getPath().equals(NetworkConfig.ENDPOINT_PREFIX + "Todos") && request.method().equals("POST")) {
 			responseString = "";
-			responseCode = 200;
-		}else if (uri.getPath().equals(NetworkConfig.ENDPOINT_PREFIX + "Todos") && request.method().equals("Get")) {
+			responseCode = HttpURLConnection.HTTP_OK;
+
+		} else if (uri.getPath().equals(NetworkConfig.ENDPOINT_PREFIX + "Todos") && request.method().equals("Get")) {
 			MemoryRepository memoryRepository = new MemoryRepository();
 			memoryRepository.open(null);
 			responseString = GsonHelper.getGson().toJson(memoryRepository.getFavourites());
-			responseCode = 200;
+			responseCode = HttpURLConnection.HTTP_OK;
+
 		} else {
 			responseString = "ERROR";
-			responseCode = 503;
+			responseCode = HttpURLConnection.HTTP_UNAVAILABLE;
 		}
 
 		return makeResponse(request, headers, responseCode, responseString);

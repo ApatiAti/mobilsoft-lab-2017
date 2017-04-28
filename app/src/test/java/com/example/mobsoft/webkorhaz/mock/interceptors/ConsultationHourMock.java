@@ -6,6 +6,8 @@ import com.example.mobsoft.webkorhaz.network.NetworkConfig;
 import com.example.mobsoft.webkorhaz.repository.MemoryRepository;
 import com.example.mobsoft.webkorhaz.utils.GsonHelper;
 
+import java.net.HttpURLConnection;
+
 import okhttp3.Headers;
 import okhttp3.MediaType;
 import okhttp3.Protocol;
@@ -38,10 +40,10 @@ public class ConsultationHourMock {
                 && request.method().equals("POST")) {
 
             responseString = GsonHelper.getGson().toJson("");
-            responseCode = 200;
+            responseCode = HttpURLConnection.HTTP_OK;
         } else {
             responseString = "ERROR";
-            responseCode = 503;
+            responseCode = HttpURLConnection.HTTP_BAD_REQUEST;
         }
 
         return makeResponse(request, headers, responseCode, responseString);

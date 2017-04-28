@@ -6,6 +6,7 @@ import android.util.Log;
 import com.example.mobsoft.webkorhaz.network.NetworkConfig;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 
 import okhttp3.Headers;
 import okhttp3.Interceptor;
@@ -46,7 +47,8 @@ public class MockInterceptor implements Interceptor {
 		} else if (path.startsWith(NetworkConfig.ENDPOINT_PREFIX + ConsultationHourMock.CONSULTATIO_HOUR_URL)) {
 			return ConsultationHourMock.process(request);
 		}
-		return makeResponse(request, headers, 404, "Unknown");
+
+		return makeResponse(request, headers, HttpURLConnection.HTTP_NOT_FOUND, "Unknown");
 
 	}
 
