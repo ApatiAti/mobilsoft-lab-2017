@@ -6,7 +6,7 @@ import java.util.Date;
  * Created by Apati on 2017.04.05..
  */
 
-public class ConsultationHourDTO {
+public class ConsultationHourDto {
     // nem kell mert ott lesz az előző oldalról
     //    public String departmentName;
     public String tpye;
@@ -15,7 +15,7 @@ public class ConsultationHourDTO {
     public int maxNumberOfPatient;
     public int available;
 
-    public ConsultationHourDTO() {
+    public ConsultationHourDto() {
     }
 
 //    public String getDepartmentName() {
