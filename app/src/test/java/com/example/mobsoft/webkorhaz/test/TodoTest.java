@@ -39,7 +39,7 @@ public class TodoTest {
         mianPresenter.getFavourites();
 
         ArgumentCaptor<String> todosCaptor = ArgumentCaptor.forClass(String.class);
-        verify(mainScreen, times(2)).showErrorAtRefreshFromServer(todosCaptor.capture());
+        verify(mainScreen, times(2)).showMessage(todosCaptor.capture());
 
         List<String> capturedTodos = todosCaptor.getAllValues();
         assertEquals("todo one", capturedTodos.get(0));
@@ -53,7 +53,7 @@ public class TodoTest {
         mianPresenter.testNetwork();
 
         ArgumentCaptor<String> todosCaptor = ArgumentCaptor.forClass(String.class);
-        verify(mainScreen, times(2)).showErrorAtRefreshFromServer(todosCaptor.capture());
+        verify(mainScreen, times(2)).showMessage(todosCaptor.capture());
 
         List<String> capturedTodos = todosCaptor.getAllValues();
         assertEquals("todo one", capturedTodos.get(0));

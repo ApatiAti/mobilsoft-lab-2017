@@ -85,21 +85,4 @@ public class ConsultationHourSearchPresenter extends Presenter<ConsultationHourS
         }
     }
 
-    /**
-     * {@link RefreshDepartmentsDataEvent} eventeket a {@link EventBus}-ról feldolgozó metódus. Android UI szálát hasznélja a feldolgozásra
-     * @param event
-     */
-    public void onEventMainThread(RefreshDepartmentsDataEvent event) {
-        if (event.getThrowable() != null) {
-            event.getThrowable().printStackTrace();
-            if (screen != null) {
-                screen.showErrorMessage("error");
-            }
-            Log.e("Networking", "Error at login in", event.getThrowable());
-        } else {
-            if (screen != null) {
-                screen.loadDepartmentData(event.getDepartment());
-            }
-        }
-    }
 }

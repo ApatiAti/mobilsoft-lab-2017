@@ -3,6 +3,7 @@ package com.example.mobsoft.webkorhaz.repository;
 import android.content.Context;
 
 import com.example.mobsoft.webkorhaz.model.Appointment;
+import com.example.mobsoft.webkorhaz.model.ConsultationHourType;
 import com.example.mobsoft.webkorhaz.model.Department;
 import com.example.mobsoft.webkorhaz.model.Todo;
 import com.example.mobsoft.webkorhaz.model.User;
@@ -51,4 +52,6 @@ public interface Repository {
     User saveUser(User user);
 
     Department saveDepartment(Department department);
+
+    ConsultationHourType saveConsultationHourType(ConsultationHourType dbConsultationHourType);
 }

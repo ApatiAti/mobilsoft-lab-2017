@@ -6,6 +6,7 @@ import com.example.mobsoft.webkorhaz.interactor.appointment.AppointmentInteracto
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointmentListFromDbEvent;
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointmentListFromServerEvents;
 import com.example.mobsoft.webkorhaz.interactor.consultationhour.ConsultationHourInteractor;
+import com.example.mobsoft.webkorhaz.interactor.consultationhour.events.RefreshDepartmentsDataEvent;
 import com.example.mobsoft.webkorhaz.interactor.todo.FavouritesInteractor;
 import com.example.mobsoft.webkorhaz.interactor.todo.events.GetFavouritesEvent;
 import com.example.mobsoft.webkorhaz.model.Todo;
@@ -116,13 +117,13 @@ public class MainPresenter extends Presenter<MainScreen> {
         if (event.getThrowable() != null) {
             event.getThrowable().printStackTrace();
             if (screen != null) {
-                screen.showErrorAtRefreshFromServer("error");
+                screen.showMessage("error");
             }
             Log.e("Networking", "Error reading favourites", event.getThrowable());
         } else {
             if (screen != null) {
                 for(Todo t : event.getTodos()){
-                    screen.showErrorAtRefreshFromServer(t.getName());
+                    screen.showMessage(t.getName());
                 }
             }
         }
@@ -136,7 +137,7 @@ public class MainPresenter extends Presenter<MainScreen> {
         if (event.getThrowable() != null) {
             event.getThrowable().printStackTrace();
             if (screen != null) {
-                screen.showErrorAtLoadFromDb("DB error");
+                screen.showMessage("Hiba történt az adatbázis elérése során");
             }
             Log.e("DB", "Error reading appointments from DB", event.getThrowable());
         } else {
@@ -154,12 +155,30 @@ public class MainPresenter extends Presenter<MainScreen> {
         if (event.getThrowable() != null) {
             event.getThrowable().printStackTrace();
             if (screen != null) {
-                screen.showErrorAtRefreshFromServer("Network error");
+                screen.showMessage("Hiba történt a foglalási időpontok lekérdezésekor");
             }
             Log.e("DB", "Error reading appointments from DB", event.getThrowable());
         } else {
             if (screen != null) {
                 screen.showAppointments(event.getAppointments());
+            }
+        }
+    }
+
+    /**
+     * {@link RefreshDepartmentsDataEvent} eventeket a {@link EventBus}-ról feldolgozó metódus. Android UI szálát hasznélja a feldolgozásra
+     * @param event
+     */
+    public void onEventMainThread(RefreshDepartmentsDataEvent event) {
+        if (event.getThrowable() != null) {
+            event.getThrowable().printStackTrace();
+            if (screen != null) {
+                screen.showMessage("Hiba történt a korházi osztályok lekérdezés során");
+            }
+            Log.e("NETWORK", "Error when refreshind departments", event.getThrowable());
+        } else {
+            if (screen != null) {
+                screen.showMessage("Sikeres department frissítés");
             }
         }
     }

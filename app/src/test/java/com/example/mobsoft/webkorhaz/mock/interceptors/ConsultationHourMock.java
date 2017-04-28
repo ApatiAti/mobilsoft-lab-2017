@@ -4,6 +4,7 @@ import android.net.Uri;
 
 import com.example.mobsoft.webkorhaz.network.NetworkConfig;
 import com.example.mobsoft.webkorhaz.repository.MemoryRepository;
+import com.example.mobsoft.webkorhaz.repository.TestMemoryRepository;
 import com.example.mobsoft.webkorhaz.utils.GsonHelper;
 
 import java.net.HttpURLConnection;
@@ -31,7 +32,7 @@ public class ConsultationHourMock {
         int responseCode;
 
         Headers headers = request.headers();
-        MemoryRepository memoryRepository = new MemoryRepository();
+        TestMemoryRepository memoryRepository = new TestMemoryRepository();
         memoryRepository.open(null);
 
 

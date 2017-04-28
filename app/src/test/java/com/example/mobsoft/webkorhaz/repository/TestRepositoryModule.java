@@ -11,6 +11,12 @@ public class TestRepositoryModule {
 	@Singleton
 	@Provides
 	public Repository provideRepository() {
-		return new EmptyMemoryRepository();
+		return new MemoryRepository();
+	}
+
+	@Singleton
+	@Provides
+	public TestMemoryRepository provideEmptyMemoryRepository() {
+		return new TestMemoryRepository();
 	}
 }

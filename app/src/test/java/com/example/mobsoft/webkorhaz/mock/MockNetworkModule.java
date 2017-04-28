@@ -1,6 +1,7 @@
 package com.example.mobsoft.webkorhaz.mock;
 
 import com.example.mobsoft.webkorhaz.network.NetworkModule;
+import com.example.mobsoft.webkorhaz.network.todo.DepartmentApi;
 import com.example.mobsoft.webkorhaz.network.todo.LoginApi;
 import com.example.mobsoft.webkorhaz.network.todo.TodoApi;
 
@@ -36,7 +37,7 @@ public class MockNetworkModule {
 	@Singleton
 	public OkHttpClient provideOkHttpClient(OkHttpClient.Builder builder) {
 
-		builder.interceptors().add(3, new Interceptor() {
+		builder.interceptors().add(new Interceptor() {
 			@Override
 			public Response intercept(Chain chain) throws IOException {
 				// TODO ezt kiszedni és helyére már a MockInterceport rakni
@@ -64,5 +65,8 @@ public class MockNetworkModule {
 	@Singleton
 	public LoginApi provideLoginApi(Retrofit retrofit) { return networkModule.provideLoginApi(retrofit);}
 
+	@Provides
+	@Singleton
+	public DepartmentApi provideDepartmentApi(Retrofit retrofit) { return networkModule.provideDepartmentApi(retrofit);}
 
 }

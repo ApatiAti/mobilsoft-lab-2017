@@ -25,9 +25,10 @@ public class MemoryRepository implements Repository {
 
 	@Override
 	public void open(Context context) {
-		createDepartments();
+
 		createUser();
 		createConsultationHourTypes();
+		createDepartments();
 		createAppointment();
 
 		openTodoRepo(context);
@@ -239,7 +240,26 @@ public class MemoryRepository implements Repository {
 
 	@Override
 	public Department saveDepartment(Department department) {
+		for (int i = 0 ; i < departmentList.size() ; i++) {
+			if (departmentList.get(i).getDepartmentId().equals(department.getDepartmentId())) {
+				departmentList.set(i, department);
+				return department;
+			}
+		}
+		departmentList.add(department);
+		return department;
+	}
+
+	@Override
+	public ConsultationHourType saveConsultationHourType(ConsultationHourType dbConsultationHourType) {
 		return null;
+	}
+
+	public void clear() {
+		appointmentList = new ArrayList<>();
+		departmentList = new ArrayList<>();
+		userList = new ArrayList<>();
+		consultiConsultationHourTypeList = new ArrayList<>();
 	}
 }
 

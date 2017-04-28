@@ -12,7 +12,5 @@ public interface MainScreen {
 
     void showAppointments(List<Appointment> appointments);
 
-    void showErrorAtLoadFromDb(String message);
-
-    void showErrorAtRefreshFromServer(String message);
+    void showMessage(String errorMessage);
 }
