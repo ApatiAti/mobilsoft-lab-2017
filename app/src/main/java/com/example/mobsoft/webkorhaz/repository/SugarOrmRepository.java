@@ -3,6 +3,7 @@ package com.example.mobsoft.webkorhaz.repository;
 import android.content.Context;
 
 import com.example.mobsoft.webkorhaz.model.Appointment;
+import com.example.mobsoft.webkorhaz.model.Department;
 import com.example.mobsoft.webkorhaz.model.Todo;
 import com.example.mobsoft.webkorhaz.model.User;
 import com.orm.SugarContext;
@@ -27,14 +28,14 @@ public class SugarOrmRepository implements Repository {
     }
 
     @Override
-    public List<Appointment> getAppointments() {
-        return Select.from(Appointment.class).orderBy("beginDate").list();
-//        return SugarRecord.listAll(Appointment.class);
+    public List<Appointment> getAppointments(User currentUserId) {
+        return Select.from(Appointment.class)
+                .where(Condition.prop("patient").eq(currentUserId.getId())).orderBy("begin_Date").list();
     }
 
     @Override
     public void saveAppointment(Appointment appointment) {
-        SugarRecord.saveInTx(appointment);
+        SugarRecord.save(appointment);
     }
 
     @Override
@@ -48,8 +49,27 @@ public class SugarOrmRepository implements Repository {
     }
 
     @Override
+    public Appointment getAppointmentById(Long appointmentId, long userId) {
+        return Select.from(Appointment.class)
+                .where(Condition.prop("appointmentId").eq(appointmentId))
+                    .and(Condition.prop("parient.id").eq(userId)).first();
+    }
+
+    @Override
+    public void deleteAllAppointement(Long userId) {
+        SugarRecord.deleteAll(Appointment.class, "patient= ?", userId.toString());
+    }
+
+    @Override
     public boolean isInDB(Appointment appointment) {
         return SugarRecord.findById(Appointment.class, appointment.getId()) != null;
+    }
+
+    @Override
+    public Department getDepartmentByName(Long departmentId) {
+        return Select.from(Department.class)
+                //.where(Condition.prop("departmentId").eq(departmentId))
+                .first();
     }
 
     /**
@@ -101,4 +121,10 @@ public class SugarOrmRepository implements Repository {
         return dbUser;
     }
 
+    @Override
+    public Department saveDepartment(Department department) {
+        long saveId = SugarRecord.save(department);
+        department.setId(saveId);
+        return department;
+    }
 }

@@ -8,6 +8,7 @@ import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointme
 import com.example.mobsoft.webkorhaz.interactor.todo.FavouritesInteractor;
 import com.example.mobsoft.webkorhaz.interactor.todo.events.GetFavouritesEvent;
 import com.example.mobsoft.webkorhaz.model.Todo;
+import com.example.mobsoft.webkorhaz.model.User;
 import com.example.mobsoft.webkorhaz.ui.Presenter;
 
 
@@ -48,7 +49,9 @@ public class MainPresenter extends Presenter<MainScreen> {
     public void attachScreen(MainScreen screen) {
         super.attachScreen(screen);
         injector.inject(this);
-        bus.register(this);
+        if (!bus.isRegistered(this)){
+            bus.register(this);
+        }
     }
 
     @Override
@@ -60,12 +63,13 @@ public class MainPresenter extends Presenter<MainScreen> {
 
     /**
      * Db-ben eltárolt Appoinmentek lekérdezése
+     * @param currentUser
      */
-    public void loadAppointmentFromDb(){
+    public void loadAppointmentFromDb(final User currentUser){
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                appointmentInteractor.loadAppointmentsFromDb();
+                appointmentInteractor.loadAppointmentsFromDb(currentUser);
             }
         });
     }
@@ -73,11 +77,11 @@ public class MainPresenter extends Presenter<MainScreen> {
     /**
      * Szerver oldalról lekérdezi a felhasználó Appointmentjeit
      */
-    public void refreashAppointments(){
+    public void refreashAppointments(final User user){
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                appointmentInteractor.reloadAppoinmentListFromServer(0);
+                appointmentInteractor.reloadAppoinmentListFromServer(user);
             }
         });
     }

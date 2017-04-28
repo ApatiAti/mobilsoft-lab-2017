@@ -3,6 +3,7 @@ package com.example.mobsoft.webkorhaz.repository;
 import android.content.Context;
 
 import com.example.mobsoft.webkorhaz.model.Appointment;
+import com.example.mobsoft.webkorhaz.model.Department;
 import com.example.mobsoft.webkorhaz.model.Todo;
 import com.example.mobsoft.webkorhaz.model.User;
 
@@ -15,7 +16,7 @@ public interface Repository {
 
     void close();
 
-    List<Appointment> getAppointments();
+    List<Appointment> getAppointments(User currentUserId);
 
     void saveAppointment(Appointment appointment);
 
@@ -23,8 +24,13 @@ public interface Repository {
 
     void removeAppointment(Appointment appointment);
 
+    Appointment getAppointmentById(Long appointmentId, long userId);
+
+    void deleteAllAppointement(Long id);
+
     boolean isInDB(Appointment appointment);
 
+    Department getDepartmentByName(Long departmentId);
 
     List<Todo> getFavourites();
 
@@ -37,4 +43,6 @@ public interface Repository {
     boolean isInDB(Todo todo);
 
     User saveUser(User user);
+
+    Department saveDepartment(Department department);
 }

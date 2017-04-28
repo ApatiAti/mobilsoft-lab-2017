@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.mobsoft.webkorhaz.MobSoftApplication;
 import com.example.mobsoft.webkorhaz.R;
 import com.example.mobsoft.webkorhaz.model.Appointment;
+import com.example.mobsoft.webkorhaz.model.User;
 import com.example.mobsoft.webkorhaz.ui.appointment.AppointmentActivity;
 import com.example.mobsoft.webkorhaz.ui.navigation.NavigationActivity;
 import com.example.mobsoft.webkorhaz.ui.util.adapter.AppointmentAdapter;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
     RecyclerView recyclerView;
     AppointmentAdapter appointmentAdapter;
     private List<Appointment> appointmentList = new ArrayList<>();
+    User currentUser;
 
     @Inject
     MainPresenter mainPresenter;
@@ -44,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
         setContentView(R.layout.activity_main);
 
         MobSoftApplication.injector.inject(this);
+
+        currentUser = ((MobSoftApplication) getApplication()).getCurrentUser();
         dateFormat = new SimpleDateFormat(getString(R.string.fullDateTimeFormat));
         appointmentAdapter = new AppointmentAdapter(appointmentList, dateFormat);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
@@ -85,8 +89,9 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
     protected void onStart() {
         super.onStart();
         mainPresenter.attachScreen(this);
+
         // TODO ez így nem jó, mert ha saját magára navigálunk vissza akkor a presenter már fel van iratkozva erre aaz eseményre
-        mainPresenter.loadAppointmentFromDb();
+        mainPresenter.loadAppointmentFromDb(currentUser);
     }
 
     @Override
@@ -112,8 +117,8 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
                 navigateToNavigationActivity();
                 return true;
             case R.id.miRefresh:
-//                Toast.makeText(this, "//TODO Refresh!\n" , Toast.LENGTH_SHORT).show();
-                mainPresenter.testNetwork();
+                Toast.makeText(this, getString(R.string.main_refresh_from_network) , Toast.LENGTH_SHORT).show();
+                mainPresenter.refreashAppointments(currentUser);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

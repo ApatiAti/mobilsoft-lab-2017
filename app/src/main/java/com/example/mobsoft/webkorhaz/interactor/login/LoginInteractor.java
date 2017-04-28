@@ -63,7 +63,7 @@ public class LoginInteractor {
 
     private Call<Void> preperaLoginCall(User user) {
 
-        return loginApi.loginPost(NetworkConfig.LOGIN_URL, user.getUsername(), user.getPassword());
+        return loginApi.loginPost(NetworkConfig.LOGIN_URL, user.getUsername(), user.getPassword(), true);
     }
 
 

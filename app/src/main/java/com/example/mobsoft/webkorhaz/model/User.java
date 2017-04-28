@@ -10,6 +10,8 @@ import java.io.Serializable;
 @Table
 public class User implements Serializable{
     private Long id;
+    // Todo nem kell
+    private Long patientId;
     private String username;
     private String password;
 
@@ -23,6 +25,13 @@ public class User implements Serializable{
 
     public User(Long id, String username, String password) {
         this.id = id;
+        this.username = username;
+        this.password = password;
+    }
+
+    public User(Long id,Long patientId, String username, String password) {
+        this.id = id;
+        this.patientId = patientId;
         this.username = username;
         this.password = password;
     }
@@ -51,4 +60,7 @@ public class User implements Serializable{
         this.password = password;
     }
 
+    public Long getPatientId() {
+        return patientId;
+    }
 }

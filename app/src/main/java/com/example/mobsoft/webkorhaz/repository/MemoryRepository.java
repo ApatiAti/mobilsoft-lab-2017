@@ -57,10 +57,16 @@ public class MemoryRepository implements Repository {
 
 	}
 
-
 	@Override
-	public List<Appointment> getAppointments() {
-		return appointmentList;
+	public List<Appointment> getAppointments(User currentUser) {
+		List<Appointment> result = new ArrayList<>();
+		for (Appointment appointment : appointmentList) {
+			if (appointment.getPatient().getUsername().equals(currentUser.getUsername())){
+				result.add(appointment);
+			}
+		}
+
+		return result;
 	}
 
 	@Override
@@ -79,8 +85,23 @@ public class MemoryRepository implements Repository {
 	}
 
 	@Override
+	public Appointment getAppointmentById(Long appointmentId, long userId) {
+		return null;
+	}
+
+	@Override
+	public void deleteAllAppointement(Long id) {
+
+	}
+
+	@Override
 	public boolean isInDB(Appointment appointment) {
 		return appointmentList.contains(appointment);
+	}
+
+	@Override
+	public Department getDepartmentByName(Long departmentId) {
+		return null;
 	}
 
 
@@ -137,5 +158,9 @@ public class MemoryRepository implements Repository {
 		return null;
 	}
 
+	@Override
+	public Department saveDepartment(Department department) {
+		return null;
+	}
 }
 

@@ -6,12 +6,12 @@
         android:orderInCategory="100"
         android:icon="@drawable/ic_menu"
         app:showAsAction="always"
-        android:title="@string/main_navigation">
+        android:title="@string/main_menu_navigation">
     </item>
     <item
         android:id="@+id/miRefresh"
         android:icon="@drawable/ic_refresh"
         app:showAsAction="ifRoom|withText"
-        android:title="@string/main_refresh">
+        android:title="@string/main_menu_refresh">
     </item>
 </menu>

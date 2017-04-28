@@ -25,4 +25,6 @@ public interface TodoApi {
   @GET
   Call<ResponseBody> getVanENetHu(@Url String url);
 
+  @GET("/")
+  Call<ResponseBody> getVanENetHu();
 }
