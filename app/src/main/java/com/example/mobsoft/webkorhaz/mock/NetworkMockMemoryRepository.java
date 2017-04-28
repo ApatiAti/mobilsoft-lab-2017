@@ -1,6 +1,7 @@
-package com.example.mobsoft.webkorhaz.repository;
+package com.example.mobsoft.webkorhaz.mock;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.example.mobsoft.webkorhaz.model.Appointment;
 import com.example.mobsoft.webkorhaz.model.ConsultationHourType;
@@ -17,7 +18,7 @@ import java.util.List;
  * Created by Apati on 2017.04.28..
  */
 
-public class TestMemoryRepository {
+public class NetworkMockMemoryRepository {
 
     private static final long MINUTE = 60 * 1000;
 
@@ -69,8 +70,13 @@ public class TestMemoryRepository {
 
     public void createUser() {
         userList = new ArrayList<>();
-        userList.add(new User(1l, "beteg1", ""));
+        userList.add(getUseOne());
         userList.add(new User(2l, "Károly", ""));
+    }
+
+    @NonNull
+    public static User getUseOne() {
+        return new User(1l, "beteg1", "");
     }
 
     public void createDepartments() {

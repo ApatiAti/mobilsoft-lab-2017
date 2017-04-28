@@ -9,7 +9,6 @@ import com.example.mobsoft.webkorhaz.model.ConsultationHourType;
 import com.example.mobsoft.webkorhaz.model.Department;
 import com.example.mobsoft.webkorhaz.repository.MemoryRepository;
 import com.example.mobsoft.webkorhaz.repository.Repository;
-import com.example.mobsoft.webkorhaz.repository.TestMemoryRepository;
 import com.example.mobsoft.webkorhaz.ui.main.MainPresenter;
 import com.example.mobsoft.webkorhaz.ui.main.MainScreen;
 import com.example.mobsoft.webkorhaz.utils.RobolectricDaggerTestRunner;

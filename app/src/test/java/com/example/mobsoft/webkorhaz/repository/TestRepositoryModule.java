@@ -1,5 +1,7 @@
 package com.example.mobsoft.webkorhaz.repository;
 
+import com.example.mobsoft.webkorhaz.mock.NetworkMockMemoryRepository;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -16,7 +18,7 @@ public class TestRepositoryModule {
 
 	@Singleton
 	@Provides
-	public TestMemoryRepository provideEmptyMemoryRepository() {
-		return new TestMemoryRepository();
+	public NetworkMockMemoryRepository provideEmptyMemoryRepository() {
+		return new NetworkMockMemoryRepository();
 	}
 }

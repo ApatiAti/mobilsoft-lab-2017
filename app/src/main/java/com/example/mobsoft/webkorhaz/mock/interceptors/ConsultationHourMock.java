@@ -2,8 +2,8 @@ package com.example.mobsoft.webkorhaz.mock.interceptors;
 
 import android.net.Uri;
 
+import com.example.mobsoft.webkorhaz.mock.NetworkMockMemoryRepository;
 import com.example.mobsoft.webkorhaz.network.NetworkConfig;
-import com.example.mobsoft.webkorhaz.repository.TestMemoryRepository;
 import com.example.mobsoft.webkorhaz.utils.GsonHelper;
 
 import java.net.HttpURLConnection;
@@ -25,7 +25,7 @@ public class ConsultationHourMock {
         int responseCode;
 
         Headers headers = request.headers();
-        TestMemoryRepository memoryRepository = new TestMemoryRepository();
+        NetworkMockMemoryRepository memoryRepository = new NetworkMockMemoryRepository();
         memoryRepository.open(null);
 
 
