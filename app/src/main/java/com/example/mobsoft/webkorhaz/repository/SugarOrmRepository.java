@@ -81,6 +81,12 @@ public class SugarOrmRepository implements Repository {
     public Department getDepartmentByDepartmentName(String departmentName) {
         return Select.from(Department.class).where(Condition.prop("department_name").eq(departmentName)).first();
     }
+
+    @Override
+    public List<Department> getDepartments() {
+        return Select.from(Department.class).list();
+    }
+
     /**
      *  Labor miatt
      */

@@ -175,6 +175,11 @@ public class MemoryRepository implements Repository {
 		return null;
 	}
 
+	@Override
+	public List<Department> getDepartments() {
+		return departmentList;
+	}
+
 	/**
 	 *  Labor miatt
 	 */

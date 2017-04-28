@@ -36,12 +36,16 @@ public class MockInterceptor implements Interceptor {
 		Headers headers = request.headers();
 
 
-		if (uri.getPath().startsWith(NetworkConfig.ENDPOINT_PREFIX + "Todos")) {
+		String path = uri.getPath();
+		if (path.startsWith(NetworkConfig.ENDPOINT_PREFIX + "Todos")) {
 			return TodoMock.process(request);
-		} else if (uri.getPath().startsWith(NetworkConfig.ENDPOINT_PREFIX + AppointmentMock.APPOINTMENT_URL)) {
+		} else if (path.startsWith(NetworkConfig.ENDPOINT_PREFIX + AppointmentMock.APPOINTMENT_URL)) {
 			return AppointmentMock.process(request);
+		} else if (path.startsWith(NetworkConfig.ENDPOINT_PREFIX + DepartmentMock.DEPARTMENT_URL)){
+			return DepartmentMock.process(request);
+		} else if (path.startsWith(NetworkConfig.ENDPOINT_PREFIX + ConsultationHourMock.CONSULTATIO_HOUR_URL)) {
+			return ConsultationHourMock.process(request);
 		}
-
 		return makeResponse(request, headers, 404, "Unknown");
 
 	}

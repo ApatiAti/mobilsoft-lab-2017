@@ -36,6 +36,8 @@ public interface Repository {
 
     Department getDepartmentByDepartmentName(String departmentName);
 
+    List<Department> getDepartments();
+
     List<Todo> getFavourites();
 
     void saveFavourite(Todo todo);
