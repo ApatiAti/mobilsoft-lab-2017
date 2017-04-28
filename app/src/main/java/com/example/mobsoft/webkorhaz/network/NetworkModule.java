@@ -1,6 +1,7 @@
 package com.example.mobsoft.webkorhaz.network;
 
 import com.example.mobsoft.webkorhaz.network.interceptors.JSessionInterceptor;
+import com.example.mobsoft.webkorhaz.network.todo.DepartmentApi;
 import com.example.mobsoft.webkorhaz.network.todo.LoginApi;
 import com.example.mobsoft.webkorhaz.network.todo.TodoApi;
 import com.example.mobsoft.webkorhaz.utils.GsonHelper;
@@ -49,11 +50,8 @@ public class NetworkModule {
     @Singleton
     public LoginApi provideLoginApi(Retrofit retrofit) { return retrofit.create(LoginApi.class);}
 
-//    @Provides
-//    @Singleton
-//    public LoginApi provideLoginApi(Retrofit retrofit) {
-//        return retrofit.create(LoginApi.class);
-//    }
-
+    @Provides
+    @Singleton
+    public DepartmentApi provideDepartmentApi(Retrofit retrofit) { return retrofit.create(DepartmentApi.class);}
 
 }

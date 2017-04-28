@@ -3,7 +3,7 @@ package com.example.mobsoft.webkorhaz.ui.ConsultationHourSearch;
 import android.util.Log;
 
 import com.example.mobsoft.webkorhaz.interactor.consultationhour.ConsultationHourInteractor;
-import com.example.mobsoft.webkorhaz.interactor.consultationhour.events.GetDepartmentsDataEvent;
+import com.example.mobsoft.webkorhaz.interactor.consultationhour.events.RefreshDepartmentsDataEvent;
 import com.example.mobsoft.webkorhaz.interactor.consultationhour.events.SearchConsultationHourEvent;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourSearch;
 import com.example.mobsoft.webkorhaz.ui.Presenter;
@@ -86,10 +86,10 @@ public class ConsultationHourSearchPresenter extends Presenter<ConsultationHourS
     }
 
     /**
-     * {@link GetDepartmentsDataEvent} eventeket a {@link EventBus}-ról feldolgozó metódus. Android UI szálát hasznélja a feldolgozásra
+     * {@link RefreshDepartmentsDataEvent} eventeket a {@link EventBus}-ról feldolgozó metódus. Android UI szálát hasznélja a feldolgozásra
      * @param event
      */
-    public void onEventMainThread(GetDepartmentsDataEvent event) {
+    public void onEventMainThread(RefreshDepartmentsDataEvent event) {
         if (event.getThrowable() != null) {
             event.getThrowable().printStackTrace();
             if (screen != null) {

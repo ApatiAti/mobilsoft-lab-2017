@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.mobsoft.webkorhaz.interactor.appointment.AppointmentInteractor;
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointmentListFromDbEvent;
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointmentListFromServerEvents;
+import com.example.mobsoft.webkorhaz.interactor.consultationhour.ConsultationHourInteractor;
 import com.example.mobsoft.webkorhaz.interactor.todo.FavouritesInteractor;
 import com.example.mobsoft.webkorhaz.interactor.todo.events.GetFavouritesEvent;
 import com.example.mobsoft.webkorhaz.model.Todo;
@@ -35,6 +36,9 @@ public class MainPresenter extends Presenter<MainScreen> {
 
     @Inject
     AppointmentInteractor appointmentInteractor;
+
+    @Inject
+    ConsultationHourInteractor consultationHourInteractor;
 
     @Inject
     Executor executor;
@@ -86,7 +90,14 @@ public class MainPresenter extends Presenter<MainScreen> {
         });
     }
 
-
+    public void refreshDepartmentData(){
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                consultationHourInteractor.refreshDepartmentData();
+            }
+        });
+    }
 
     /**
      *  labor miatt

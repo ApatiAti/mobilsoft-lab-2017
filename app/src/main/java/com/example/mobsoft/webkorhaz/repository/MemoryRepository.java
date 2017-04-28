@@ -25,7 +25,7 @@ public class MemoryRepository implements Repository {
 
 	@Override
 	public void open(Context context) {
-		createDepartmentsAndCHTypes();
+		createDepartments();
 		createUser();
 		createConsultationHourTypes();
 		createAppointment();
@@ -33,7 +33,7 @@ public class MemoryRepository implements Repository {
 		openTodoRepo(context);
 	}
 
-	private void createAppointment() {
+	public void createAppointment() {
 		Calendar c = Calendar.getInstance();
 		c.setTime(new Date());
 		c.add(Calendar.DAY_OF_YEAR, +2);
@@ -64,12 +64,14 @@ public class MemoryRepository implements Repository {
 		appointmentList.add(flight2);
 	}
 
-	private void createUser() {
+	public void createUser() {
+		userList = new ArrayList<>();
 		userList.add(new User(1l, "beteg1", ""));
 		userList.add(new User(2l, "Károly", ""));
 	}
 
-	private void createDepartmentsAndCHTypes() {
+	public void createDepartments() {
+		departmentList  = new ArrayList<>();
 
 		List<ConsultationHourType> chtypeList = new ArrayList<>();
 		chtypeList.add(consultiConsultationHourTypeList.get(0));
@@ -84,7 +86,9 @@ public class MemoryRepository implements Repository {
 		departmentList.add(new Department(101L, "Szemészet", chtypeList2));
 	}
 
-	private void createConsultationHourTypes() {
+	public void createConsultationHourTypes() {
+		consultiConsultationHourTypeList = new ArrayList<>();
+
 		ConsultationHourType chtype1 = new ConsultationHourType(1000L, 1L, "Valami típus");
 		ConsultationHourType chtype2 = new ConsultationHourType(1002L, 2L, "láb cucc");
 		ConsultationHourType chtype3 = new ConsultationHourType(1002L, 3L, "Szem cucc");

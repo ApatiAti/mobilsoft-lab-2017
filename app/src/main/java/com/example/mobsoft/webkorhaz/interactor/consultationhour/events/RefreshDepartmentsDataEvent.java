@@ -8,14 +8,14 @@ import java.util.List;
  * Created by Apati on 2017.04.05..
  */
 
-public class GetDepartmentsDataEvent {
+public class RefreshDepartmentsDataEvent {
     private int code;
     private List<Department> Department;
     private Throwable throwable;
 
     //<editor-fold desc="Constructors|Getters|Setters">
 
-    public GetDepartmentsDataEvent() {
+    public RefreshDepartmentsDataEvent() {
     }
 
     public int getCode() {
