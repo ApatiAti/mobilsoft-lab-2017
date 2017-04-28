@@ -22,7 +22,6 @@ public class Appointment implements Serializable {
     private User patient;
     private Long consultationHourId;
 
-    // TODO department-hez kell csatolni
     private Department department;
     private ConsultationHourType consultationHourType;
 

@@ -1,4 +1,4 @@
-package com.example.mobsoft.webkorhaz.model;
+package com.example.mobsoft.webkorhaz.model.dto;
 
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDto;
 import com.orm.SugarRecord;
@@ -19,6 +19,8 @@ public class AppointmentDto {
     private String complaint;
     private Long patientId;
     private Long consultationHourId;
+    private Long departmentId;
+    private Long consultationHouTypeId;
 
     public AppointmentDto() {
     }
@@ -85,5 +87,21 @@ public class AppointmentDto {
 
     public void setConsultationHourId(Long consultationHourId) {
         this.consultationHourId = consultationHourId;
+    }
+
+    public Long getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Long departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    public Long getConsultationHouTypeId() {
+        return consultationHouTypeId;
+    }
+
+    public void setConsultationHouTypeId(Long consultationHouTypeId) {
+        this.consultationHouTypeId = consultationHouTypeId;
     }
 }

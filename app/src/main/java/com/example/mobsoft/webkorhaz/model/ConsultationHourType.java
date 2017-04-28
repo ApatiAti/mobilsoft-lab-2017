@@ -10,6 +10,7 @@ import java.io.Serializable;
 @Table
 public class ConsultationHourType implements Serializable{
     private Long id;
+    private Long consultationHourTypeId;
     private String type;
 
     public ConsultationHourType() {
@@ -31,6 +32,14 @@ public class ConsultationHourType implements Serializable{
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getConsultationHourTypeId() {
+        return consultationHourTypeId;
+    }
+
+    public void setConsultationHourTypeId(Long consultationHourTypeId) {
+        this.consultationHourTypeId = consultationHourTypeId;
     }
 
     public String getType() {

@@ -15,31 +15,8 @@ basePath: /api
 produces:
   - application/json
 paths:
-  /login:
-    post: 
-      summary: Login method
-      description: |
-        Through the Login endpoint the user can login in the application. This endpoint if the login was succesful return a security token and the user's id
-      parameters:
-        - name: email
-          in: body
-          description: Login object
-          required: true
-          schema:
-            $ref: '#/definitions/LoginRequest'
-      tags:
-        - Login
-      responses:
-        200:
-          description: Logged user's id and a security token
-          schema:
-              $ref: '#/definitions/LoginResponse'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
   /getDepartmentsAndTypes:
-    get:
+    post:
       summary: Get Departments and department's consultationHour's Types
       description: |
         The DepartmentsAndTypes endpoint returns information about the hospital's departments and about the consultation Hour's tpyes
@@ -87,13 +64,6 @@ paths:
       summary: Get appointmentList
       description: |
         This endpoint returns information aboutthe user's appointment
-      parameters:
-      - name: userId
-        in: query
-        description: User's/Patient's id
-        required: true
-        type: integer
-        format: int32
       tags:
         - Appointment
       responses:
@@ -191,32 +161,13 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 definitions:
-  LoginRequest:
-    type: object
-    properties:
-      email:
-        type: string
-        description: Email addres
-      passwordHash:
-        type: string
-        description: Email addres
-  LoginResponse:
-    type: object
-    properties:
-      userId:
-        type: integer
-        format: int32
-        description: Id of the logged User
-      token: 
-        type : string
-        description: user token
   Department:
     type: object
     properties:
       departmentId:
         type: integer
         format: int32
-        description: Id of department
+        description: Id of department from server
       departmentName:
         type: string
         description: Name of the department
@@ -231,6 +182,10 @@ definitions:
         type: integer
         format: int32
         description: Id of ConsultationHourType
+      consultationTypeid:
+        type: integer
+        format: int32
+        description: Id of ConsultationHourType from server
       name:
         type: string
         description: Name of the ConsultationHourType
@@ -255,14 +210,14 @@ definitions:
   ConsultationHour:
     type: object
     properties:
-      id:
+      consultationHourId:
         type: integer
         format: int32
         description: Id of ConsultationHour
       typeId:
         type: integer
         format: int32
-        description: Id of ConsultationHourType
+        description: Id of ConsultationHourType from server
       beginDate:
         type: string
         format: date-time
@@ -285,7 +240,7 @@ definitions:
       appointmentId:
         type: integer
         format: int32
-        description: Id of Appointment
+        description: Id of Appointment from server
       beginDate:
         type: string
         format: date-time
@@ -310,7 +265,15 @@ definitions:
       consultationHourId:
         type: integer
         format: int32
-        description: Id of ConsultationHour
+        description: Id of ConsultationHour from server
+      departmentId:
+        type: integer
+        format: int32
+        description: Id of Department
+      consultationTypeId:
+        type: integer
+        format: int32
+        description: Id of ConsultationHourType from server
   Error:
     type: object
     properties:

@@ -10,7 +10,6 @@ import java.io.Serializable;
 @Table
 public class User implements Serializable{
     private Long id;
-    // Todo nem kell
     private Long patientId;
     private String username;
     private String password;

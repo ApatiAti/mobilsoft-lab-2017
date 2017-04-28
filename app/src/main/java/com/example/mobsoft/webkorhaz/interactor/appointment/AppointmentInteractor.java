@@ -7,12 +7,10 @@ import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointme
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.ReloadAppoinmentFromServerEvent;
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.SaveAppointmentsEvents;
 import com.example.mobsoft.webkorhaz.model.Appointment;
-import com.example.mobsoft.webkorhaz.model.Department;
+import com.example.mobsoft.webkorhaz.model.User;
 import com.example.mobsoft.webkorhaz.network.HttpNetwork;
 import com.example.mobsoft.webkorhaz.repository.Repository;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -33,18 +31,7 @@ public class AppointmentInteractor {
     public void loadAppointmentsFromDb() {
         LoadAppointmentListFromDbEvent event = new LoadAppointmentListFromDbEvent();
         try {
-            List<Appointment> appointments = repository.getAppointments();
-//            List<Appointment> appointments = new ArrayList<>();
-//            Appointment appointment = new Appointment(
-//                    new Date(), new Date(), "IB028", "Dr Kovács",new Department(100l, "Szemészet", null), "", 10l, 10l, "Valami típus"
-//            );
-//            Appointment appointment2 = new Appointment(
-//                    new Date(), new Date(), "IB028", "Dr Kovács", "Ortopédia", "", 10l, 10l, "Valami típus"
-//            );
-//
-//            appointments.add(appointment);
-//            appointments.add(appointment2);
-
+            List<Appointment> appointments = repository.getAppointments(new User());
             event.setAppointments(appointments);
             bus.post(event);
         } catch (Exception e){
@@ -68,14 +55,18 @@ public class AppointmentInteractor {
     public void saveAppointent(Appointment appointment) {
         SaveAppointmentsEvents event = new SaveAppointmentsEvents();
         try {
-            Appointment savedAppointment = HttpNetwork.saveAppointment(appointment);
-
-            repository.saveAppointment(savedAppointment);
-            event.setAppointment(savedAppointment);
+            boolean succes = HttpNetwork.saveAppointment(appointment);
+            if (succes){
+                repository.saveAppointment(appointment);
+                event.setSucces(true);
+            } else {
+                event.setSucces(false);
+            }
 
             bus.post(event);
         } catch (Exception e){
             event.setThrowable(e);
+            event.setSucces(false);
             bus.post(event);
         }
     }
