@@ -1,6 +1,7 @@
 package com.example.mobsoft.webkorhaz.mock;
 
 import com.example.mobsoft.webkorhaz.network.NetworkModule;
+import com.example.mobsoft.webkorhaz.network.todo.LoginApi;
 import com.example.mobsoft.webkorhaz.network.todo.TodoApi;
 
 import java.io.IOException;
@@ -55,10 +56,13 @@ public class MockNetworkModule {
 
 	@Provides
 	@Singleton
-	public TodoApi provideAuthApi(Retrofit retrofit) {
-		return networkModule.provideATodoApi(retrofit);
+	public TodoApi provideTodoApi(Retrofit retrofit) {
+		return networkModule.provideTodoApi(retrofit);
 	}
 
+	@Provides
+	@Singleton
+	public LoginApi provideLoginApi(Retrofit retrofit) { return networkModule.provideLoginApi(retrofit);}
 
 
 }

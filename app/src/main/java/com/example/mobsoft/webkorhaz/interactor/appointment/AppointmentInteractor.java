@@ -28,10 +28,10 @@ public class AppointmentInteractor {
         MobSoftApplication.injector.inject(this);
     }
 
-    public void loadAppointmentsFromDb() {
+    public void loadAppointmentsFromDb(User user) {
         LoadAppointmentListFromDbEvent event = new LoadAppointmentListFromDbEvent();
         try {
-            List<Appointment> appointments = repository.getAppointments(new User());
+            List<Appointment> appointments = repository.getAppointments(user);
             event.setAppointments(appointments);
             bus.post(event);
         } catch (Exception e){
@@ -43,7 +43,7 @@ public class AppointmentInteractor {
     public void reloadAppoinmentListFromServer(long userId) {
         LoadAppointmentListFromServerEvents event = new LoadAppointmentListFromServerEvents();
         try {
-            List<Appointment> appointments = HttpNetwork.getAppointmentList(0);
+            List<Appointment> appointments = HttpNetwork.getAppointmentList(userId);
             event.setAppointments(appointments);
             bus.post(event);
         } catch (Exception e){
@@ -58,15 +58,15 @@ public class AppointmentInteractor {
             boolean succes = HttpNetwork.saveAppointment(appointment);
             if (succes){
                 repository.saveAppointment(appointment);
-                event.setSucces(true);
+                event.setAppointment(appointment);
             } else {
-                event.setSucces(false);
+                event.setAppointment(null);
             }
 
             bus.post(event);
         } catch (Exception e){
             event.setThrowable(e);
-            event.setSucces(false);
+            event.setAppointment(null);
             bus.post(event);
         }
     }

@@ -81,7 +81,7 @@ public class MainPresenter extends Presenter<MainScreen> {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                appointmentInteractor.reloadAppoinmentListFromServer(user);
+                appointmentInteractor.reloadAppoinmentListFromServer(user.getPatientId());
             }
         });
     }
