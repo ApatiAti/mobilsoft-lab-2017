@@ -7,7 +7,7 @@ import java.util.Date;
  */
 
 public class ConsultationHourSearch {
-    private String department;
+    private String departmentName;
     private String type;
     private Date beginDate;
     private Date endDate;
@@ -15,12 +15,12 @@ public class ConsultationHourSearch {
     public ConsultationHourSearch() {
     }
 
-    public String getDepartment() {
-        return department;
+    public String getDepartmentName() {
+        return departmentName;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 
     public String getType() {

@@ -7,6 +7,7 @@ import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointme
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.ReloadAppoinmentFromServerEvent;
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.SaveAppointmentsEvents;
 import com.example.mobsoft.webkorhaz.model.Appointment;
+import com.example.mobsoft.webkorhaz.model.User;
 import com.example.mobsoft.webkorhaz.network.HttpNetwork;
 import com.example.mobsoft.webkorhaz.repository.Repository;
 
@@ -30,7 +31,7 @@ public class AppointmentInteractor {
     public void loadAppointmentsFromDb() {
         LoadAppointmentListFromDbEvent event = new LoadAppointmentListFromDbEvent();
         try {
-            List<Appointment> appointments = repository.getAppointments();
+            List<Appointment> appointments = repository.getAppointments(new User());
             event.setAppointments(appointments);
             bus.post(event);
         } catch (Exception e){

@@ -2,7 +2,7 @@ package com.example.mobsoft.webkorhaz.network;
 
 import com.example.mobsoft.webkorhaz.model.Appointment;
 import com.example.mobsoft.webkorhaz.model.User;
-import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDTO;
+import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDto;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourSearch;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public class HttpNetwork {
         return null;
     }
 
-    public static List<ConsultationHourDTO> seachConsultationHour(ConsultationHourSearch searchParam) {
+    public static List<ConsultationHourDto> seachConsultationHour(ConsultationHourSearch searchParam) {
         return null;
     }
 

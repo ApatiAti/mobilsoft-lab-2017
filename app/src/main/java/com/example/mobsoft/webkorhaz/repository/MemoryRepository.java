@@ -3,7 +3,10 @@ package com.example.mobsoft.webkorhaz.repository;
 import android.content.Context;
 
 import com.example.mobsoft.webkorhaz.model.Appointment;
+import com.example.mobsoft.webkorhaz.model.ConsultationHourType;
+import com.example.mobsoft.webkorhaz.model.Department;
 import com.example.mobsoft.webkorhaz.model.Todo;
+import com.example.mobsoft.webkorhaz.model.User;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -27,18 +30,26 @@ public class MemoryRepository implements Repository {
 		c.add(Calendar.HOUR_OF_DAY, +2);
 		Date endDate = c.getTime();
 
-		Appointment flight1 = new Appointment(1L, beginDate, endDate, "Ib025", "Dr Doktor", "Fáj fejem", 11L, 12L);
+		Appointment flight1 = new Appointment(beginDate, endDate, "Ib025", "Dr Doktor"
+				, new Department(100L, "Szemészet", null), "Fáj fejem"
+				, new User("Valaki kovács", ""), 12L
+				, new ConsultationHourType(1000L, "Valami típus"));
 
 		c.add(Calendar.DAY_OF_YEAR, +1);
 		beginDate = c.getTime();
 		c.add(Calendar.HOUR_OF_DAY, +1);
 		endDate = c.getTime();
 
-		Appointment flight2 = new Appointment(2L, beginDate, endDate, "EB01", "Dr Doktor", "Cucc fejem", 15L, 17L);
+		Appointment flight2 = new Appointment(beginDate, endDate, "EB01", "Dr Doktor"
+				, new Department(102L, "Ortopédia", null), "Cucc fejem"
+				, new User("Károly", ""), 17L
+				, new ConsultationHourType(1002L, "láb cucc"));
 
 		appointmentList = new ArrayList<>();
 		appointmentList.add(flight1);
 		appointmentList.add(flight2);
+
+		openTodoRepo(context);
 	}
 
 	@Override
@@ -46,10 +57,16 @@ public class MemoryRepository implements Repository {
 
 	}
 
-
 	@Override
-	public List<Appointment> getAppointments() {
-		return appointmentList;
+	public List<Appointment> getAppointments(User currentUser) {
+		List<Appointment> result = new ArrayList<>();
+		for (Appointment appointment : appointmentList) {
+			if (appointment.getPatient().getUsername().equals(currentUser.getUsername())){
+				result.add(appointment);
+			}
+		}
+
+		return result;
 	}
 
 	@Override
@@ -68,8 +85,23 @@ public class MemoryRepository implements Repository {
 	}
 
 	@Override
+	public Appointment getAppointmentById(Long appointmentId, long userId) {
+		return null;
+	}
+
+	@Override
+	public void deleteAllAppointement(Long id) {
+
+	}
+
+	@Override
 	public boolean isInDB(Appointment appointment) {
 		return appointmentList.contains(appointment);
+	}
+
+	@Override
+	public Department getDepartmentByName(Long departmentId) {
+		return null;
 	}
 
 
@@ -121,5 +153,14 @@ public class MemoryRepository implements Repository {
 		return todos.contains(flight);
 	}
 
+	@Override
+	public User saveUser(User user) {
+		return null;
+	}
+
+	@Override
+	public Department saveDepartment(Department department) {
+		return null;
+	}
 }
 

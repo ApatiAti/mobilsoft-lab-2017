@@ -1,7 +1,7 @@
 package com.example.mobsoft.webkorhaz.interactor.consultationhour.events;
 
 import com.example.mobsoft.webkorhaz.model.Appointment;
-import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDTO;
+import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDto;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class SearchConsultationHourEvent {
     private int code;
-    private List<ConsultationHourDTO> consultationHourDTOs;
+    private List<ConsultationHourDto> consultationHourDTOs;
     private Throwable throwable;
 
     //<editor-fold desc="Constructors|Getters|Setters">
@@ -27,11 +27,11 @@ public class SearchConsultationHourEvent {
         this.code = code;
     }
 
-    public List<ConsultationHourDTO> getConsultationHourDTOs() {
+    public List<ConsultationHourDto> getConsultationHourDtos() {
         return consultationHourDTOs;
     }
 
-    public void setConsultationHourDTOs(List<ConsultationHourDTO> consultationHourDTOs) {
+    public void setConsultationHourDtos(List<ConsultationHourDto> consultationHourDTOs) {
         this.consultationHourDTOs = consultationHourDTOs;
     }
 

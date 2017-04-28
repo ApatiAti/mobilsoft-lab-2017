@@ -2,24 +2,37 @@ package com.example.mobsoft.webkorhaz.model;
 
 import com.orm.dsl.Table;
 
+import java.io.Serializable;
+
 /**
  * Created by Apati on 2017.04.03..
  */
 @Table
-public class User {
+public class User implements Serializable{
     private Long id;
-    private String email;
+    private Long patientId;
+    private String username;
     private String password;
-    private String token;
 
     public User() {
     }
 
-    public User(Long id, String email, String password, String token) {
-        this.id = id;
-        this.email = email;
+    public User(String username, String password) {
+        this.username = username;
         this.password = password;
-        this.token = token;
+    }
+
+    public User(Long id, String username, String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+    }
+
+    public User(Long id,Long patientId, String username, String password) {
+        this.id = id;
+        this.patientId = patientId;
+        this.username = username;
+        this.password = password;
     }
 
     public Long getId() {
@@ -30,12 +43,12 @@ public class User {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -46,11 +59,7 @@ public class User {
         this.password = password;
     }
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
+    public Long getPatientId() {
+        return patientId;
     }
 }
