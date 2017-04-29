@@ -65,11 +65,7 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Appointment appointment = appointmentList.get(position);
-                Intent intent = new Intent(MainActivity.this, AppointmentActivity.class);
-                intent.putExtra(getString(R.string.resource_intent_appointment), appointment);
-//                intent.putExtra(getString(R.string.resource_intent_appointment_position), position);
-                startActivity(intent);
+                navigateToAppointmentActivity(position);
             }
 
 //            @Override
@@ -84,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
         // Sets the Toolbar to act as the ActionBar
         setSupportActionBar(toolbar);
     }
+
 
     @Override
     protected void onStart() {
@@ -129,14 +126,6 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
     }
 
     /**
-     *  Átnavigálunk a NavigationActivity-re úgyhogy az nem kerül a BackStackre
-     */
-    private void navigateToNavigationActivity() {
-        Intent intent = new Intent(MainActivity.this, NavigationActivity.class);
-        startActivity(intent);
-    }
-
-    /**
      * Feltölti a képernyőt appointmentekkel
      * @param appointments
      */
@@ -152,4 +141,25 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
     public void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
+
+    /**
+     *  Átnavigálunk a NavigationActivity-re
+     */
+    private void navigateToNavigationActivity() {
+        Intent intent = new Intent(MainActivity.this, NavigationActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     *  Átnavigálunk a NavigationActivity-re
+     * @param position
+     */
+    private void navigateToAppointmentActivity(int position) {
+        Appointment appointment = appointmentList.get(position);
+        Intent intent = new Intent(MainActivity.this, AppointmentActivity.class);
+        intent.putExtra(getString(R.string.resource_intent_appointment), appointment);
+//                intent.putExtra(getString(R.string.resource_intent_appointment_position), position);
+        startActivity(intent);
+    }
+
 }
