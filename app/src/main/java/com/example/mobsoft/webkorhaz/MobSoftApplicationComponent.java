@@ -21,6 +21,7 @@ import com.example.mobsoft.webkorhaz.ui.login.LoginPresenter;
 import com.example.mobsoft.webkorhaz.ui.main.MainActivity;
 import com.example.mobsoft.webkorhaz.ui.main.MainPresenter;
 import com.example.mobsoft.webkorhaz.ui.navigation.NavigationActivity;
+import com.example.mobsoft.webkorhaz.ui.navigation.NavigationPresenter;
 
 import javax.inject.Singleton;
 
@@ -62,6 +63,8 @@ public interface MobSoftApplicationComponent {
     void inject(ConsultationHourSearchPresenter consultationHourSearchPresenter);
 
     void inject(ConsultationHourListPresenter consultationHourListPresenter);
+
+    void inject(NavigationPresenter navigationPresenter);
 
     /**
      * Interractors

@@ -54,7 +54,8 @@ public class NavigationActivity extends AppCompatActivity implements NavigationS
     @Override
     public void afterLogout() {
         Intent i = new Intent(NavigationActivity.this, LoginActivity.class);
-        // TODO Delete user data
+        ((MobSoftApplication) getApplication()).setCurrentUser(null);
+
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);
         finish();

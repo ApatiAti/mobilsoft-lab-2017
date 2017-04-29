@@ -4,14 +4,8 @@ import android.net.Uri;
 
 import com.example.mobsoft.webkorhaz.mock.NetworkMockMemoryRepository;
 import com.example.mobsoft.webkorhaz.model.Appointment;
-import com.example.mobsoft.webkorhaz.model.User;
-import com.example.mobsoft.webkorhaz.model.dto.AppointmentDto;
-import com.example.mobsoft.webkorhaz.network.NetworkConfig;
-import com.example.mobsoft.webkorhaz.utils.GsonHelper;
 
 import java.net.HttpURLConnection;
-import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.Headers;
 import okhttp3.Request;
@@ -25,6 +19,7 @@ import static com.example.mobsoft.webkorhaz.mock.interceptors.MockHelper.makeRes
 
 public class LoginMock {
     public static final String LOGIN_URL = "/login";
+    public static final String LOGOUT_URL = "/logout";
 
     public static Response process(Request request) {
         Uri uri = Uri.parse(request.url().toString());
@@ -43,9 +38,16 @@ public class LoginMock {
                 && request.method().equals("POST")) {
             responseString = "Succes";
             responseCode = HttpURLConnection.HTTP_OK;
-        }  else {
+
+        } else if (uri.getPath().equals(LOGOUT_URL )
+                && request.method().equals("GET")) {
+            responseString = "Succes";
+            responseCode = HttpURLConnection.HTTP_OK;
+
+        } else{
             responseString = "ERROR";
             responseCode = HttpURLConnection.HTTP_BAD_REQUEST;
+
         }
 
 

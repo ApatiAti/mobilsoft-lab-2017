@@ -17,7 +17,6 @@ import javax.inject.Inject;
 import de.greenrobot.event.EventBus;
 import retrofit2.Call;
 import retrofit2.Response;
-import retrofit2.http.HTTP;
 
 /**
  * Created by Apati on 2017.04.04..
@@ -40,7 +39,7 @@ public class LoginInteractor {
      * Bejelentkezési próba
      */
     public void login(User user){
-        Call<Void> activeUser = preperaLoginCall(user);
+        Call<Void> activeUser = loginApi.loginPost(NetworkConfig.LOGIN_URL, user.getUsername(), user.getPassword(), true);
         LoginEvent event = new LoginEvent();
         try {
             Response<Void> response = activeUser.execute();
@@ -61,21 +60,23 @@ public class LoginInteractor {
         }
     }
 
-    private Call<Void> preperaLoginCall(User user) {
-
-        return loginApi.loginPost(NetworkConfig.LOGIN_URL, user.getUsername(), user.getPassword(), true);
-    }
-
 
     /**
      * Bejelentkezési próba
      */
     public void logout(){
+        Call<Void> voidCall = loginApi.logoutGet(NetworkConfig.LOGOUT_URL);
         LogoutEvent event = new LogoutEvent();
         try {
-            User activeUser = HttpNetwork.startLogout();
-            event.setUser(activeUser);
-            bus.post(event);
+            Response<Void> execute = voidCall.execute();
+            int code = execute.code();
+            if (HttpURLConnection.HTTP_OK == code){
+                User activeUser = HttpNetwork.startLogout();
+                event.setUser(activeUser);
+                bus.post(event);
+            } else {
+                throw new RuntimeException("Hiba történt");
+            }
         } catch (Exception e){
             event.setThrowable(e);
             bus.post(event);

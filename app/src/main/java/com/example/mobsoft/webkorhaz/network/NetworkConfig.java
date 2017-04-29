@@ -7,4 +7,5 @@ public class NetworkConfig {
 	public static final String SERVICE_ENDPOINT = ENDPOINT_ADDRESS + ENDPOINT_PREFIX;
 
 	public static final String LOGIN_URL = ENDPOINT_ADDRESS + "/login";
+	public static final String LOGOUT_URL = ENDPOINT_ADDRESS + "/logout";
 }

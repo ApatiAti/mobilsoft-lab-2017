@@ -18,4 +18,6 @@ public interface LoginApi {
     @POST
     Call<Void> loginPost( @Url String url,@Field("username") String username, @Field("password") String password, @Field("mobile-api") boolean mobileApi);
 
+    @GET
+    Call<Void> logoutGet( @Url String url);
 }
