@@ -65,14 +65,10 @@ public class AppointmentMock {
                     responseCode = HttpURLConnection.HTTP_OK;
                     break;
                 case "PUT":
-//                    appointment = null;
-//                    memoryRepository.updateAppointment(appointment);
                     responseString = "Succes";
                     responseCode = HttpURLConnection.HTTP_OK;
                     break;
                 case "DELETE":
-//                    appointment =
-//                    memoryRepository.deleteAppointment(appointment);
                     responseString = "Succes";
                     responseCode = HttpURLConnection.HTTP_OK;
                     break;

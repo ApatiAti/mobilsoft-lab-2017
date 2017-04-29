@@ -144,13 +144,6 @@ public class AppointmentInteractor {
     }
 
 
-//    appointmentDto.getPatientId();
-//       appointmentDto.getConsultationHourId();
-//       appointmentDto.getDepartmentId();
-//       appointmentDto.getConsultationHouTypeId();
-
-
-
     /**
      * Felületen megadott Appointment elküldése a szerverhez és lokális mentése
      * @param appointment
