@@ -57,8 +57,8 @@ public class SugarOrmRepository implements Repository {
     }
 
     @Override
-    public void deleteAllAppointement(Long userId) {
-        SugarRecord.deleteAll(Appointment.class, "patient= ?", userId.toString());
+    public void deleteAllAppointement(String userId) {
+        SugarRecord.deleteAll(Appointment.class, "patient.username = ?", userId.toString());
     }
 
     @Override
@@ -150,5 +150,18 @@ public class SugarOrmRepository implements Repository {
         long id = SugarRecord.save(consultationHourType);
         consultationHourType.setId(id);
         return consultationHourType;
+    }
+
+    public User getUserByPatientId(Long patientId){
+        return Select.from(User.class)
+                .where(Condition.prop("patient_Id").eq(patientId))
+                .first();
+    }
+
+    @Override
+    public ConsultationHourType getConsultationHourType(Long consultationHouTypeId) {
+        return Select.from(ConsultationHourType.class)
+                .where(Condition.prop("consultation_Hour_Type_Id").eq(consultationHouTypeId))
+                .first();
     }
 }

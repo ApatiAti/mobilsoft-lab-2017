@@ -27,7 +27,7 @@ public interface Repository {
 
     Appointment getAppointmentByAppointmentId(Long appointmentId, long userId);
 
-    void deleteAllAppointement(Long id);
+    void deleteAllAppointement(String username);
 
     void deleteAppointment(Appointment appointment);
 
@@ -54,4 +54,8 @@ public interface Repository {
     Department saveDepartment(Department department);
 
     ConsultationHourType saveConsultationHourType(ConsultationHourType dbConsultationHourType);
+
+    ConsultationHourType getConsultationHourType(Long consultationHouTypeId);
+
+    User getUserByPatientId(Long patientId);
 }

@@ -5,10 +5,12 @@ import android.net.Uri;
 import com.example.mobsoft.webkorhaz.mock.NetworkMockMemoryRepository;
 import com.example.mobsoft.webkorhaz.model.Appointment;
 import com.example.mobsoft.webkorhaz.model.User;
+import com.example.mobsoft.webkorhaz.model.dto.AppointmentDto;
 import com.example.mobsoft.webkorhaz.network.NetworkConfig;
 import com.example.mobsoft.webkorhaz.utils.GsonHelper;
 
 import java.net.HttpURLConnection;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.mobsoft.webkorhaz.mock.interceptors.MockHelper.makeResponse;
@@ -35,27 +37,42 @@ public class AppointmentMock {
 
 
 
-        if (uri.getPath().equals(NetworkConfig.ENDPOINT_PREFIX + APPOINTMENT_URL)) {
+        if (uri.getPath().equals(NetworkConfig.ENDPOINT_PREFIX + APPOINTMENT_LIST_URL)
+                && request.method().equals("GET")) {
+            Long userId = Long.valueOf(request.url().queryParameter("userId"));
+            userId = userId == null ? 1L : userId;
+            User currentUser = memoryRepository.getUserByUserId(userId);
+
+            List<AppointmentDto> dtoList = new ArrayList<>();
+            for (Appointment dbAppointment : memoryRepository.getAppointments(currentUser)){
+                AppointmentDto dto = new AppointmentDto(dbAppointment);
+                dtoList.add(dto);
+            }
+
+            responseString = GsonHelper.getGson().toJson(dtoList);
+            responseCode = HttpURLConnection.HTTP_OK;
+
+        } else if (uri.getPath().startsWith(NetworkConfig.ENDPOINT_PREFIX + APPOINTMENT_URL)) {
             switch (request.method()){
                 case "POST":
                     responseString = "Succes";
                     responseCode = HttpURLConnection.HTTP_OK;
                     break;
                 case "GET":
-                    Long appointmentId = null;
+                    Long appointmentId = Long.valueOf(request.url().queryParameter("userId"));
                     Appointment appointmentByAppointmentId = memoryRepository.getAppointmentByAppointmentId(appointmentId, 1L);
                     responseString = GsonHelper.getGson().toJson(appointmentByAppointmentId);
                     responseCode = HttpURLConnection.HTTP_OK;
                     break;
                 case "PUT":
 //                    appointment = null;
-                    memoryRepository.updateAppointment(appointment);
+//                    memoryRepository.updateAppointment(appointment);
                     responseString = "Succes";
                     responseCode = HttpURLConnection.HTTP_OK;
                     break;
                 case "DELETE":
 //                    appointment =
-                    memoryRepository.deleteAppointment(appointment);
+//                    memoryRepository.deleteAppointment(appointment);
                     responseString = "Succes";
                     responseCode = HttpURLConnection.HTTP_OK;
                     break;
@@ -64,12 +81,6 @@ public class AppointmentMock {
                     responseCode = HttpURLConnection.HTTP_OK;
                     break;
             }
-        } else if (uri.getPath().equals(NetworkConfig.ENDPOINT_PREFIX + APPOINTMENT_LIST_URL)
-                    && request.method().equals("POST")) {
-            User currentUser = null;
-            List<Appointment> appointments = memoryRepository.getAppointments(currentUser);
-            responseString = GsonHelper.getGson().toJson(appointments);
-            responseCode = HttpURLConnection.HTTP_OK;
         } else {
             responseString = "ERROR";
             responseCode = HttpURLConnection.HTTP_BAD_REQUEST;

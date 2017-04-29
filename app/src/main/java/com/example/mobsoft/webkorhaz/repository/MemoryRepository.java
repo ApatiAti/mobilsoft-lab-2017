@@ -67,8 +67,8 @@ public class MemoryRepository implements Repository {
 
 	public void createUser() {
 		userList = new ArrayList<>();
-		userList.add(new User(1l, "beteg1", ""));
-		userList.add(new User(2l, "Károly", ""));
+		userList.add(new User(1l, 1l, "beteg1", ""));
+		userList.add(new User(2l, 2l, "Károly", ""));
 	}
 
 	public void createDepartments() {
@@ -149,8 +149,17 @@ public class MemoryRepository implements Repository {
 	}
 
 	@Override
-	public void deleteAllAppointement(Long id) {
-		appointmentList.clear();
+	public void deleteAllAppointement(String username) {
+		List<Appointment> newAppointmentList = new ArrayList<>();
+
+		for (Appointment appointment : appointmentList){
+			String dbusername = appointment.getPatient().getUsername();
+			if (! dbusername.equals(username)){
+                newAppointmentList.add(appointment);
+            }
+        }
+
+        appointmentList = newAppointmentList;
 	}
 
 	@Override
@@ -252,6 +261,26 @@ public class MemoryRepository implements Repository {
 
 	@Override
 	public ConsultationHourType saveConsultationHourType(ConsultationHourType dbConsultationHourType) {
+		consultiConsultationHourTypeList.add(dbConsultationHourType);
+		return dbConsultationHourType;
+	}
+
+	@Override
+	public ConsultationHourType getConsultationHourType(Long consultationHouTypeId) {
+		for (ConsultationHourType consultationHourType : consultiConsultationHourTypeList){
+			if (consultationHourType.getConsultationHourTypeId().equals(consultationHouTypeId)){
+				return  consultationHourType;
+			}
+		}
+		return null;
+	}
+
+	public User getUserByPatientId(Long patientId){
+		for (User user : userList){
+			if (user.getPatientId().equals(patientId)){
+				return user;
+			}
+		}
 		return null;
 	}
 

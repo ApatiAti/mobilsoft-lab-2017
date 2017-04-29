@@ -71,12 +71,12 @@ public class NetworkMockMemoryRepository {
     public void createUser() {
         userList = new ArrayList<>();
         userList.add(getUseOne());
-        userList.add(new User(2l, "Károly", ""));
+        userList.add(new User(2L, 2L, "Károly", ""));
     }
 
     @NonNull
     public static User getUseOne() {
-        return new User(1l, "beteg1", "");
+        return new User(1L, 1L, "beteg1", "");
     }
 
     public void createDepartments() {
@@ -254,6 +254,15 @@ public class NetworkMockMemoryRepository {
 
 
     public ConsultationHourType saveConsultationHourType(ConsultationHourType dbConsultationHourType) {
+        return null;
+    }
+
+    public User getUserByUserId(Long userId){
+        for (User user : userList){
+            if (user.getId().equals(userId)){
+                return user;
+            }
+        }
         return null;
     }
 }

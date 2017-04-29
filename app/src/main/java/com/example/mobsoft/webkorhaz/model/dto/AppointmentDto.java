@@ -1,5 +1,6 @@
 package com.example.mobsoft.webkorhaz.model.dto;
 
+import com.example.mobsoft.webkorhaz.model.Appointment;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDto;
 import com.orm.SugarRecord;
 import com.orm.dsl.Table;
@@ -23,6 +24,19 @@ public class AppointmentDto {
     private Long consultationHouTypeId;
 
     public AppointmentDto() {
+    }
+
+    public AppointmentDto(Appointment appointment) {
+        this.appointmentId = appointment.getAppointmentId();
+        this.beginDate = appointment.getBeginDate();
+        this.endDate = appointment.getEndDate();
+        this.room = appointment.getRoom();
+        this.doctorsName = appointment.getDoctorsName();
+        this.complaint = appointment.getComplaint();
+        this.patientId = appointment.getPatient().getPatientId();
+        this.consultationHourId = appointment.getConsultationHourId();
+        this.departmentId = appointment.getDepartment().getDepartmentId();
+        this.consultationHouTypeId = appointment.getConsultationHourType().getConsultationHourTypeId();
     }
 
     public Long getAppointmentId() {

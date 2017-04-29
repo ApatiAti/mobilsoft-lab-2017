@@ -1,6 +1,6 @@
 package com.example.mobsoft.webkorhaz.test;
 
-import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.example.mobsoft.webkorhaz.BuildConfig;
 import com.example.mobsoft.webkorhaz.MobSoftApplication;
@@ -18,6 +18,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.robolectric.annotation.Config;
 
 import java.util.List;
@@ -28,6 +29,7 @@ import static com.example.mobsoft.webkorhaz.TestHelper.setTestInjector;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertNotSame;
+import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -39,6 +41,8 @@ import static org.mockito.internal.verification.VerificationModeFactory.times;
 @RunWith(RobolectricDaggerTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21)
 public class AppointmentTest {
+
+    public static final String TAG = "AppointmentTest";
 
     @Inject
     Repository memoryRepository;
@@ -55,56 +59,95 @@ public class AppointmentTest {
     }
 
     @Test
-    public void refreshAppointment_EmtpyDb(){
-        User user = callRefreshAppointment();
+    public void refreshAppointment_NoAppointmentIdDb(){
+        Log.d(TAG, "refreshAppointment_NoAppointmentIdDb: start");
 
-        List<Appointment> appointments = memoryRepository.getAppointments(user);
 
-        assertEquals(2, appointments.size());
-        for (Appointment appointment : appointments){
-            assertNotNull(appointment.getConsultationHourType());
-            assertNotNull(appointment.getDepartment());
-            assertNotNull(appointment.getPatient());
-        }
-    }
-
-    @Test
-    public void refreshAppointment_WithDb() {
-        String room = "nem szoba";
-
-        memoryRepository.saveAppointment(new Appointment(1000L, null, null ,null ,null ,null ,null, new User("xxxxxx", ""), null ,null));
-        memoryRepository.saveAppointment(new Appointment(0L, null, null , room,null ,null ,null, new User("beteg1", ""), null ,null));
-
-        User user = callRefreshAppointment();
-
-        List<Appointment> appointments = memoryRepository.getAppointments(user);
-
-        assertEquals(2, appointments.size());
-        for (Appointment appointment : appointments){
-            assertNotNull(appointment.getConsultationHourType());
-            assertNotNull(appointment.getDepartment());
-            assertNotNull(appointment.getPatient());
-            assertNotSame(room, appointment.getRoom());
-        }
-    }
-
-    @After
-    public void tearDown() {
-        mainPresenter.detachScreen();
-    }
-
-    @NonNull
-    private User callRefreshAppointment() {
+        User user = NetworkMockMemoryRepository.getUseOne();
         MainScreen mainScreen = mock(MainScreen.class);
         mainPresenter.attachScreen(mainScreen);
-        User user = NetworkMockMemoryRepository.getUseOne();
+
+        ((MemoryRepository) memoryRepository).createConsultationHourTypes();
+        ((MemoryRepository) memoryRepository).createDepartments();
+        ((MemoryRepository) memoryRepository).createUser();
 
         assertTrue(memoryRepository.getAppointments(user).isEmpty());
 
 
-        mainPresenter.refreashAppointments(user.getId());
+        mainPresenter.refreashAppointments(user);
 
-        verify(mainScreen, times(1));
-        return user;
+
+        ArgumentCaptor<List> captor = ArgumentCaptor.forClass(List.class);
+        verify(mainScreen, times(1)).showAppointments(captor.capture());
+
+
+        List<Appointment> appointments = captor.getAllValues().get(0);
+
+        assertEquals(1, appointments.size());
+        Appointment appointment = appointments.get(0);
+        assertNotNull(appointment.getConsultationHourType());
+        assertNotNull(appointment.getDepartment());
+        assertNotNull(appointment.getPatient());
+
+
+        Log.d(TAG, "refreshAppointment_NoAppointmentIdDb: finish");
     }
+
+    @Test
+    public void refreshAppointment_WithAppointmentInDb() {
+        Log.d(TAG, "refreshAppointment_WithAppointmentInDb: start");
+
+        User user = NetworkMockMemoryRepository.getUseOne();
+        long remainingAppointmentId = 1000L;
+        long updatedAppointmentId = 0L;
+        String room = "nem szoba";
+
+        MainScreen mainScreen = mock(MainScreen.class);
+        mainPresenter.attachScreen(mainScreen);
+
+
+        ((MemoryRepository) memoryRepository).createConsultationHourTypes();
+        ((MemoryRepository) memoryRepository).createDepartments();
+        ((MemoryRepository) memoryRepository).createUser();
+
+
+        memoryRepository.saveAppointment(new Appointment(remainingAppointmentId, null, null ,null ,null ,null ,null, new User("xxxxxx", ""), null ,null));
+        memoryRepository.saveAppointment(new Appointment(updatedAppointmentId, null, null , room,null ,null ,null, new User(1L, 1L, "beteg1", ""), null ,null));
+
+
+        mainPresenter.refreashAppointments(user);
+
+
+        verify(mainScreen, times(1)).showAppointments(new ArgumentCaptor<List<Appointment>>().capture());
+
+
+        List<Appointment> appointments = MemoryRepository.appointmentList;
+
+        assertEquals(2, appointments.size());
+        for (Appointment appointment : appointments) {
+            if (appointment.getAppointmentId().equals(updatedAppointmentId)){
+                assertNotNull(appointment.getConsultationHourType());
+                assertNotNull(appointment.getDepartment());
+                assertNotNull(appointment.getPatient());
+                assertNotSame(room, appointment.getRoom());
+            } else {
+                assertNull(appointment.getConsultationHourType());
+                assertNull(appointment.getDepartment());
+                assertNotNull(appointment.getPatient());
+                assertNotSame(room, appointment.getRoom());
+            }
+        }
+
+        Log.d(TAG, "refreshAppointment_WithAppointmentInDb: finish");
+    }
+
+
+    @After
+    public void tearDown() {
+        mainPresenter.detachScreen();
+        Log.d(TAG, "");
+        Log.d(TAG, "");
+    }
+
+
 }

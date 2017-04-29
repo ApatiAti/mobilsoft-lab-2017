@@ -1,6 +1,7 @@
 package com.example.mobsoft.webkorhaz.mock;
 
 import com.example.mobsoft.webkorhaz.network.NetworkModule;
+import com.example.mobsoft.webkorhaz.network.todo.AppointmentApi;
 import com.example.mobsoft.webkorhaz.network.todo.DepartmentApi;
 import com.example.mobsoft.webkorhaz.network.todo.LoginApi;
 import com.example.mobsoft.webkorhaz.network.todo.TodoApi;
@@ -68,5 +69,10 @@ public class MockNetworkModule {
 	@Provides
 	@Singleton
 	public DepartmentApi provideDepartmentApi(Retrofit retrofit) { return networkModule.provideDepartmentApi(retrofit);}
+
+
+	@Provides
+	@Singleton
+	public AppointmentApi provideAppointmentApi(Retrofit retrofit) { return networkModule.provideAppointmentApi(retrofit);}
 
 }
