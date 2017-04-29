@@ -41,7 +41,6 @@ public interface AppointmentApi {
   /**
    * Get appointmentList
    * This endpoint returns information aboutthe user&#39;s appointment 
-   * @param userId User&#39;s/Patient&#39;s id (required)
    * @return Call&lt;List<Appointment>&gt;
    */
   
