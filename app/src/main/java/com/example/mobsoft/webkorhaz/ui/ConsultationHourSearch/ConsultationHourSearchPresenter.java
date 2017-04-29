@@ -80,13 +80,13 @@ public class ConsultationHourSearchPresenter extends Presenter<ConsultationHourS
             Log.e("Networking", "Error at login in", event.getThrowable());
         } else {
             if (screen != null) {
-                screen.showSearchResults(event.getConsultationHourDtos());
+                screen.navigateAndShowSearchResults(event.getConsultationHourDtos());
             }
         }
     }
 
     /**
-     * {@link SearchConsultationHourEvent} eventeket a {@link EventBus}-ról feldolgozó metódus. Android UI szálát hasznélja a feldolgozásra
+     * {@link RefreshDepartmentsDataEvent} eventeket a {@link EventBus}-ról feldolgozó metódus. Android UI szálát hasznélja a feldolgozásra
      * @param event
      */
     public void onEventMainThread(RefreshDepartmentsDataEvent event) {

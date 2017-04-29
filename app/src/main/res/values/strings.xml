@@ -43,13 +43,13 @@
     <string name="resource_intent_consultationHour">consultationHourDtoList</string>
     <string name="resource_intent_appointment">appointment</string>
     <string name="resource_intent_appointment_position">appointment_position</string>
-
-    <string name="departmentName">departmentName</string>
+    <string name="resource_intent_department">department</string>
 
 
     <string name="action_settings">Settings</string>
     <string name="timeFormat">hh:mm</string>
     <string name="fullDateTimeFormat">yyyy-MM-dd HH:mm</string>
     <string name="resource_intent_consultationHourDto">consultationHourDto</string>
+    <string name="resource_intent_consultationHourType">consultationHourType</string>
 
 </resources>

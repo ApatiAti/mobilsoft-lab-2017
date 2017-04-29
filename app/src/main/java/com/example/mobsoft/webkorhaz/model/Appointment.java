@@ -56,13 +56,13 @@ public class Appointment implements Serializable {
     public Appointment(ConsultationHourDto item) {
         this.beginDate = item.getBeginDate();
         this.endDate = item.getEndDate();
-        this.room = "Ib025";
-        this.doctorsName = "Doktor";
-        this.department = new Department(1l, "Valami", null);
-        this.complaint = "";
-        this.patient = new User("Kovács valaki", "password");
-        this.consultationHourId = 1l;
-        this.consultationHourType = new ConsultationHourType(20l, 0L, "lábcuc");
+        this.room = item.getRoom();
+        this.doctorsName = item.getDoctorsName();
+//        this.department = new Department(1l, "Valami", null);
+//        this.complaint = "";
+//        this.patient = new User("Kovács valaki", "password");
+        this.consultationHourId = item.getConsultationHourId();
+//        this.consultationHourType = new ConsultationHourType(20l, 0L, "lábcuc");
     }
 
     public Long getId() {

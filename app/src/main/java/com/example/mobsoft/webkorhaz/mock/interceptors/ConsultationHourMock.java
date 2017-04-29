@@ -4,9 +4,7 @@ import android.net.Uri;
 
 import com.example.mobsoft.webkorhaz.mock.NetworkMockMemoryRepository;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDto;
-import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourSearch;
 import com.example.mobsoft.webkorhaz.network.NetworkConfig;
-import com.example.mobsoft.webkorhaz.repository.MemoryRepository;
 import com.example.mobsoft.webkorhaz.utils.GsonHelper;
 
 import java.net.HttpURLConnection;
@@ -17,7 +15,6 @@ import java.util.List;
 
 import okhttp3.Headers;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import static com.example.mobsoft.webkorhaz.mock.interceptors.MockHelper.makeResponse;
@@ -41,18 +38,16 @@ public class ConsultationHourMock {
         if (uri.getPath().equals(NetworkConfig.ENDPOINT_PREFIX + CONSULTATIO_HOUR_URL)
                 && request.method().equals("POST")) {
 
-            ConsultationHourSearch consultationHourSearch = GsonHelper.getGson().fromJson(request.body().toString(), ConsultationHourSearch.class);
-
-
             List<ConsultationHourDto> consultationHourDtoList = new ArrayList<>();
 
             Calendar c = Calendar.getInstance();
-            c.setTime(consultationHourSearch.getBeginDate());
+            c.setTime(new Date());
+            c.add(Calendar.DAY_OF_YEAR, 1);
             Date beginDate = c.getTime();
             c.add(Calendar.HOUR_OF_DAY, 1);
             Date endDate = c.getTime();
 
-            consultationHourDtoList.add(new ConsultationHourDto(11000L, "2", beginDate, endDate, 10, 5));
+            consultationHourDtoList.add(new ConsultationHourDto(11000L, "2", beginDate, endDate, "IB651", "Dokto Róbert", 10, 5));
 
 
             c.add(Calendar.DAY_OF_YEAR, 2);
@@ -60,7 +55,7 @@ public class ConsultationHourMock {
             c.add(Calendar.HOUR_OF_DAY, 1);
             endDate = c.getTime();
 
-            consultationHourDtoList.add(new ConsultationHourDto(11001L, "1", beginDate, endDate, 10, 5));
+            consultationHourDtoList.add(new ConsultationHourDto(11001L, "1", beginDate, endDate, "IB651", "Dokto Róbert", 10, 5));
 
             responseString = GsonHelper.getGson().toJson(consultationHourDtoList);
             responseCode = HttpURLConnection.HTTP_OK;

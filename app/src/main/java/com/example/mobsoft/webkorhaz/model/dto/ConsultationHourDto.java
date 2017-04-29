@@ -8,13 +8,13 @@ import java.util.Date;
  */
 
 public class ConsultationHourDto implements Serializable {
-//      "room": "string",
-//      "doctorsName": "string",
     public Long consultationHourId;
     public String tpyeId;
     // STring
     public Date beginDate;
     public Date endDate;
+    public String room;
+    public String doctorsName;
     public int maxNumberOfPatient;
     public int currentPatientCount;
 
@@ -22,8 +22,8 @@ public class ConsultationHourDto implements Serializable {
 //   ap   "appointmentId": 0,
 //   ok   "beginDate": "2017-04-29T19:57:22.029Z",
 //   ok   "endDate": "2017-04-29T19:57:22.029Z",
-//      "room": "string",
-//      "doctorsName": "string",
+//   ok   "room": "string",
+//   ok   "doctorsName": "string",
 //   ap   "complaints": "string",
 //   ap   "patientName": "string",
 //   ok   "consultationHourId": 0,
@@ -34,7 +34,7 @@ public class ConsultationHourDto implements Serializable {
     public ConsultationHourDto() {
     }
 
-    public ConsultationHourDto(Long consultationHourId, String tpyeId, Date beginDate, Date endDate, int maxNumberOfPatient, int currentPatientCount) {
+    public ConsultationHourDto(Long consultationHourId, String tpyeId, Date beginDate, Date endDate, String room, String doctorsName, int maxNumberOfPatient, int currentPatientCount) {
         this.consultationHourId = consultationHourId;
         this.tpyeId = tpyeId;
         this.beginDate = beginDate;
@@ -82,6 +82,22 @@ public class ConsultationHourDto implements Serializable {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public String getRoom() {
+        return room;
+    }
+
+    public void setRoom(String room) {
+        this.room = room;
+    }
+
+    public String getDoctorsName() {
+        return doctorsName;
+    }
+
+    public void setDoctorsName(String doctorsName) {
+        this.doctorsName = doctorsName;
     }
 
     public int getMaxNumberOfPatient() {

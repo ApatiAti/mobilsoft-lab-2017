@@ -13,6 +13,9 @@ import android.view.View;
 import com.example.mobsoft.webkorhaz.MobSoftApplication;
 import com.example.mobsoft.webkorhaz.R;
 import com.example.mobsoft.webkorhaz.model.Appointment;
+import com.example.mobsoft.webkorhaz.model.ConsultationHourType;
+import com.example.mobsoft.webkorhaz.model.Department;
+import com.example.mobsoft.webkorhaz.model.User;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDto;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDtoList;
 import com.example.mobsoft.webkorhaz.ui.appointment.AppointmentActivity;
@@ -39,6 +42,9 @@ public class ConsultationHourListActivity extends AppCompatActivity implements C
     ConsultationHourListAdapter consultationHourListAdapter;
     private List<ConsultationHourDto> consultationHourDtoList = new ArrayList<>();
 
+    Department department;
+    ConsultationHourType chType;
+
     @Inject
     ConsultationHourListPresenter consultationHourListPresenter;
 
@@ -54,11 +60,12 @@ public class ConsultationHourListActivity extends AppCompatActivity implements C
         fullDateTimeFormat = new SimpleDateFormat(getString(R.string.fullDateTimeFormat));
 
         ConsultationHourDtoList dtoList = (ConsultationHourDtoList) getIntent().getSerializableExtra(getString(R.string.resource_intent_consultationHour));
-        String departmentName = (String) getIntent().getSerializableExtra(getString(R.string.departmentName));
+        department = (Department) getIntent().getSerializableExtra(getString(R.string.resource_intent_department));
+        chType = (ConsultationHourType) getIntent().getSerializableExtra(getString(R.string.resource_intent_consultationHourType));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_back_arrow);
-        toolbar.setTitle(departmentName);
+        toolbar.setTitle(department.getDepartmentName());
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -107,8 +114,15 @@ public class ConsultationHourListActivity extends AppCompatActivity implements C
     }
 
     private void showApointmentCreateScreen(int position) {
+        User currentUser = ((MobSoftApplication) getApplication()).getCurrentUser();
+
         ConsultationHourDto item = consultationHourDtoList.get(position);
+
         Appointment newAppointment = new Appointment(item);
+        newAppointment.setPatient(currentUser);
+        newAppointment.setDepartment(department);
+        newAppointment.setConsultationHourType(chType);
+
         Intent intent = new Intent(ConsultationHourListActivity.this, AppointmentActivity.class);
         intent.putExtra(getString(R.string.resource_intent_appointment), newAppointment);
         startActivity(intent);

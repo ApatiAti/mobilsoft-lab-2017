@@ -7,7 +7,7 @@ import java.util.Date;
  */
 
 public class ConsultationHourSearch {
-    private String departmentName;
+    private Long departmentId;
     private Long typeId;
     // TODO string
     private Date beginDate;
@@ -16,12 +16,12 @@ public class ConsultationHourSearch {
     public ConsultationHourSearch() {
     }
 
-    public String getDepartmentName() {
-        return departmentName;
+    public Long getDepartmentId() {
+        return departmentId;
     }
 
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName;
+    public void setDepartmentId(Long departmentId) {
+        this.departmentId = departmentId;
     }
 
     public Long getTypeId() {

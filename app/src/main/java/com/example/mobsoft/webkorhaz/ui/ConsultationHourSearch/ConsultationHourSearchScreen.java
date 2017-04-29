@@ -12,7 +12,7 @@ import java.util.List;
 public interface ConsultationHourSearchScreen {
     void showErrorMessage(String error);
 
-    void showSearchResults(List<ConsultationHourDto> consultationHourDTOs);
+    void navigateAndShowSearchResults(List<ConsultationHourDto> consultationHourDTOs);
 
     void loadDepartmentData(List<Department> department);
 }

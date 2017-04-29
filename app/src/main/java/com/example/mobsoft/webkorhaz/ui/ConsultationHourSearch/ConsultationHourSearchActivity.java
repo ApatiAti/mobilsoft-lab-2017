@@ -148,9 +148,12 @@ public class ConsultationHourSearchActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void showSearchResults(List<ConsultationHourDto> consultationHourDtoList) {
+    public void navigateAndShowSearchResults(List<ConsultationHourDto> consultationHourDtoList) {
         Intent intent = new Intent(this, ConsultationHourListActivity.class);
         intent.putExtra(getString(R.string.resource_intent_consultationHour), new ConsultationHourDtoList(consultationHourDtoList));
+
+        intent.putExtra(getString(R.string.resource_intent_department), getSelectedDepartmentData());
+        intent.putExtra(getString(R.string.resource_intent_consultationHourType), getSelectedConsultationHourType());
         startActivity(intent);
     }
 
@@ -181,7 +184,7 @@ public class ConsultationHourSearchActivity extends AppCompatActivity implements
         ConsultationHourSearch consultationHourSearch = new ConsultationHourSearch();
         consultationHourSearch.setBeginDate(startDateListener.getSelectedDate());
         consultationHourSearch.setEndDate(startDateListener.getSelectedDate());
-        consultationHourSearch.setDepartmentName(selectedDepartment.getDepartmentName());
+        consultationHourSearch.setDepartmentId(selectedDepartment.getDepartmentId());
         consultationHourSearch.setTypeId(selectedConsultationHourType.getConsultationHourTypeId());
 
         consultationHourSearchPresenter.search(consultationHourSearch);
