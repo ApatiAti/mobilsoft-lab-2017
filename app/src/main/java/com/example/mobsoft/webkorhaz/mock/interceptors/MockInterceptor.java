@@ -46,7 +46,7 @@ public class MockInterceptor implements Interceptor {
 			return DepartmentMock.process(request);
 		} else if (path.startsWith(NetworkConfig.ENDPOINT_PREFIX + ConsultationHourMock.CONSULTATIO_HOUR_URL)) {
 			return ConsultationHourMock.process(request);
-		} else if (path.startsWith(NetworkConfig.LOGIN_URL)){
+		} else if (path.startsWith(LoginMock.LOGIN_URL)){
 			return LoginMock.process(request);
 		}
 

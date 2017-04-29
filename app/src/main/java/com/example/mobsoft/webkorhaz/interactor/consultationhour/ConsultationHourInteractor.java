@@ -126,8 +126,11 @@ public class ConsultationHourInteractor {
         List<ConsultationHourType> returnList = new ArrayList<>();
 
         Map<Long, ConsultationHourType> dbCHTypeMap = new HashMap<>();
-        for (ConsultationHourType consultationHourType : dbDepartment.getConsultationHourTypeList()){
-            dbCHTypeMap.put(consultationHourType.getConsultationHourTypeId(), consultationHourType);
+        List<ConsultationHourType> dbCHTypeList = dbDepartment.getConsultationHourTypeList();
+        if (dbCHTypeList != null) {
+            for (ConsultationHourType consultationHourType : dbCHTypeList) {
+                dbCHTypeMap.put(consultationHourType.getConsultationHourTypeId(), consultationHourType);
+            }
         }
 
         for (ConsultationHourType consultationHourType : consultationHourTypeList){

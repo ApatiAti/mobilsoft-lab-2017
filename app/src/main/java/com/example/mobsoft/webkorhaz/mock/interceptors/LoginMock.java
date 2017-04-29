@@ -24,6 +24,8 @@ import static com.example.mobsoft.webkorhaz.mock.interceptors.MockHelper.makeRes
  */
 
 public class LoginMock {
+    public static final String LOGIN_URL = "/login";
+
     public static Response process(Request request) {
         Uri uri = Uri.parse(request.url().toString());
 
@@ -37,7 +39,7 @@ public class LoginMock {
 
 
 
-        if (uri.getPath().equals(NetworkConfig.LOGIN_URL)
+        if (uri.getPath().equals(LOGIN_URL)
                 && request.method().equals("POST")) {
             responseString = "Succes";
             responseCode = HttpURLConnection.HTTP_OK;

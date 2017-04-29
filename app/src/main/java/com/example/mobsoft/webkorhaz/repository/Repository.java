@@ -27,7 +27,7 @@ public interface Repository {
 
     Appointment getAppointmentByAppointmentId(Long appointmentId, long userId);
 
-    void deleteAllAppointement(String username);
+    void deleteAllAppointement(User username);
 
     void deleteAppointment(Appointment appointment);
 

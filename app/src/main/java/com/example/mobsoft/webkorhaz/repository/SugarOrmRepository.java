@@ -57,8 +57,8 @@ public class SugarOrmRepository implements Repository {
     }
 
     @Override
-    public void deleteAllAppointement(String userId) {
-        SugarRecord.deleteAll(Appointment.class, "patient.username = ?", userId.toString());
+    public void deleteAllAppointement(User user) {
+        SugarRecord.deleteAll(Appointment.class, "patient = ?", user.getId().toString());
     }
 
     @Override

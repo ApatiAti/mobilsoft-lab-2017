@@ -149,12 +149,12 @@ public class MemoryRepository implements Repository {
 	}
 
 	@Override
-	public void deleteAllAppointement(String username) {
+	public void deleteAllAppointement(User user) {
 		List<Appointment> newAppointmentList = new ArrayList<>();
 
 		for (Appointment appointment : appointmentList){
 			String dbusername = appointment.getPatient().getUsername();
-			if (! dbusername.equals(username)){
+			if (! dbusername.equals(user.getUsername())){
                 newAppointmentList.add(appointment);
             }
         }

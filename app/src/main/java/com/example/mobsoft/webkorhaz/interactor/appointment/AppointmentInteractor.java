@@ -71,7 +71,7 @@ public class AppointmentInteractor {
                 List<AppointmentDto> body = execute.body();
 
 
-                List<Appointment> appointmentList = loadAppoinmentDtoList(body, user.getUsername());
+                List<Appointment> appointmentList = loadAppoinmentDtoList(body, user);
 
                 event.setAppointments(appointmentList);
                 bus.post(event);
@@ -84,10 +84,10 @@ public class AppointmentInteractor {
         }
     }
 
-    private List<Appointment> loadAppoinmentDtoList(List<AppointmentDto> appointmentDtoList, String username) {
+    private List<Appointment> loadAppoinmentDtoList(List<AppointmentDto> appointmentDtoList, User user) {
         List<Appointment> newAppointmentList = new ArrayList<>();
 
-        repository.deleteAllAppointement(username);
+        repository.deleteAllAppointement(user);
 
         for (AppointmentDto appointmentDto : appointmentDtoList) {
             Appointment appointment = mapDtoToAppointment(appointmentDto);

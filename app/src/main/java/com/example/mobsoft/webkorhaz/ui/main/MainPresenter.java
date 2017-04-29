@@ -152,12 +152,13 @@ public class MainPresenter extends Presenter<MainScreen> {
      * @param event
      */
     public void onEventMainThread(LoadAppointmentListFromServerEvents event) {
-        if (event.getThrowable() != null) {
-            event.getThrowable().printStackTrace();
+        Throwable throwable = event.getThrowable();
+        if (throwable != null) {
+            throwable.printStackTrace();
             if (screen != null) {
-                screen.showMessage("Hiba történt a foglalási időpontok lekérdezésekor");
+                screen.showMessage("Hiba történt a foglalási időpontok lekérdezésekor." + throwable.getMessage());
             }
-            Log.e("DB", "Error reading appointments from DB", event.getThrowable());
+            Log.e("DB", "Error reading appointments from DB", throwable);
         } else {
             if (screen != null) {
                 screen.showAppointments(event.getAppointments());
