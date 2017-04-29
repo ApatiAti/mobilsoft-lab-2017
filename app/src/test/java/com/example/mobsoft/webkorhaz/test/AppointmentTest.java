@@ -112,7 +112,7 @@ public class AppointmentTest {
 
 
         memoryRepository.saveAppointment(new Appointment(remainingAppointmentId, null, null ,null ,null ,null ,null, new User("xxxxxx", ""), null ,null));
-        memoryRepository.saveAppointment(new Appointment(updatedAppointmentId, null, null , room,null ,null ,null, new User(1L, 1L, "beteg1", ""), null ,null));
+        memoryRepository.saveAppointment(new Appointment(updatedAppointmentId, null, null , room,null ,null ,null, new User(1L, "beteg1", ""), null ,null));
 
 
         mainPresenter.refreashAppointments(user);

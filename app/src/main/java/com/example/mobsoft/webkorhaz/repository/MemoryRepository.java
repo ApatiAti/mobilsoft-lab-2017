@@ -67,8 +67,8 @@ public class MemoryRepository implements Repository {
 
 	public void createUser() {
 		userList = new ArrayList<>();
-		userList.add(new User(1l, 1l, "beteg1", ""));
-		userList.add(new User(2l, 2l, "Károly", ""));
+		userList.add(new User(1l, "beteg1", ""));
+		userList.add(new User(2l, "Károly", ""));
 	}
 
 	public void createDepartments() {
@@ -275,9 +275,9 @@ public class MemoryRepository implements Repository {
 		return null;
 	}
 
-	public User getUserByPatientId(Long patientId){
+	public User getUserByPatientName(String patientName){
 		for (User user : userList){
-			if (user.getPatientId().equals(patientId)){
+			if (user.getUsername().equals(patientName)){
 				return user;
 			}
 		}

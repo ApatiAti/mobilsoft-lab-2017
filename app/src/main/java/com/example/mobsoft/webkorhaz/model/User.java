@@ -28,13 +28,6 @@ public class User implements Serializable{
         this.password = password;
     }
 
-    public User(Long id,Long patientId, String username, String password) {
-        this.id = id;
-        this.patientId = patientId;
-        this.username = username;
-        this.password = password;
-    }
-
     public Long getId() {
         return id;
     }
@@ -59,7 +52,4 @@ public class User implements Serializable{
         this.password = password;
     }
 
-    public Long getPatientId() {
-        return patientId;
-    }
 }

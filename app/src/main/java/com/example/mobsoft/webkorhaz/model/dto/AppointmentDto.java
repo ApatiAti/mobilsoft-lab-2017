@@ -1,11 +1,7 @@
 package com.example.mobsoft.webkorhaz.model.dto;
 
 import com.example.mobsoft.webkorhaz.model.Appointment;
-import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDto;
-import com.orm.SugarRecord;
-import com.orm.dsl.Table;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -18,7 +14,7 @@ public class AppointmentDto {
     private String room;
     private String doctorsName;
     private String complaint;
-    private Long patientId;
+    private String patientName;
     private Long consultationHourId;
     private Long departmentId;
     private Long consultationHouTypeId;
@@ -33,7 +29,7 @@ public class AppointmentDto {
         this.room = appointment.getRoom();
         this.doctorsName = appointment.getDoctorsName();
         this.complaint = appointment.getComplaint();
-        this.patientId = appointment.getPatient().getPatientId();
+        this.patientName = appointment.getPatient().getUsername();
         this.consultationHourId = appointment.getConsultationHourId();
         this.departmentId = appointment.getDepartment().getDepartmentId();
         this.consultationHouTypeId = appointment.getConsultationHourType().getConsultationHourTypeId();
@@ -87,12 +83,12 @@ public class AppointmentDto {
         this.complaint = complaint;
     }
 
-    public Long getPatientId() {
-        return patientId;
+    public String getPatientName() {
+        return patientName;
     }
 
-    public void setPatientId(Long patientId) {
-        this.patientId = patientId;
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
     }
 
     public Long getConsultationHourId() {

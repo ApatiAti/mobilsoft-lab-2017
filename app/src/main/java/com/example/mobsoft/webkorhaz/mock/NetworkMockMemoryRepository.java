@@ -71,12 +71,12 @@ public class NetworkMockMemoryRepository {
     public void createUser() {
         userList = new ArrayList<>();
         userList.add(getUseOne());
-        userList.add(new User(2L, 2L, "Károly", ""));
+        userList.add(new User(2L, "Károly", ""));
     }
 
     @NonNull
     public static User getUseOne() {
-        return new User(1L, 1L, "beteg1", "");
+        return new User(1L, "beteg1", "");
     }
 
     public void createDepartments() {

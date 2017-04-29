@@ -152,9 +152,9 @@ public class SugarOrmRepository implements Repository {
         return consultationHourType;
     }
 
-    public User getUserByPatientId(Long patientId){
+    public User getUserByPatientName(String patientName){
         return Select.from(User.class)
-                .where(Condition.prop("patient_Id").eq(patientId))
+                .where(Condition.prop("username").eq(patientName))
                 .first();
     }
 

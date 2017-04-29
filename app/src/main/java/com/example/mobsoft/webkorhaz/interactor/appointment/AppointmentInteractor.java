@@ -97,7 +97,7 @@ public class AppointmentInteractor {
             appointment.setConsultationHourType(
                     mapConsultationHourTypeFromDto(appointmentDto.getConsultationHouTypeId()));
             appointment.setPatient(
-                    mapPatientFromDto(appointmentDto.getPatientId()));
+                    mapPatientFromDto(appointmentDto.getPatientName()));
 
             repository.saveAppointment(appointment);
             newAppointmentList.add(appointment);
@@ -106,8 +106,8 @@ public class AppointmentInteractor {
         return newAppointmentList;
     }
 
-    private User mapPatientFromDto(Long patientId) {
-        User dbUser = repository.getUserByPatientId(patientId);
+    private User mapPatientFromDto(String patientName) {
+        User dbUser = repository.getUserByPatientName(patientName);
         if (dbUser == null){
             throw new RuntimeException("Hiba a lekérdezés során! Felhasználó");
         }
