@@ -41,7 +41,4 @@ public class ConsultationHourListPresenter extends Presenter<ConsultationHourLis
         super.detachScreen();
     }
 
-    public void showConsultationHourList(List<ConsultationHourDto> consultationHourList){
-
-    }
 }

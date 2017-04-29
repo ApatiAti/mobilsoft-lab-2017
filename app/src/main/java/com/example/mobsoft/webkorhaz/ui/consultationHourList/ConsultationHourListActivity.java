@@ -81,15 +81,11 @@ public class ConsultationHourListActivity extends AppCompatActivity implements C
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                ConsultationHourDto item = consultationHourDtoList.get(position);
-                Appointment newAppointment = new Appointment(item);
-                Intent intent = new Intent(ConsultationHourListActivity.this, AppointmentActivity.class);
-                intent.putExtra(getString(R.string.resource_intent_appointment), newAppointment);
-                startActivity(intent);
-                finish();
+                showApointmentCreateScreen(position);
             }
         }));
             }
+
 
     @Override
     protected void onStart() {
@@ -103,23 +99,21 @@ public class ConsultationHourListActivity extends AppCompatActivity implements C
         consultationHourListPresenter.detachScreen();
     }
 
-
-    @Deprecated
-    @Override
-    public void showConsultationHourList() {
-        consultationHourListPresenter.showConsultationHourList(null);
-    }
-
-    @Deprecated
-    @Override
-    public void showApointmentCreateScreen() {
-
-    }
-
     // Toolbar back button
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
+
+    private void showApointmentCreateScreen(int position) {
+        ConsultationHourDto item = consultationHourDtoList.get(position);
+        Appointment newAppointment = new Appointment(item);
+        Intent intent = new Intent(ConsultationHourListActivity.this, AppointmentActivity.class);
+        intent.putExtra(getString(R.string.resource_intent_appointment), newAppointment);
+        startActivity(intent);
+        finish();
+    }
+
+
 }
