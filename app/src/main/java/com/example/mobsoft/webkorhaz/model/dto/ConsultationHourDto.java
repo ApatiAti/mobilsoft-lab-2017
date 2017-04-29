@@ -8,19 +8,42 @@ import java.util.Date;
  */
 
 public class ConsultationHourDto implements Serializable {
-    // TODO nem departmentName mert Department lesz a keresésnél és onnan azt átadjuk az appointmentnek
-    //      kell ID attr
-    //    public String departmentName;
-    public String tpye;
+//      "room": "string",
+//      "doctorsName": "string",
+    public Long consultationHourId;
+    public String tpyeId;
+    // STring
     public Date beginDate;
     public Date endDate;
     public int maxNumberOfPatient;
-    public int available;
+    public int currentPatientCount;
+
+
+//   ap   "appointmentId": 0,
+//   ok   "beginDate": "2017-04-29T19:57:22.029Z",
+//   ok   "endDate": "2017-04-29T19:57:22.029Z",
+//      "room": "string",
+//      "doctorsName": "string",
+//   ap   "complaints": "string",
+//   ap   "patientName": "string",
+//   ok   "consultationHourId": 0,
+//   dp   "departmentId": 0,
+//   dp   "consultationTypeId": 0
+
 
     public ConsultationHourDto() {
     }
 
-//    public String getDepartmentName() {
+    public ConsultationHourDto(Long consultationHourId, String tpyeId, Date beginDate, Date endDate, int maxNumberOfPatient, int currentPatientCount) {
+        this.consultationHourId = consultationHourId;
+        this.tpyeId = tpyeId;
+        this.beginDate = beginDate;
+        this.endDate = endDate;
+        this.maxNumberOfPatient = maxNumberOfPatient;
+        this.currentPatientCount = currentPatientCount;
+    }
+
+    //    public String getDepartmentName() {
 //        return departmentName;
 //    }
 //
@@ -28,12 +51,21 @@ public class ConsultationHourDto implements Serializable {
 //        this.departmentName = departmentName;
 //    }
 
-    public String getTpye() {
-        return tpye;
+
+    public Long getConsultationHourId() {
+        return consultationHourId;
     }
 
-    public void setTpye(String tpye) {
-        this.tpye = tpye;
+    public void setConsultationHourId(Long consultationHourId) {
+        this.consultationHourId = consultationHourId;
+    }
+
+    public String getTpyeId() {
+        return tpyeId;
+    }
+
+    public void setTpyeId(String tpyeId) {
+        this.tpyeId = tpyeId;
     }
 
     public Date getBeginDate() {
@@ -60,11 +92,11 @@ public class ConsultationHourDto implements Serializable {
         this.maxNumberOfPatient = maxNumberOfPatient;
     }
 
-    public int getAvailable() {
-        return available;
+    public int getCurrentPatientCount() {
+        return currentPatientCount;
     }
 
-    public void setAvailable(int available) {
-        this.available = available;
+    public void setCurrentPatientCount(int currentPatientCount) {
+        this.currentPatientCount = currentPatientCount;
     }
 }

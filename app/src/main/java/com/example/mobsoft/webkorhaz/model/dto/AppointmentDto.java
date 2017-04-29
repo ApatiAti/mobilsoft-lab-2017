@@ -9,6 +9,7 @@ import java.util.Date;
  */
 public class AppointmentDto {
     private Long appointmentId;
+  // TODO String
     private Date beginDate;
     private Date endDate;
     private String room;
