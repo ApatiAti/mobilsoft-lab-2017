@@ -114,7 +114,7 @@ public class DepartmentTest {
         verify(mainScreen, times(1)).showMessage(messageCaptor.capture());
 
         List<String> messages = messageCaptor.getAllValues();
-        assertEquals("Sikeres department frissítés", messages.get(0));
+        assertEquals("Sikeres adatbázis frissítés", messages.get(0));
     }
 
     @After

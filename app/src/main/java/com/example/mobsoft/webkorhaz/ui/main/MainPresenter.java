@@ -95,7 +95,7 @@ public class MainPresenter extends Presenter<MainScreen> {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                consultationHourInteractor.refreshDepartmentData();
+                consultationHourInteractor.refreshDepartmentDataFromServer();
             }
         });
     }
@@ -181,7 +181,7 @@ public class MainPresenter extends Presenter<MainScreen> {
             Log.e("NETWORK", "Error when refreshind departments", event.getThrowable());
         } else {
             if (screen != null) {
-                screen.showMessage("Sikeres department frissítés");
+                screen.showMessage("Sikeres adatbázis frissítés");
             }
         }
     }

@@ -105,7 +105,7 @@ public class AppointmentActivity extends AppCompatActivity implements Appointmen
 
     @Override
     public void appointmentSaved(Appointment appointment) {
-        Toast.makeText(this, "Sikeres appointment mentés! ", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Sikeres időpont foglalás! ", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(AppointmentActivity.this, MainActivity.class);
         startActivity(i);
         finish();
