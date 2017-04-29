@@ -54,9 +54,9 @@ public class ConsultationHourListAdapter extends RecyclerView.Adapter<Consultati
         ConsultationHourDto item = consultationHourDtoList.get(position);
 
         String date = fullDateTimeFormat.format(item.getBeginDate()) + " - " + timeFormat.format(item.getEndDate()) ;
-        String patientNumbers = item.getAvailable() + " / " + item.getMaxNumberOfPatient();
+        String patientNumbers = item.getCurrentPatientCount() + " / " + item.getMaxNumberOfPatient();
 
-        holder.textViewTypeName.setText(item.getTpye());
+//        holder.textViewTypeName.setText(item.getTpye());
         holder.textViewPatientNumbers.setText(patientNumbers);
         holder.textViewInterval.setText(date);
     }

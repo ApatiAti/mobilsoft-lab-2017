@@ -8,7 +8,8 @@ import java.util.Date;
 
 public class ConsultationHourSearch {
     private String departmentName;
-    private String type;
+    private Long typeId;
+    // TODO string
     private Date beginDate;
     private Date endDate;
 
@@ -23,12 +24,12 @@ public class ConsultationHourSearch {
         this.departmentName = departmentName;
     }
 
-    public String getType() {
-        return type;
+    public Long getTypeId() {
+        return typeId;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTypeId(Long typeId) {
+        this.typeId = typeId;
     }
 
     public Date getBeginDate() {

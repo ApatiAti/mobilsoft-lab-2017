@@ -101,6 +101,9 @@ public class ConsultationHourSearchActivity extends AppCompatActivity implements
         Long departmentId = getSelectedDepartmentData().getDepartmentId();
         List<ConsultationHourType> consultationHourTypes = departmentTypeMap.get(departmentId);
 
+        if (consultationHourTypes == null){
+            consultationHourTypes = new ArrayList<>();
+        }
 
         ArrayAdapter<ConsultationHourType> consultationTypeArrayAdapter =
                 new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, consultationHourTypes);
@@ -167,6 +170,10 @@ public class ConsultationHourSearchActivity extends AppCompatActivity implements
         }
     }
 
+    /**
+     * Megadott adatokkal keresés indítása
+     * @param view
+     */
     public void searchConsultationHour(View view) {
         Department selectedDepartment = getSelectedDepartmentData();
         ConsultationHourType selectedConsultationHourType = getSelectedConsultationHourType();
@@ -175,7 +182,7 @@ public class ConsultationHourSearchActivity extends AppCompatActivity implements
         consultationHourSearch.setBeginDate(startDateListener.getSelectedDate());
         consultationHourSearch.setEndDate(startDateListener.getSelectedDate());
         consultationHourSearch.setDepartmentName(selectedDepartment.getDepartmentName());
-        consultationHourSearch.setType(selectedConsultationHourType.getType());
+        consultationHourSearch.setTypeId(selectedConsultationHourType.getConsultationHourTypeId());
 
         consultationHourSearchPresenter.search(consultationHourSearch);
 

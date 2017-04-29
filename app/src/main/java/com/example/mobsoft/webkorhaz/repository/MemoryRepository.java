@@ -275,6 +275,17 @@ public class MemoryRepository implements Repository {
 		return null;
 	}
 
+	@Override
+	public List<ConsultationHourType> getConsultationHourTypeByDepartment_Id(Long id) {
+		List<ConsultationHourType> returnList = new ArrayList<>();
+		for (ConsultationHourType consultationHourType: consultiConsultationHourTypeList) {
+			if (consultationHourType.getDepartment().getId().equals(id)){
+				returnList.add(consultationHourType);
+			}
+		}
+		return returnList;
+	}
+
 	public User getUserByPatientName(String patientName){
 		for (User user : userList){
 			if (user.getUsername().equals(patientName)){

@@ -89,8 +89,8 @@ public class NetworkMockMemoryRepository {
         departmentList.add(new Department(100L, "Ortopédia", chtypeList));
 
         List<ConsultationHourType> chtypeList2 = new ArrayList<>();
-        chtypeList2.add(consultiConsultationHourTypeList.get(0));
         chtypeList2.add(consultiConsultationHourTypeList.get(2));
+        chtypeList2.add(consultiConsultationHourTypeList.get(3));
 
         departmentList.add(new Department(101L, "Szemészet", chtypeList2));
     }
@@ -98,13 +98,15 @@ public class NetworkMockMemoryRepository {
     public void createConsultationHourTypes() {
         consultiConsultationHourTypeList = new ArrayList<>();
 
-        ConsultationHourType chtype1 = new ConsultationHourType(1000L, 1L, "Valami típus");
-        ConsultationHourType chtype2 = new ConsultationHourType(1002L, 2L, "láb cucc");
+        ConsultationHourType chtype1 = new ConsultationHourType(1000L, 1L, "Gerinc vizsgálat");
+        ConsultationHourType chtype2 = new ConsultationHourType(1001L, 2L, "láb cucc");
         ConsultationHourType chtype3 = new ConsultationHourType(1002L, 3L, "Szem cucc");
+        ConsultationHourType chtype4 = new ConsultationHourType(1003L, 4L, "szürke hályog");
 
         consultiConsultationHourTypeList.add(chtype1);
         consultiConsultationHourTypeList.add(chtype2);
         consultiConsultationHourTypeList.add(chtype3);
+        consultiConsultationHourTypeList.add(chtype4);
     }
 
     public List<Appointment> getAppointments(User currentUser) {

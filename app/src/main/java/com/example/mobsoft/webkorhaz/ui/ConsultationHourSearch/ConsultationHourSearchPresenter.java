@@ -61,7 +61,7 @@ public class ConsultationHourSearchPresenter extends Presenter<ConsultationHourS
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                consultationHourInteractor.getDepartmentsDataFromServer();
+                consultationHourInteractor.getDepartmentsDataFromDb();
             }
         });
     }
@@ -75,7 +75,7 @@ public class ConsultationHourSearchPresenter extends Presenter<ConsultationHourS
         if (event.getThrowable() != null) {
             event.getThrowable().printStackTrace();
             if (screen != null) {
-                screen.showErrorMessage("error");
+                screen.showErrorMessage("Hiba történt a lekérdezés során");
             }
             Log.e("Networking", "Error at login in", event.getThrowable());
         } else {
@@ -84,5 +84,26 @@ public class ConsultationHourSearchPresenter extends Presenter<ConsultationHourS
             }
         }
     }
+
+    /**
+     * {@link SearchConsultationHourEvent} eventeket a {@link EventBus}-ról feldolgozó metódus. Android UI szálát hasznélja a feldolgozásra
+     * @param event
+     */
+    public void onEventMainThread(RefreshDepartmentsDataEvent event) {
+        if (event.getThrowable() != null) {
+            event.getThrowable().printStackTrace();
+            if (screen != null) {
+                screen.showErrorMessage("error");
+            }
+            Log.e("Networking", "Error at login in", event.getThrowable());
+        } else {
+            if (screen != null) {
+                // todo törölni
+                screen.showErrorMessage("Sikeres db lekérdezés!");
+                screen.loadDepartmentData(event.getDepartment());
+            }
+        }
+    }
+
 
 }

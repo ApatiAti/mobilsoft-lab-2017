@@ -2,6 +2,7 @@ package com.example.mobsoft.webkorhaz.network;
 
 import com.example.mobsoft.webkorhaz.network.interceptors.JSessionInterceptor;
 import com.example.mobsoft.webkorhaz.network.todo.AppointmentApi;
+import com.example.mobsoft.webkorhaz.network.todo.ConsultationHourApi;
 import com.example.mobsoft.webkorhaz.network.todo.DepartmentApi;
 import com.example.mobsoft.webkorhaz.network.todo.LoginApi;
 import com.example.mobsoft.webkorhaz.network.todo.TodoApi;
@@ -58,5 +59,10 @@ public class NetworkModule {
     @Provides
     @Singleton
     public AppointmentApi provideAppointmentApi(Retrofit retrofit) { return retrofit.create(AppointmentApi.class);}
+
+
+    @Provides
+    @Singleton
+    public ConsultationHourApi provideConsultationHourApi(Retrofit retrofit) { return retrofit.create(ConsultationHourApi.class);}
 
 }

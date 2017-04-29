@@ -13,6 +13,8 @@ public class ConsultationHourType implements Serializable{
     private Long consultationHourTypeId;
     private String type;
 
+    private Department department;
+
     public ConsultationHourType() {
     }
 
@@ -54,5 +56,13 @@ public class ConsultationHourType implements Serializable{
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }

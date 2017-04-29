@@ -74,7 +74,7 @@ public class SugarOrmRepository implements Repository {
     @Override
     public Department getDepartmentByDepartmentId(Long departmentId) {
         return Select.from(Department.class)
-                //.where(Condition.prop("departmentId").eq(departmentId))
+                .where(Condition.prop("department_Id").eq(departmentId))
                 .first();
     }
 
@@ -156,6 +156,11 @@ public class SugarOrmRepository implements Repository {
         return Select.from(User.class)
                 .where(Condition.prop("username").eq(patientName))
                 .first();
+    }
+
+    @Override
+    public List<ConsultationHourType> getConsultationHourTypeByDepartment_Id(Long id) {
+        return SugarRecord.find(ConsultationHourType.class, "department = ?" , id.toString());
     }
 
     @Override

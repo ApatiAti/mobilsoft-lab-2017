@@ -7,7 +7,7 @@ import com.example.mobsoft.webkorhaz.model.ConsultationHourType;
 import com.example.mobsoft.webkorhaz.model.Department;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDto;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourSearch;
-import com.example.mobsoft.webkorhaz.network.HttpNetwork;
+import com.example.mobsoft.webkorhaz.network.todo.ConsultationHourApi;
 import com.example.mobsoft.webkorhaz.network.todo.DepartmentApi;
 import com.example.mobsoft.webkorhaz.repository.Repository;
 
@@ -31,6 +31,8 @@ public class ConsultationHourInteractor {
     @Inject
     DepartmentApi departmentApi;
     @Inject
+    ConsultationHourApi consultationHourApi;
+    @Inject
     Repository repository;
 
     @Inject
@@ -41,11 +43,21 @@ public class ConsultationHourInteractor {
     }
 
     public void searchConsultationHour(ConsultationHourSearch searchParam){
+        Call<List<ConsultationHourDto>> listCall = consultationHourApi.consultationHourSearchPost(searchParam);
+
         SearchConsultationHourEvent event = new SearchConsultationHourEvent();
         try {
-            List<ConsultationHourDto> consultationHourDTOList = HttpNetwork.seachConsultationHour(searchParam);
-            event.setConsultationHourDtos(consultationHourDTOList);
-            bus.post(event);
+            Response<List<ConsultationHourDto>> execute = listCall.execute();
+            int responesCode = execute.code();
+
+            if(HttpURLConnection.HTTP_OK == responesCode){
+                List<ConsultationHourDto> consultationHourDTOList = execute.body();
+
+                event.setConsultationHourDtos(consultationHourDTOList);
+                bus.post(event);
+            } else {
+                throw new RuntimeException("Hiba történt a keresés során");
+            }
         } catch (Exception e){
             event.setThrowable(e);
             bus.post(event);
@@ -53,11 +65,25 @@ public class ConsultationHourInteractor {
     }
 
 
-    public Object getDepartmentsDataFromServer() {
-        return null;
+    public void getDepartmentsDataFromDb() {
+        // TODO új eventett létrehozni hozzá
+        RefreshDepartmentsDataEvent event = new RefreshDepartmentsDataEvent();
+        try {
+            List<Department> departmentList = repository.getDepartments();
+
+            for (Department department: departmentList) {
+                department.setConsultationHourTypeList(repository.getConsultationHourTypeByDepartment_Id(department.getId()));
+            }
+
+            event.setDepartment(departmentList);
+            bus.post(event);
+        } catch (Exception e){
+            event.setThrowable(e);
+            bus.post(event);
+        }
     }
 
-    public void refreshDepartmentData() {
+    public void refreshDepartmentDataFromServer() {
         Call<List<Department>> departmentsAndTypesGet = departmentApi.getDepartmentsAndTypesGet();
         RefreshDepartmentsDataEvent event = new RefreshDepartmentsDataEvent();
         try {
@@ -80,7 +106,6 @@ public class ConsultationHourInteractor {
             bus.post(event);
         }
     }
-
     /**
      * A paraméterkéne átadott Departmentekkel a db-t frissítjük.
      * Ha léterzik a department  akkor felül írjuk
@@ -96,18 +121,24 @@ public class ConsultationHourInteractor {
 
             if (dbDepartment != null){
                 dbDepartment.setDepartmentName(department.getDepartmentName());
+                dbDepartment = repository.saveDepartment(dbDepartment);
 
                 List<ConsultationHourType> dbCHType = saveOrUpdateConsultationHourList(dbDepartment, department.getConsultationHourTypeList());
                 dbDepartment.setConsultationHourTypeList(dbCHType);
 
             } else {
+                dbDepartment = repository.saveDepartment(department);
+
+                List<ConsultationHourType> newConsultationHourTypeList = new ArrayList<>();
                 for (ConsultationHourType consultationHourType : department.getConsultationHourTypeList()) {
+                    consultationHourType.setDepartment(dbDepartment);
                     consultationHourType = repository.saveConsultationHourType(consultationHourType);
+                    newConsultationHourTypeList.add(consultationHourType);
                 }
-                dbDepartment = department;
+
+                dbDepartment.setConsultationHourTypeList(newConsultationHourTypeList);
             }
 
-            dbDepartment = repository.saveDepartment(dbDepartment);
             newDepartmentList.add(dbDepartment);
         }
 
@@ -140,6 +171,7 @@ public class ConsultationHourInteractor {
                 dbConsultationHourType.setType(consultationHourType.getType());
             } else {
                 dbConsultationHourType = consultationHourType;
+                dbConsultationHourType.setDepartment(dbDepartment);
             }
 
             dbConsultationHourType = repository.saveConsultationHourType(dbConsultationHourType);
