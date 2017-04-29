@@ -109,9 +109,6 @@ public class ConsultationHourSearchActivity extends AppCompatActivity implements
 
     }
 
-    private Department getSelectedDepartmentData() {
-        return (Department) spinnerDepartmentName.getSelectedItem();
-    }
 
     @Override
     protected void onStart() {
@@ -126,6 +123,32 @@ public class ConsultationHourSearchActivity extends AppCompatActivity implements
     protected void onStop() {
         super.onStop();
         consultationHourSearchPresenter.detachScreen();
+    }
+
+
+    @Override
+    public void loadDepartmentData(List<Department> dataList) {
+        Map<Long, List<ConsultationHourType>> newMap = new HashMap<>();
+        for (Department data : dataList){
+            newMap.put(data.getDepartmentId(), data.getConsultationHourTypeList());
+        }
+
+        departmentList = dataList;
+        departmentTypeMap = newMap;
+
+        initializingSpinners();
+    }
+
+    @Override
+    public void showErrorMessage(String error) {
+        Toast.makeText(this, "Hiba történt!\n" + error, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showSearchResults(List<ConsultationHourDto> consultationHourDtoList) {
+        Intent intent = new Intent(this, ConsultationHourListActivity.class);
+        intent.putExtra(getString(R.string.resource_intent_consultationHour), new ConsultationHourDtoList(consultationHourDtoList));
+        startActivity(intent);
     }
 
     private void initializingSpinners(){
@@ -162,36 +185,6 @@ public class ConsultationHourSearchActivity extends AppCompatActivity implements
 
     }
 
-    private ConsultationHourType getSelectedConsultationHourType() {
-        return (ConsultationHourType)spinnerTypeName.getSelectedItem();
-    }
-
-
-    @Override
-    public void loadDepartmentData(List<Department> dataList) {
-        Map<Long, List<ConsultationHourType>> newMap = new HashMap<>();
-        for (Department data : dataList){
-            newMap.put(data.getDepartmentId(), data.getConsultationHourTypeList());
-        }
-
-        departmentList = dataList;
-        departmentTypeMap = newMap;
-
-        initializingSpinners();
-    }
-
-    @Override
-    public void showErrorMessage(String error) {
-        Toast.makeText(this, "Hiba történt!\n" + error, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void showSearchResults(List<ConsultationHourDto> consultationHourDtoList) {
-        Intent intent = new Intent(this, ConsultationHourListActivity.class);
-        intent.putExtra(getString(R.string.resource_intent_consultationHour), new ConsultationHourDtoList(consultationHourDtoList));
-        startActivity(intent);
-    }
-
 
     public void selectDateTime(View view) {
         SlideDateTimeListener listener;
@@ -213,5 +206,12 @@ public class ConsultationHourSearchActivity extends AppCompatActivity implements
                 .show();
     }
 
+    private Department getSelectedDepartmentData() {
+        return (Department) spinnerDepartmentName.getSelectedItem();
+    }
+
+    private ConsultationHourType getSelectedConsultationHourType() {
+        return (ConsultationHourType)spinnerTypeName.getSelectedItem();
+    }
 
 }
