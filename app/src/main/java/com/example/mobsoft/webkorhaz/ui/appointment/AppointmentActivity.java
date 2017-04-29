@@ -100,23 +100,19 @@ public class AppointmentActivity extends AppCompatActivity implements Appointmen
 
     @Override
     public void showMessage(String message) {
-        Toast.makeText(this, "Hiba történt! " + message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void appointmentSaved(Appointment appointment) {
         Toast.makeText(this, "Sikeres appointment mentés! ", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(AppointmentActivity.this, MainActivity.class);
-//      "felesleges" mert a MainActivity-n mindig db-ből frissül majd
-//        i.putExtra(getString(R.string.resource_intent_appointment), appointment);
-//        i.putExtra(getString(R.string.resource_intent_appointment_position), position);
-
         startActivity(i);
         finish();
     }
 
     public void saveAppointment(Appointment appointment) {
-        appointmentPresenter.saveAppointment(appointment);
+        appointmentPresenter.saveorUpdateAppointment(appointment);
     }
 
     public void refreshAppointmentFromOldValue() {
@@ -141,7 +137,7 @@ public class AppointmentActivity extends AppCompatActivity implements Appointmen
                 refreshAppointmentView();
                 return true;
             case R.id.miSave:
-                appointmentPresenter.saveAppointment(activeAppointment);
+                appointmentPresenter.saveorUpdateAppointment(activeAppointment);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -49,11 +49,11 @@ public class AppointmentPresenter extends Presenter<AppointmentScreen> {
     }
 
 
-    public void saveAppointment(final Appointment appointment){
+    public void saveorUpdateAppointment(final Appointment appointment){
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                appointmentInteractor.saveAppointent(appointment);
+                appointmentInteractor.saveOrUpdateAppointent(appointment);
             }
         });
     }

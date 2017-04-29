@@ -7,7 +7,7 @@ import com.example.mobsoft.webkorhaz.model.Appointment;
  */
 public interface AppointmentScreen {
 
-    public void showMessage(String message);
+    void showMessage(String message);
 
     void appointmentSaved(Appointment appointment);
 }

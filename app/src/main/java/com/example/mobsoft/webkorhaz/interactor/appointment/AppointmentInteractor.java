@@ -148,23 +148,37 @@ public class AppointmentInteractor {
      * Felületen megadott Appointment elküldése a szerverhez és lokális mentése
      * @param appointment
      */
-    public void saveAppointent(Appointment appointment) {
+    public void saveOrUpdateAppointent(Appointment appointment) {
+        Call<Void> saveAppointment = createRequestCallObject(appointment);
         SaveAppointmentsEvents event = new SaveAppointmentsEvents();
         try {
-            boolean succes = HttpNetwork.saveAppointment(appointment);
-            if (succes){
+            Response<Void> execute = saveAppointment.execute();
+            int responseCode = execute.code();
+
+            if (HttpURLConnection.HTTP_OK == responseCode){
                 repository.saveAppointment(appointment);
                 event.setAppointment(appointment);
+                bus.post(event);
             } else {
-                event.setAppointment(null);
+                throw new RuntimeException("Hálózati hiba történt a mentés során!");
             }
 
-            bus.post(event);
         } catch (Exception e){
             event.setThrowable(e);
-            event.setAppointment(null);
+            event.setAppointment(appointment);
             bus.post(event);
         }
+    }
+
+    private Call<Void> createRequestCallObject(Appointment appointment) {
+        Call<Void> saveAppointment;
+        AppointmentDto request = new AppointmentDto(appointment);
+        if (appointment.getId() != null){
+            saveAppointment = appointmentApi.appointmentPut(request);
+        } else {
+            saveAppointment = appointmentApi.appointmentPost(request);
+        }
+        return saveAppointment;
     }
 
     /**

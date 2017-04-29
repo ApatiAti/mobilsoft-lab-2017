@@ -142,6 +142,7 @@ public class MainPresenter extends Presenter<MainScreen> {
             Log.e("DB", "Error reading appointments from DB", event.getThrowable());
         } else {
             if (screen != null) {
+                screen.showMessage("Időpontok adatbázisból való betöltése sikeres");
                 screen.showAppointments(event.getAppointments());
             }
         }
@@ -161,6 +162,7 @@ public class MainPresenter extends Presenter<MainScreen> {
             Log.e("DB", "Error reading appointments from DB", throwable);
         } else {
             if (screen != null) {
+                screen.showMessage("Időpontok frissítve lettek a serverről");
                 screen.showAppointments(event.getAppointments());
             }
         }
