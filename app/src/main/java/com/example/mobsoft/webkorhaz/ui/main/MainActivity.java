@@ -8,6 +8,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +21,8 @@ import com.example.mobsoft.webkorhaz.model.User;
 import com.example.mobsoft.webkorhaz.ui.appointment.AppointmentActivity;
 import com.example.mobsoft.webkorhaz.ui.navigation.NavigationActivity;
 import com.example.mobsoft.webkorhaz.ui.util.adapter.AppointmentAdapter;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -30,11 +33,14 @@ import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity implements MainScreen {
 
+    private static final String TAG = "MainActivity";
     DateFormat dateFormat;
     RecyclerView recyclerView;
     AppointmentAdapter appointmentAdapter;
     private List<Appointment> appointmentList = new ArrayList<>();
     User currentUser;
+
+    Tracker mTracker;
 
     @Inject
     MainPresenter mainPresenter;
@@ -47,7 +53,10 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
 
         MobSoftApplication.injector.inject(this);
 
-        currentUser = ((MobSoftApplication) getApplication()).getCurrentUser();
+        MobSoftApplication application = (MobSoftApplication) getApplication();
+        mTracker = application.getDefaultTracker();
+
+        currentUser = application.getCurrentUser();
         dateFormat = new SimpleDateFormat(getString(R.string.fullDateTimeFormat));
         appointmentAdapter = new AppointmentAdapter(appointmentList, dateFormat);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
@@ -85,9 +94,13 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
     @Override
     protected void onStart() {
         super.onStart();
-        mainPresenter.attachScreen(this);
 
-        // TODO ez így nem jó, mert ha saját magára navigálunk vissza akkor a presenter már fel van iratkozva erre aaz eseményre
+
+        Log.i(TAG, "OnStart activity name: " + TAG);
+        mTracker.setScreenName("Activity~" + TAG);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+
+        mainPresenter.attachScreen(this);
         mainPresenter.loadAppointmentFromDb(currentUser);
     }
 
@@ -118,11 +131,24 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
                 mainPresenter.refreashAppointments(currentUser);
                 return true;
             case R.id.miRefreshDepartment:
-                Toast.makeText(this, getString(R.string.main_refresh_department_from_network) , Toast.LENGTH_SHORT).show();
-                mainPresenter.refreshDepartmentData();
+                onTapRefreshDepartment();
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    /**
+     * Menüben található korházi osztály frissítő gombra kattintás
+     */
+    private void onTapRefreshDepartment() {
+        mTracker.send(new HitBuilders.EventBuilder()
+                .setCategory("Action")
+                .setAction("OnClick")
+                .setLabel("Refresh department")
+                .setValue(1)
+                .build());
+        Toast.makeText(this, getString(R.string.main_refresh_department_from_network) , Toast.LENGTH_SHORT).show();
+        mainPresenter.refreshDepartmentData();
     }
 
     /**
