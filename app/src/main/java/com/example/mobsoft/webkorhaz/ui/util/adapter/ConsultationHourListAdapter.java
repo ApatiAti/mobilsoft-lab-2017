@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.mobsoft.webkorhaz.R;
+import com.example.mobsoft.webkorhaz.model.ConsultationHourType;
 import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDto;
 
 import java.text.DateFormat;
@@ -21,24 +22,31 @@ public class ConsultationHourListAdapter extends RecyclerView.Adapter<Consultati
     DateFormat fullDateTimeFormat;
     DateFormat timeFormat;
     List<ConsultationHourDto> consultationHourDtoList;
+    ConsultationHourType consultationHourType;
 
 
 
     public class ConsultationHourDtoViewHolder extends RecyclerView.ViewHolder{
         TextView textViewTypeName;
+        TextView textViewDoctorName;
+        TextView textViewRoom;
         TextView textViewInterval;
         TextView textViewPatientNumbers;
 
         public ConsultationHourDtoViewHolder(View itemView) {
             super(itemView);
             textViewTypeName = (TextView) itemView.findViewById(R.id.chListViewTypeName);
+            textViewTypeName.setText(consultationHourType.getType());
+            textViewRoom= (TextView) itemView.findViewById(R.id.chListViewRoom);
+            textViewDoctorName = (TextView) itemView.findViewById(R.id.chListViewDoctorName);
             textViewInterval = (TextView) itemView.findViewById(R.id.chListViewInterval);
             textViewPatientNumbers = (TextView) itemView.findViewById(R.id.chListPatientNumbers);
         }
     }
 
-    public ConsultationHourListAdapter(List<ConsultationHourDto> consultationHourDtoList, DateFormat fullDateTimeFormat, DateFormat timeFormat) {
+    public ConsultationHourListAdapter(List<ConsultationHourDto> consultationHourDtoList, ConsultationHourType consultationHourType, DateFormat fullDateTimeFormat, DateFormat timeFormat) {
         this.consultationHourDtoList = consultationHourDtoList;
+        this.consultationHourType = consultationHourType;
         this.fullDateTimeFormat = fullDateTimeFormat;
         this.timeFormat = timeFormat;
     }
@@ -56,7 +64,8 @@ public class ConsultationHourListAdapter extends RecyclerView.Adapter<Consultati
         String date = fullDateTimeFormat.format(item.getBeginDate()) + " - " + timeFormat.format(item.getEndDate()) ;
         String patientNumbers = item.getCurrentPatientCount() + " / " + item.getMaxNumberOfPatient();
 
-//        holder.textViewTypeName.setText(item.getTpye());
+        holder.textViewRoom.setText(item.getRoom());
+        holder.textViewDoctorName.setText(item.getDoctorsName());
         holder.textViewPatientNumbers.setText(patientNumbers);
         holder.textViewInterval.setText(date);
     }

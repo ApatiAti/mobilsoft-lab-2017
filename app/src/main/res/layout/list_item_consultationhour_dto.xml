@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     >
 
     <TextView
@@ -18,12 +18,32 @@
         android:layout_alignParentStart="true" />
 
     <TextView
+        android:id="@+id/chListViewDoctorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Doktor"
+        android:layout_below="@+id/chListViewTypeName"
+        android:layout_alignLeft="@+id/chListViewTypeName"
+        android:layout_alignStart="@+id/chListViewTypeName"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/chListViewRoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/chListPatientNumbers"
+        android:layout_alignStart="@+id/chListPatientNumbers"
+        android:layout_alignTop="@+id/chListViewDoctorName"
+        android:text="TextView" />
+
+    <TextView
         android:id="@+id/chListViewInterval"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/chListViewTypeName"
-        android:layout_alignStart="@+id/chListViewTypeName"
-        android:layout_below="@+id/chListViewTypeName"
+        android:layout_alignLeft="@+id/chListViewDoctorName"
+        android:layout_alignStart="@+id/chListViewDoctorName"
+        android:layout_below="@+id/chListViewDoctorName"
         android:layout_marginTop="8dp"
         android:textSize="20sp"
         android:text="2016.02.12 15:00 - 16:00" />

@@ -27,7 +27,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
 
 /**
  * Created by mobsoft on 2017. 03. 31..
@@ -44,9 +43,6 @@ public class ConsultationHourListActivity extends AppCompatActivity implements C
 
     Department department;
     ConsultationHourType chType;
-
-    @Inject
-    ConsultationHourListPresenter consultationHourListPresenter;
 
 
     @Override
@@ -73,7 +69,7 @@ public class ConsultationHourListActivity extends AppCompatActivity implements C
 
 
         consultationHourDtoList = dtoList.getList();
-        consultationHourListAdapter = new ConsultationHourListAdapter(consultationHourDtoList, fullDateTimeFormat, timeFormat);
+        consultationHourListAdapter = new ConsultationHourListAdapter(consultationHourDtoList, chType, fullDateTimeFormat, timeFormat);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_consultationhour);
@@ -97,13 +93,11 @@ public class ConsultationHourListActivity extends AppCompatActivity implements C
     @Override
     protected void onStart() {
         super.onStart();
-        consultationHourListPresenter.attachScreen(this);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        consultationHourListPresenter.detachScreen();
     }
 
     // Toolbar back button
