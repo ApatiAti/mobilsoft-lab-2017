@@ -1,5 +1,7 @@
 package com.example.mobsoft.webkorhaz.model.dto;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -15,6 +17,7 @@ public class ConsultationHourDto implements Serializable {
     public Date endDate;
     public String room;
     public String doctorsName;
+    @SerializedName("maxPatientCount")
     public int maxNumberOfPatient;
     public int currentPatientCount;
 

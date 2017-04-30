@@ -49,6 +49,9 @@ public class ConsultationHourSearchActivity extends AppCompatActivity implements
     MySlideDateTimeListener startDateListener;
     MySlideDateTimeListener endDateListener;
 
+    TextView startDateTextView;
+    TextView endDateTextView;
+
     @Inject
     ConsultationHourSearchPresenter consultationHourSearchPresenter;
 
@@ -66,8 +69,8 @@ public class ConsultationHourSearchActivity extends AppCompatActivity implements
 
         simpleDateFormat = new SimpleDateFormat(getString(R.string.fullDateTimeFormat));
 
-        TextView startDateTextView = (TextView) findViewById(R.id.chsearchDateBegin);
-        TextView endDateTextView = (TextView) findViewById(R.id.chsearchDateEnd);
+        startDateTextView = (TextView) findViewById(R.id.chsearchDateBegin);
+        endDateTextView = (TextView) findViewById(R.id.chsearchDateEnd);
 
         Date sysdate = new Date();
         startDateTextView.setText(simpleDateFormat.format(sysdate));
@@ -183,7 +186,7 @@ public class ConsultationHourSearchActivity extends AppCompatActivity implements
 
         ConsultationHourSearch consultationHourSearch = new ConsultationHourSearch();
         consultationHourSearch.setBeginDate(startDateListener.getSelectedDate());
-        consultationHourSearch.setEndDate(startDateListener.getSelectedDate());
+        consultationHourSearch.setEndDate(endDateListener.getSelectedDate());
         consultationHourSearch.setDepartmentId(selectedDepartment.getDepartmentId());
         consultationHourSearch.setTypeId(selectedConsultationHourType.getConsultationHourTypeId());
 
@@ -198,22 +201,36 @@ public class ConsultationHourSearchActivity extends AppCompatActivity implements
 
     public void selectDateTime(View view) {
         SlideDateTimeListener listener;
+        Date date;
         if (view.getId() ==  R.id.chsearchDateBegin ){
             listener = startDateListener;
+            date = getDateFromTextField(startDateTextView);
         } else {
             listener = endDateListener;
+            date = getDateFromTextField(endDateTextView);
         }
 
         new SlideDateTimePicker.Builder(getSupportFragmentManager())
                 .setListener(listener)
                 .setInitialDate(new Date())
                 .setMinDate(new Date())
+                .setInitialDate(date)
                 //.setMaxDate(maxDate)
                 .setIs24HourTime(true)
                 .setTheme(SlideDateTimePicker.HOLO_LIGHT)
 //                .setIndicatorColor(Color.parseColor("#990000"))
                 .build()
                 .show();
+    }
+
+    private Date getDateFromTextField(TextView startDateTextView) {
+        Date date;
+        try {
+            date = simpleDateFormat.parse(startDateTextView.getText().toString());
+        } catch (Exception e){
+            date = new Date();
+        }
+        return  date;
     }
 
     private Department getSelectedDepartmentData() {
