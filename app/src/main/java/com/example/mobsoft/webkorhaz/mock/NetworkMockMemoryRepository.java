@@ -82,17 +82,30 @@ public class NetworkMockMemoryRepository {
     public void createDepartments() {
         departmentList  = new ArrayList<>();
 
+        ConsultationHourType chtype0 = consultiConsultationHourTypeList.get(0);
+        ConsultationHourType chtype1 = consultiConsultationHourTypeList.get(1);
+        ConsultationHourType chtype2 = consultiConsultationHourTypeList.get(2);
+        ConsultationHourType chtype3 = consultiConsultationHourTypeList.get(3);
+
+        Department department1 = new Department(100L, "Ortopédia", null);
         List<ConsultationHourType> chtypeList = new ArrayList<>();
-        chtypeList.add(consultiConsultationHourTypeList.get(0));
-        chtypeList.add(consultiConsultationHourTypeList.get(1));
+        chtypeList.add(chtype0);
+        chtypeList.add(chtype1);
+        chtype0.setDepartment(department1);
+        chtype1.setDepartment(department1);
 
-        departmentList.add(new Department(100L, "Ortopédia", chtypeList));
+        department1.setConsultationHourTypeList(chtypeList);
+        departmentList.add(department1);
 
+        Department department2 = new Department(101L, "Szemészet", null);
         List<ConsultationHourType> chtypeList2 = new ArrayList<>();
-        chtypeList2.add(consultiConsultationHourTypeList.get(2));
-        chtypeList2.add(consultiConsultationHourTypeList.get(3));
+        chtypeList2.add(chtype2);
+        chtypeList2.add(chtype3);
+        chtype2.setDepartment(department1);
+        chtype3.setDepartment(department1);
 
-        departmentList.add(new Department(101L, "Szemészet", chtypeList2));
+        department2.setConsultationHourTypeList(chtypeList2);
+        departmentList.add(department2);
     }
 
     public void createConsultationHourTypes() {
