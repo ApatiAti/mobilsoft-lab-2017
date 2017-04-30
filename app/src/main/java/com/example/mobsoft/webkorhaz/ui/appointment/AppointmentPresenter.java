@@ -93,13 +93,13 @@ public class AppointmentPresenter extends Presenter<AppointmentScreen> {
      * @param event
      */
     public void onEventMainThread(SaveAppointmentsEvents event) {
-        if (event.getThrowable() != null) {
-            event.getThrowable().printStackTrace();
-            String msg = "Error at Loading Appointment";
+        Throwable throwable = event.getThrowable();
+        if (throwable != null) {
+            throwable.printStackTrace();
             if (screen != null) {
-                screen.showMessage(msg);
+                screen.showMessage(throwable.getMessage());
             }
-            Log.e("Networking", msg, event.getThrowable());
+            Log.e("Networking", throwable.getMessage(), throwable);
         } else {
             if (screen != null) {
                 screen.appointmentSaved(event.getAppointment());

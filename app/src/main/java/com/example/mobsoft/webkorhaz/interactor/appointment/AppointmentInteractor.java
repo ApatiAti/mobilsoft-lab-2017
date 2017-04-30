@@ -137,7 +137,7 @@ public class AppointmentInteractor {
         appointment.setEndDate(appointmentDto.getEndDate());
         appointment.setRoom(appointmentDto.getRoom());
         appointment.setDoctorsName(appointmentDto.getDoctorsName());
-        appointment.setComplaint(appointmentDto.getComplaint());
+        appointment.setComplaints(appointmentDto.getComplaints());
         appointment.setConsultationHourId(appointmentDto.getConsultationHourId());
 
         return appointment;

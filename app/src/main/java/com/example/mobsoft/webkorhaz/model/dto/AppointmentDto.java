@@ -15,7 +15,7 @@ public class AppointmentDto {
     private Date endDate;
     private String room;
     private String doctorsName;
-    private String complaint;
+    private String complaints;
     private String patientName;
     private Long consultationHourId;
     private Long departmentId;
@@ -31,7 +31,7 @@ public class AppointmentDto {
         this.endDate = appointment.getEndDate();
         this.room = appointment.getRoom();
         this.doctorsName = appointment.getDoctorsName();
-        this.complaint = appointment.getComplaint();
+        this.complaints = appointment.getComplaints();
         this.patientName = appointment.getPatient().getUsername();
         this.consultationHourId = appointment.getConsultationHourId();
         this.departmentId = appointment.getDepartment().getDepartmentId();
@@ -78,12 +78,12 @@ public class AppointmentDto {
         this.doctorsName = doctorsName;
     }
 
-    public String getComplaint() {
-        return complaint;
+    public String getComplaints() {
+        return complaints;
     }
 
-    public void setComplaint(String complaint) {
-        this.complaint = complaint;
+    public void setComplaints(String complaints) {
+        this.complaints = complaints;
     }
 
     public String getPatientName() {

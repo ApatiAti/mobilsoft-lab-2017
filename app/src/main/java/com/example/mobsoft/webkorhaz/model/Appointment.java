@@ -17,7 +17,7 @@ public class Appointment implements Serializable {
     private Date endDate;
     private String room;
     private String doctorsName;
-    private String complaint;
+    private String complaints;
     private User patient;
     private Long consultationHourId;
 
@@ -27,14 +27,14 @@ public class Appointment implements Serializable {
     public Appointment() {
     }
 
-    public Appointment(Long appointmentId, Date beginDate, Date endDate, String room, String doctorsName, Department department, String complaint, User patient, Long consultationHourId, ConsultationHourType consultationHourType) {
+    public Appointment(Long appointmentId, Date beginDate, Date endDate, String room, String doctorsName, Department department, String complaints, User patient, Long consultationHourId, ConsultationHourType consultationHourType) {
         this.appointmentId = appointmentId;
         this.beginDate = beginDate;
         this.endDate = endDate;
         this.room = room;
         this.doctorsName = doctorsName;
         this.department = department;
-        this.complaint = complaint;
+        this.complaints = complaints;
         this.patient = patient;
         this.consultationHourId = consultationHourId;
         this.consultationHourType = consultationHourType;
@@ -42,12 +42,13 @@ public class Appointment implements Serializable {
 
     public Appointment(Appointment oldAppointment) {
         this.id = oldAppointment.getId();
+        this.appointmentId = oldAppointment.getAppointmentId();
         this.beginDate = oldAppointment.getBeginDate();
         this.endDate = oldAppointment.getEndDate();
         this.room = oldAppointment.getRoom();
         this.doctorsName = oldAppointment.getDoctorsName();
         this.department = oldAppointment.getDepartment();
-        this.complaint = oldAppointment.getComplaint();
+        this.complaints = oldAppointment.getComplaints();
         this.patient = oldAppointment.getPatient();
         this.consultationHourId = oldAppointment.getConsultationHourId();
         this.consultationHourType = oldAppointment.getConsultationHourType();
@@ -59,7 +60,7 @@ public class Appointment implements Serializable {
         this.room = item.getRoom();
         this.doctorsName = item.getDoctorsName();
 //        this.department = new Department(1l, "Valami", null);
-//        this.complaint = "";
+//        this.complaints = "";
 //        this.patient = new User("Kovács valaki", "password");
         this.consultationHourId = item.getConsultationHourId();
 //        this.consultationHourType = new ConsultationHourType(20l, 0L, "lábcuc");
@@ -113,12 +114,12 @@ public class Appointment implements Serializable {
         this.doctorsName = doctorsName;
     }
 
-    public String getComplaint() {
-        return complaint;
+    public String getComplaints() {
+        return complaints;
     }
 
-    public void setComplaint(String complaint) {
-        this.complaint = complaint;
+    public void setComplaints(String complaints) {
+        this.complaints = complaints;
     }
 
     public User getPatient() {

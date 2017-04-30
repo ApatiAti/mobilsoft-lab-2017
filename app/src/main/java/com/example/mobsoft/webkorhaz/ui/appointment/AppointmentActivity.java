@@ -73,7 +73,7 @@ public class AppointmentActivity extends AppCompatActivity implements Appointmen
         editTextDoctor.setText(activeAppointment.getDoctorsName());
         editTextRoom.setText(activeAppointment.getRoom());
         editTextDate.setText(dateInterval);
-        editTextComplaints.setText(activeAppointment.getComplaint());
+        editTextComplaints.setText(activeAppointment.getComplaints());
     }
 
     private void initToolBar(Appointment appointment) {
@@ -137,6 +137,7 @@ public class AppointmentActivity extends AppCompatActivity implements Appointmen
                 refreshAppointmentView();
                 return true;
             case R.id.miSave:
+                activeAppointment.setComplaints(editTextComplaints.getText().toString());
                 appointmentPresenter.saveorUpdateAppointment(activeAppointment);
                 return true;
             default:
