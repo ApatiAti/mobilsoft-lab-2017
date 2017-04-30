@@ -7,14 +7,12 @@ import com.example.mobsoft.webkorhaz.MobSoftApplication;
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.DeleteAppointmentEvent;
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointmentListFromDbEvent;
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointmentListFromServerEvents;
-import com.example.mobsoft.webkorhaz.interactor.appointment.events.ReloadAppoinmentFromServerEvent;
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.SaveAppointmentsEvent;
 import com.example.mobsoft.webkorhaz.model.Appointment;
 import com.example.mobsoft.webkorhaz.model.ConsultationHourType;
 import com.example.mobsoft.webkorhaz.model.Department;
 import com.example.mobsoft.webkorhaz.model.User;
 import com.example.mobsoft.webkorhaz.model.dto.AppointmentDto;
-import com.example.mobsoft.webkorhaz.network.HttpNetwork;
 import com.example.mobsoft.webkorhaz.network.todo.AppointmentApi;
 import com.example.mobsoft.webkorhaz.repository.Repository;
 
@@ -239,20 +237,4 @@ public class AppointmentInteractor {
         }
     }
 
-    /**
-     * Egy frissítése esetén ha nincs department vagy chType akkor hibát kell dobni, és frissítetni kell
-     * @param appointment
-     */
-    @Deprecated
-    public void reloadAppoinmentFromServer(Appointment appointment) {
-        ReloadAppoinmentFromServerEvent event = new ReloadAppoinmentFromServerEvent();
-        try {
-            Appointment reloadedAppointent = HttpNetwork.reloadAppointment(appointment);
-            event.setAppointment(reloadedAppointent);
-            bus.post(event);
-        } catch (Exception e){
-            event.setThrowable(e);
-            bus.post(event);
-        }
-    }
 }

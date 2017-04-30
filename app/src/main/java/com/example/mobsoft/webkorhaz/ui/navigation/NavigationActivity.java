@@ -79,6 +79,6 @@ public class NavigationActivity extends AppCompatActivity implements NavigationS
 
     @Override
     public void error(String errorMessage) {
-        Toast.makeText(this, this.getString(R.string.navigation_error) + errorMessage, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
     }
 }

@@ -42,7 +42,6 @@
 
     <string name="resource_intent_consultationHour">consultationHourDtoList</string>
     <string name="resource_intent_appointment">appointment</string>
-    <string name="resource_intent_appointment_position">appointment_position</string>
     <string name="resource_intent_department">department</string>
 
 

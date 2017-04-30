@@ -37,8 +37,6 @@ public class AppointmentActivity extends AppCompatActivity implements Appointmen
     EditText editTextDate;
     EditText editTextComplaints;
 
-//    Integer position;
-
     @Inject
     AppointmentPresenter appointmentPresenter;
 
@@ -54,7 +52,6 @@ public class AppointmentActivity extends AppCompatActivity implements Appointmen
         timeFormat = new SimpleDateFormat(getString(R.string.timeFormat));
 
         oldAppointment = (Appointment) getIntent().getSerializableExtra(getString(R.string.resource_intent_appointment));
-//        position = (Integer) getIntent().getSerializableExtra(getString(R.string.resource_intent_appointment_position));
         refreshAppointmentFromOldValue();
 
         editTextDoctor = (EditText) findViewById(R.id.appointmentEditDoctor);
@@ -109,10 +106,6 @@ public class AppointmentActivity extends AppCompatActivity implements Appointmen
         Intent i = new Intent(AppointmentActivity.this, MainActivity.class);
         startActivity(i);
         finish();
-    }
-
-    public void saveAppointment(Appointment appointment) {
-        appointmentPresenter.saveorUpdateAppointment(appointment);
     }
 
     public void refreshAppointmentFromOldValue() {

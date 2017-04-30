@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.example.mobsoft.webkorhaz.interactor.appointment.AppointmentInteractor;
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.DeleteAppointmentEvent;
-import com.example.mobsoft.webkorhaz.interactor.appointment.events.ReloadAppoinmentFromServerEvent;
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.SaveAppointmentsEvent;
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.ShowAppointmentEvent;
 import com.example.mobsoft.webkorhaz.model.Appointment;
@@ -26,7 +25,6 @@ public class AppointmentPresenter extends Presenter<AppointmentScreen> {
 
     @Inject
     AppointmentInteractor appointmentInteractor;
-
     @Inject
     Executor executor;
 
@@ -59,15 +57,6 @@ public class AppointmentPresenter extends Presenter<AppointmentScreen> {
         });
     }
 
-    public void refreshAppointmentFromServer(final Appointment appointment){
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                appointmentInteractor.reloadAppoinmentFromServer(appointment);
-            }
-        });
-    }
-
     public void deleteAppointment(final Appointment appointment) {
         executor.execute(new Runnable() {
             @Override
@@ -82,7 +71,6 @@ public class AppointmentPresenter extends Presenter<AppointmentScreen> {
      * {@link ShowAppointmentEvent} eventeket a {@link EventBus}-ról feldolgozó metódus. Android UI szálát hasznélja a feldolgozásra
      * @param event
      */
-
     public void onEventMainThread(DeleteAppointmentEvent event) {
         Throwable throwable = event.getThrowable();
         if (throwable != null) {
@@ -118,24 +106,4 @@ public class AppointmentPresenter extends Presenter<AppointmentScreen> {
         }
     }
 
-    /**
-     * {@link ReloadAppoinmentFromServerEvent} eventeket a {@link EventBus}-ról feldolgozó metódus. Android UI szálát hasznélja a feldolgozásra
-     * @param event
-     */
-    /* TODO átnézni kell-e ez
-    public void onEventMainThread(ReloadAppoinmentFromServerEvent event) {
-        if (event.getThrowable() != null) {
-            event.getThrowable().printStackTrace();
-            String msg = "Error at Loading Appointment from server";
-            if (screen != null) {
-                screen.showMessage(msg);
-            }
-            Log.e("Networking", msg, event.getThrowable());
-        } else {
-            if (screen != null) {
-                screen.showAppointment(event.getAppointment());
-            }
-        }
-    }
-    */
 }

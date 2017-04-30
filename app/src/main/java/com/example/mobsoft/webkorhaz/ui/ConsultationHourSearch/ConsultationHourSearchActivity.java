@@ -147,7 +147,7 @@ public class ConsultationHourSearchActivity extends AppCompatActivity implements
 
     @Override
     public void showErrorMessage(String error) {
-        Toast.makeText(this, "Hiba történt!\n" + error, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
     }
 
     @Override

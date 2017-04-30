@@ -121,7 +121,6 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
     // Menu elemek onClick eseményének kezelése
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.miNavigation:
                 navigateToNavigationActivity();
@@ -184,7 +183,6 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
         Appointment appointment = appointmentList.get(position);
         Intent intent = new Intent(MainActivity.this, AppointmentActivity.class);
         intent.putExtra(getString(R.string.resource_intent_appointment), appointment);
-//                intent.putExtra(getString(R.string.resource_intent_appointment_position), position);
         startActivity(intent);
     }
 

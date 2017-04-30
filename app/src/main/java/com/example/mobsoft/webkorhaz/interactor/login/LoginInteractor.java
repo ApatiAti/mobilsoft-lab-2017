@@ -75,7 +75,7 @@ public class LoginInteractor {
                 event.setUser(activeUser);
                 bus.post(event);
             } else {
-                throw new RuntimeException("Hiba történt");
+                throw new RuntimeException("Hiba történt a kijelentkezés során!");
             }
         } catch (Exception e){
             event.setThrowable(e);
