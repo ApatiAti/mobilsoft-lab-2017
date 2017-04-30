@@ -66,7 +66,6 @@ public class ConsultationHourInteractor {
 
 
     public void getDepartmentsDataFromDb() {
-        // TODO új eventett létrehozni hozzá
         RefreshDepartmentsDataEvent event = new RefreshDepartmentsDataEvent();
         try {
             List<Department> departmentList = repository.getDepartments();

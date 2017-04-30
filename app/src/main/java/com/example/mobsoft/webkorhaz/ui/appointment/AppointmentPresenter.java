@@ -5,7 +5,6 @@ import android.util.Log;
 import com.example.mobsoft.webkorhaz.interactor.appointment.AppointmentInteractor;
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.DeleteAppointmentEvent;
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.SaveAppointmentsEvent;
-import com.example.mobsoft.webkorhaz.interactor.appointment.events.ShowAppointmentEvent;
 import com.example.mobsoft.webkorhaz.model.Appointment;
 import com.example.mobsoft.webkorhaz.ui.Presenter;
 
@@ -68,7 +67,7 @@ public class AppointmentPresenter extends Presenter<AppointmentScreen> {
 
 
     /**
-     * {@link ShowAppointmentEvent} eventeket a {@link EventBus}-ról feldolgozó metódus. Android UI szálát hasznélja a feldolgozásra
+     * {@link DeleteAppointmentEvent} eventeket a {@link EventBus}-ról feldolgozó metódus. Android UI szálát hasznélja a feldolgozásra
      * @param event
      */
     public void onEventMainThread(DeleteAppointmentEvent event) {

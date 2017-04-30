@@ -34,9 +34,6 @@ public class LoginInteractor {
         MobSoftApplication.injector.inject(this);
     }
 
-    /**
-     * Bejelentkezési próba
-     */
     public void login(User user){
         Call<Void> activeUser = loginApi.loginPost(NetworkConfig.LOGIN_URL, user.getUsername(), user.getPassword(), true);
         LoginEvent event = new LoginEvent();
@@ -59,10 +56,6 @@ public class LoginInteractor {
         }
     }
 
-
-    /**
-     * Bejelentkezési próba
-     */
     public void logout(){
         Call<Void> voidCall = loginApi.logoutGet(NetworkConfig.LOGOUT_URL);
         LogoutEvent event = new LogoutEvent();
