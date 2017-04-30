@@ -40,16 +40,6 @@ public class SugarOrmRepository implements Repository {
     }
 
     @Override
-    public void updateAppointment(Appointment appointment) {
-        return;
-    }
-
-    @Override
-    public void removeAppointment(Appointment appointment) {
-        SugarRecord.deleteInTx(appointment);
-    }
-
-    @Override
     public Appointment getAppointmentByAppointmentId(Long appointmentId, long userId) {
         return Select.from(Appointment.class)
                 .where(Condition.prop("appointmentId").eq(appointmentId))
@@ -67,22 +57,11 @@ public class SugarOrmRepository implements Repository {
     }
 
     @Override
-    public boolean isInDB(Appointment appointment) {
-        return SugarRecord.findById(Appointment.class, appointment.getId()) != null;
-    }
-
-    @Override
     public Department getDepartmentByDepartmentId(Long departmentId) {
         return Select.from(Department.class)
                 .where(Condition.prop("department_Id").eq(departmentId))
                 .first();
     }
-
-    @Override
-    public Department getDepartmentByDepartmentName(String departmentName) {
-        return Select.from(Department.class).where(Condition.prop("department_name").eq(departmentName)).first();
-    }
-
 
     @Override
     public List<Department> getDepartments() {
@@ -120,11 +99,6 @@ public class SugarOrmRepository implements Repository {
     @Override
     public void removeFavourite(Todo flight) {
         SugarRecord.deleteInTx(flight);
-    }
-
-    @Override
-    public boolean isInDB(Todo flight) {
-        return SugarRecord.findById(Todo.class, flight.getId()) != null;
     }
 
     @Override

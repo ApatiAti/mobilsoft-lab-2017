@@ -121,15 +121,6 @@ public class MemoryRepository implements Repository {
 		appointmentList.add(appointment);
 	}
 
-	@Override
-	public void updateAppointment(Appointment appointment) {
-		return;
-	}
-
-	@Override
-	public void removeAppointment(Appointment appointment) {
-		appointmentList.remove(appointment);
-	}
 
 	@Override
 	public Appointment getAppointmentByAppointmentId(Long appointmentId, long userId) {
@@ -163,25 +154,9 @@ public class MemoryRepository implements Repository {
 	}
 
 	@Override
-	public boolean isInDB(Appointment appointment) {
-		return appointmentList.contains(appointment);
-	}
-
-	@Override
 	public Department getDepartmentByDepartmentId(Long departmentId) {
 		for (Department department : departmentList){
 			if (department.getDepartmentId().equals(departmentId)){
-				return department;
-			}
-		}
-
-		return null;
-	}
-
-	@Override
-	public Department getDepartmentByDepartmentName(String departmentName) {
-		for (Department department : departmentList){
-			if (department.getDepartmentName().equals(department)){
 				return department;
 			}
 		}
@@ -235,11 +210,6 @@ public class MemoryRepository implements Repository {
 	@Override
 	public void removeFavourite(Todo flight) {
 		todos.remove(flight);
-	}
-
-	@Override
-	public boolean isInDB(Todo flight) {
-		return todos.contains(flight);
 	}
 
 	@Override

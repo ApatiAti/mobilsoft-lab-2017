@@ -21,21 +21,13 @@ public interface Repository {
 
     void saveAppointment(Appointment appointment);
 
-    void updateAppointment(Appointment appointment);
-
-    void removeAppointment(Appointment appointment);
-
     Appointment getAppointmentByAppointmentId(Long appointmentId, long userId);
 
     void deleteAllAppointement(User username);
 
     void deleteAppointment(Appointment appointment);
 
-    boolean isInDB(Appointment appointment);
-
     Department getDepartmentByDepartmentId(Long departmentId);
-
-    Department getDepartmentByDepartmentName(String departmentName);
 
     List<Department> getDepartments();
 
@@ -46,8 +38,6 @@ public interface Repository {
     void updateFavourites(List<Todo> todos);
 
     void removeFavourite(Todo todo);
-
-    boolean isInDB(Todo todo);
 
     User saveUser(User user);
 
