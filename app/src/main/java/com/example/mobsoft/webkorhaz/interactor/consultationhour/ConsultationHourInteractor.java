@@ -72,7 +72,7 @@ public class ConsultationHourInteractor {
             List<Department> departmentList = repository.getDepartments();
 
             for (Department department: departmentList) {
-                department.setConsultationHourTypeList(repository.getConsultationHourTypeByDepartment_Id(department.getId()));
+                department.setConsultationHourTypeList(repository.getConsultationHourTypeByDepartment(department));
             }
 
             event.setDepartment(departmentList);
@@ -157,7 +157,7 @@ public class ConsultationHourInteractor {
         List<ConsultationHourType> returnList = new ArrayList<>();
 
         Map<Long, ConsultationHourType> dbCHTypeMap = new HashMap<>();
-        List<ConsultationHourType> dbCHTypeList = dbDepartment.getConsultationHourTypeList();
+        List<ConsultationHourType> dbCHTypeList = repository.getConsultationHourTypeByDepartment(dbDepartment);
         if (dbCHTypeList != null) {
             for (ConsultationHourType consultationHourType : dbCHTypeList) {
                 dbCHTypeMap.put(consultationHourType.getConsultationHourTypeId(), consultationHourType);

@@ -159,8 +159,8 @@ public class SugarOrmRepository implements Repository {
     }
 
     @Override
-    public List<ConsultationHourType> getConsultationHourTypeByDepartment_Id(Long id) {
-        return SugarRecord.find(ConsultationHourType.class, "department = ?" , id.toString());
+    public List<ConsultationHourType> getConsultationHourTypeByDepartment(Department department) {
+        return SugarRecord.find(ConsultationHourType.class, "department = ?" , department.getId().toString());
     }
 
     @Override

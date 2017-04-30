@@ -57,7 +57,7 @@ public interface Repository {
 
     ConsultationHourType getConsultationHourType(Long consultationHouTypeId);
 
-    List<ConsultationHourType> getConsultationHourTypeByDepartment_Id(Long id);
+    List<ConsultationHourType> getConsultationHourTypeByDepartment(Department department);
 
     User getUserByPatientName(String patientName);
 }

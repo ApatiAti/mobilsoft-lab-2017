@@ -276,10 +276,10 @@ public class MemoryRepository implements Repository {
 	}
 
 	@Override
-	public List<ConsultationHourType> getConsultationHourTypeByDepartment_Id(Long id) {
+	public List<ConsultationHourType> getConsultationHourTypeByDepartment(Department department) {
 		List<ConsultationHourType> returnList = new ArrayList<>();
 		for (ConsultationHourType consultationHourType: consultiConsultationHourTypeList) {
-			if (consultationHourType.getDepartment().getId().equals(id)){
+			if (consultationHourType.getDepartment().getId().equals(department.getId())){
 				returnList.add(consultationHourType);
 			}
 		}
