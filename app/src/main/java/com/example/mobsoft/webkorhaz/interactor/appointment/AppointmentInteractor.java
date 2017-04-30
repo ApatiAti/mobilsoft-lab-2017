@@ -95,7 +95,7 @@ public class AppointmentInteractor {
             appointment.setDepartment(
                     mapDepartmentFromDto(appointmentDto.getDepartmentId()));
             appointment.setConsultationHourType(
-                    mapConsultationHourTypeFromDto(appointmentDto.getConsultationHouTypeId()));
+                    mapConsultationHourTypeFromDto(appointmentDto.getConsultationHourTypeId()));
             appointment.setPatient(
                     mapPatientFromDto(appointmentDto.getPatientName()));
 

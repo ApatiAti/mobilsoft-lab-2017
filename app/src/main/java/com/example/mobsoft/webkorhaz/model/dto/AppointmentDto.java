@@ -1,6 +1,7 @@
 package com.example.mobsoft.webkorhaz.model.dto;
 
 import com.example.mobsoft.webkorhaz.model.Appointment;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 
@@ -18,7 +19,8 @@ public class AppointmentDto {
     private String patientName;
     private Long consultationHourId;
     private Long departmentId;
-    private Long consultationHouTypeId;
+    @SerializedName(value = "consultationTypeId")
+    private Long consultationHourTypeId;
 
     public AppointmentDto() {
     }
@@ -33,7 +35,7 @@ public class AppointmentDto {
         this.patientName = appointment.getPatient().getUsername();
         this.consultationHourId = appointment.getConsultationHourId();
         this.departmentId = appointment.getDepartment().getDepartmentId();
-        this.consultationHouTypeId = appointment.getConsultationHourType().getConsultationHourTypeId();
+        this.consultationHourTypeId = appointment.getConsultationHourType().getConsultationHourTypeId();
     }
 
     public Long getAppointmentId() {
@@ -108,11 +110,11 @@ public class AppointmentDto {
         this.departmentId = departmentId;
     }
 
-    public Long getConsultationHouTypeId() {
-        return consultationHouTypeId;
+    public Long getConsultationHourTypeId() {
+        return consultationHourTypeId;
     }
 
-    public void setConsultationHouTypeId(Long consultationHouTypeId) {
-        this.consultationHouTypeId = consultationHouTypeId;
+    public void setConsultationHourTypeId(Long consultationHourTypeId) {
+        this.consultationHourTypeId = consultationHourTypeId;
     }
 }
