@@ -20,11 +20,6 @@ public class ConsultationHourTypeDeserializer implements JsonDeserializer<Consul
     public ConsultationHourType deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         ConsultationHourType chType = new ConsultationHourType();
 
-
-//        JsonElement consultationTypeid = json.getAsJsonObject().get("id");
-//        Long chTypeId = consultationTypeid != null ? consultationTypeid.getAsLong() : null;
-//        chType.setConsultationHourTypeId(chTypeId));
-
         JsonElement consultationTypeid = json.getAsJsonObject().get("consultationTypeid");
         Long chTypeId = consultationTypeid != null ? consultationTypeid.getAsLong() : null;
         chType.setConsultationHourTypeId(chTypeId);

@@ -4,7 +4,6 @@ import com.example.mobsoft.webkorhaz.MobSoftApplication;
 import com.example.mobsoft.webkorhaz.interactor.login.events.LoginEvent;
 import com.example.mobsoft.webkorhaz.interactor.login.events.LogoutEvent;
 import com.example.mobsoft.webkorhaz.model.User;
-import com.example.mobsoft.webkorhaz.network.HttpNetwork;
 import com.example.mobsoft.webkorhaz.network.NetworkConfig;
 import com.example.mobsoft.webkorhaz.network.todo.LoginApi;
 import com.example.mobsoft.webkorhaz.repository.Repository;
@@ -71,8 +70,6 @@ public class LoginInteractor {
             Response<Void> execute = voidCall.execute();
             int code = execute.code();
             if (HttpURLConnection.HTTP_OK == code){
-                User activeUser = HttpNetwork.startLogout();
-                event.setUser(activeUser);
                 bus.post(event);
             } else {
                 throw new RuntimeException("Hiba történt a kijelentkezés során!");

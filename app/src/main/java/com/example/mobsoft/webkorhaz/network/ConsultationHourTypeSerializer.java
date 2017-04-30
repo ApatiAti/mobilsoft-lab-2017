@@ -1,14 +1,11 @@
 package com.example.mobsoft.webkorhaz.network;
 
 import com.example.mobsoft.webkorhaz.model.ConsultationHourType;
-import com.example.mobsoft.webkorhaz.utils.GsonHelper;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import com.google.gson.annotations.JsonAdapter;
 
 import java.lang.reflect.Type;
 
