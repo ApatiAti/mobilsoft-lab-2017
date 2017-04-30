@@ -32,7 +32,10 @@ import dagger.Component;
  */
 
 @Singleton
-@Component(modules = {UIModule.class, RepositoryModule.class, InteractorModule.class, MockNetworkModule.class})
+@Component(modules = {UIModule.class, RepositoryModule.class, InteractorModule.class
+//        , MockNetworkModule.class
+        ,NetworkModule.class
+})
 public interface MobSoftApplicationComponent {
 
     /**

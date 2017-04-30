@@ -1,5 +1,9 @@
 package com.example.mobsoft.webkorhaz.utils;
 
+import com.example.mobsoft.webkorhaz.model.ConsultationHourType;
+import com.example.mobsoft.webkorhaz.model.Department;
+import com.example.mobsoft.webkorhaz.network.ConsultationHourTypeDeserializer;
+import com.example.mobsoft.webkorhaz.network.DepartmentDeserializer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -9,7 +13,10 @@ public class GsonHelper {
 	private static Gson gson;
 
 	static {
-		gson = new GsonBuilder().setDateFormat(DATE_FORMAT).create();
+		gson = new GsonBuilder()
+				.registerTypeAdapter(ConsultationHourType.class, new ConsultationHourTypeDeserializer())
+				.registerTypeAdapter(Department.class, new DepartmentDeserializer())
+				.setDateFormat(DATE_FORMAT).create();
 	}
 
 	public static Gson getGson() {
