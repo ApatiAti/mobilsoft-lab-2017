@@ -9,5 +9,5 @@ public interface AppointmentScreen {
 
     void showMessage(String message);
 
-    void appointmentSaved(Appointment appointment);
+    void navigateToAppointmentList(String message);
 }

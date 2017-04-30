@@ -94,6 +94,8 @@ paths:
       responses:
         200:
           description: Succes
+          schema:
+            $ref: '#/definitions/Appointment'
         400:
           description: Unexpected error
           schema:
@@ -145,12 +147,12 @@ paths:
       description: |
         With this endpoint user can delete an existing appointment
       parameters:
-      - name: request
-        in: body
-        description: Appointment
+      - name: appointmentId
+        in: query
+        description: AppointmentId
         required: true
-        schema:
-          $ref: '#/definitions/Appointment'
+        type: integer
+        format: int64
       tags:
         - Appointment
       responses:
@@ -178,10 +180,6 @@ definitions:
   ConsultationHourType:
     type: object
     properties:
-      id:
-        type: integer
-        format: int64
-        description: Id of ConsultationHourType
       consultationTypeid:
         type: integer
         format: int64

@@ -1,11 +1,14 @@
 package com.example.mobsoft.webkorhaz.interactor.appointment;
 
 
+import android.support.annotation.NonNull;
+
 import com.example.mobsoft.webkorhaz.MobSoftApplication;
+import com.example.mobsoft.webkorhaz.interactor.appointment.events.DeleteAppointmentEvent;
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointmentListFromDbEvent;
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointmentListFromServerEvents;
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.ReloadAppoinmentFromServerEvent;
-import com.example.mobsoft.webkorhaz.interactor.appointment.events.SaveAppointmentsEvents;
+import com.example.mobsoft.webkorhaz.interactor.appointment.events.SaveAppointmentsEvent;
 import com.example.mobsoft.webkorhaz.model.Appointment;
 import com.example.mobsoft.webkorhaz.model.ConsultationHourType;
 import com.example.mobsoft.webkorhaz.model.Department;
@@ -15,6 +18,7 @@ import com.example.mobsoft.webkorhaz.network.HttpNetwork;
 import com.example.mobsoft.webkorhaz.network.todo.AppointmentApi;
 import com.example.mobsoft.webkorhaz.repository.Repository;
 
+import java.io.EOFException;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +40,27 @@ public class AppointmentInteractor {
 
     public AppointmentInteractor() {
         MobSoftApplication.injector.inject(this);
+    }
+
+    public void deleteAppointment(Appointment appointment){
+        Call<Void> deleteCall = appointmentApi.appointmentDelete(appointment.getAppointmentId());
+        DeleteAppointmentEvent event = new DeleteAppointmentEvent();
+        try {
+            Response<Void> execute = deleteCall.execute();
+            int responseCode = execute.code();
+
+            if(HttpURLConnection.HTTP_OK == responseCode) {
+                repository.deleteAppointment(appointment);
+                event.setSucces(true);
+                bus.post(event);
+            } else {
+                throw  new RuntimeException("Hiba a lekérdezés során. Hibakód HTTP: " + responseCode);
+            }
+        } catch (Exception e){
+            event.setThrowable(e);
+            event.setSucces(false);
+            bus.post(event);
+        }
     }
 
     /**
@@ -67,7 +92,7 @@ public class AppointmentInteractor {
             Response<List<AppointmentDto>> execute = listCall.execute();
             int responseCode = execute.code();
 
-            if(HttpURLConnection.HTTP_OK == responseCode) {
+            if (HttpURLConnection.HTTP_OK == responseCode) {
                 List<AppointmentDto> body = execute.body();
 
 
@@ -76,9 +101,14 @@ public class AppointmentInteractor {
                 event.setAppointments(appointmentList);
                 bus.post(event);
             } else {
-                throw  new RuntimeException("Hiba a lekérdezés során. Hibakód HTTP: " + responseCode);
+                throw new RuntimeException("Hiba a lekérdezés során. Hibakód HTTP: " + responseCode);
             }
-        } catch (Exception e){
+        } catch (EOFException e){
+            RuntimeException tmp = new RuntimeException("Nincs foglalt időpontja!");
+            tmp.initCause(e);
+            event.setThrowable(tmp);
+            bus.post(event);
+        }catch (Exception e){
             event.setThrowable(e);
             bus.post(event);
         }
@@ -90,20 +120,26 @@ public class AppointmentInteractor {
         repository.deleteAllAppointement(user);
 
         for (AppointmentDto appointmentDto : appointmentDtoList) {
-            Appointment appointment = mapDtoToAppointment(appointmentDto);
-
-            appointment.setDepartment(
-                    mapDepartmentFromDto(appointmentDto.getDepartmentId()));
-            appointment.setConsultationHourType(
-                    mapConsultationHourTypeFromDto(appointmentDto.getConsultationHourTypeId()));
-            appointment.setPatient(
-                    mapPatientFromDto(appointmentDto.getPatientName()));
-
-            repository.saveAppointment(appointment);
+            Appointment appointment = mapAndSaveAppointment(appointmentDto);
             newAppointmentList.add(appointment);
         }
 
         return newAppointmentList;
+    }
+
+    @NonNull
+    private Appointment mapAndSaveAppointment(AppointmentDto appointmentDto) {
+        Appointment appointment = mapDtoToAppointment(appointmentDto);
+
+        appointment.setDepartment(
+                mapDepartmentFromDto(appointmentDto.getDepartmentId()));
+        appointment.setConsultationHourType(
+                mapConsultationHourTypeFromDto(appointmentDto.getConsultationHourTypeId()));
+        appointment.setPatient(
+                mapPatientFromDto(appointmentDto.getPatientName()));
+
+        repository.saveAppointment(appointment);
+        return appointment;
     }
 
     private User mapPatientFromDto(String patientName) {
@@ -149,10 +185,43 @@ public class AppointmentInteractor {
      * @param appointment
      */
     public void saveOrUpdateAppointent(Appointment appointment) {
-        Call<Void> saveAppointment = createRequestCallObject(appointment);
-        SaveAppointmentsEvents event = new SaveAppointmentsEvents();
+        if (appointment.getId() != null){
+            updateAppointment(appointment);
+        } else {
+            saveAppointment(appointment);
+        }
+    }
+
+    private void saveAppointment(Appointment appointment) {
+        Call<AppointmentDto> saveAppointment = appointmentApi.appointmentPost(new AppointmentDto(appointment));
+        SaveAppointmentsEvent event = new SaveAppointmentsEvent();
         try {
-            Response<Void> execute = saveAppointment.execute();
+            Response<AppointmentDto> execute = saveAppointment.execute();
+            int responseCode = execute.code();
+
+            if (HttpURLConnection.HTTP_OK == responseCode){
+                AppointmentDto responseAppointmentDto = execute.body();
+                Appointment savedAppointment = mapAndSaveAppointment(responseAppointmentDto);
+
+                event.setAppointment(savedAppointment );
+                bus.post(event);
+            } else {
+                throw new RuntimeException("Hálózati hiba történt a mentés során!");
+            }
+
+        } catch (Exception e){
+            event.setThrowable(e);
+            event.setAppointment(appointment);
+            bus.post(event);
+        }
+    }
+
+    private void updateAppointment(Appointment appointment) {
+        AppointmentDto request = new AppointmentDto(appointment);
+        Call<Void> updateAppointment = appointmentApi.appointmentPut(request);
+        SaveAppointmentsEvent event = new SaveAppointmentsEvent();
+        try {
+            Response<Void> execute = updateAppointment.execute();
             int responseCode = execute.code();
 
             if (HttpURLConnection.HTTP_OK == responseCode){
@@ -168,17 +237,6 @@ public class AppointmentInteractor {
             event.setAppointment(appointment);
             bus.post(event);
         }
-    }
-
-    private Call<Void> createRequestCallObject(Appointment appointment) {
-        Call<Void> saveAppointment;
-        AppointmentDto request = new AppointmentDto(appointment);
-        if (appointment.getId() != null){
-            saveAppointment = appointmentApi.appointmentPut(request);
-        } else {
-            saveAppointment = appointmentApi.appointmentPost(request);
-        }
-        return saveAppointment;
     }
 
     /**

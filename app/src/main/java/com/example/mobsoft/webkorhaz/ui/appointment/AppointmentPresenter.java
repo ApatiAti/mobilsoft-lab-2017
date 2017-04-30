@@ -3,8 +3,9 @@ package com.example.mobsoft.webkorhaz.ui.appointment;
 import android.util.Log;
 
 import com.example.mobsoft.webkorhaz.interactor.appointment.AppointmentInteractor;
+import com.example.mobsoft.webkorhaz.interactor.appointment.events.DeleteAppointmentEvent;
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.ReloadAppoinmentFromServerEvent;
-import com.example.mobsoft.webkorhaz.interactor.appointment.events.SaveAppointmentsEvents;
+import com.example.mobsoft.webkorhaz.interactor.appointment.events.SaveAppointmentsEvent;
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.ShowAppointmentEvent;
 import com.example.mobsoft.webkorhaz.model.Appointment;
 import com.example.mobsoft.webkorhaz.ui.Presenter;
@@ -67,32 +68,42 @@ public class AppointmentPresenter extends Presenter<AppointmentScreen> {
         });
     }
 
+    public void deleteAppointment(final Appointment appointment) {
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                appointmentInteractor.deleteAppointment(appointment);
+            }
+        });
+    }
+
+
     /**
      * {@link ShowAppointmentEvent} eventeket a {@link EventBus}-ról feldolgozó metódus. Android UI szálát hasznélja a feldolgozásra
      * @param event
      */
-    /* TODO átnézni kell-e ez
-    public void onEventMainThread(ShowAppointmentEvent event) {
-        if (event.getThrowable() != null) {
-            event.getThrowable().printStackTrace();
-            String msg = "Error at Loading Appointment";
+
+    public void onEventMainThread(DeleteAppointmentEvent event) {
+        Throwable throwable = event.getThrowable();
+        if (throwable != null) {
+            throwable.printStackTrace();
             if (screen != null) {
-                screen.showMessage(msg);
+                screen.showMessage(throwable.getMessage());
             }
-            Log.e("Networking", msg, event.getThrowable());
+            Log.e("Networking", throwable.getMessage() , throwable);
         } else {
             if (screen != null) {
-                screen.showAppointment(event.getAppointment());
+                screen.navigateToAppointmentList("Sikeres időpont törlés! ");
             }
         }
     }
-    */
+
 
     /**
-     * {@link SaveAppointmentsEvents} eventeket a {@link EventBus}-ról feldolgozó metódus. Android UI szálát hasznélja a feldolgozásra
+     * {@link SaveAppointmentsEvent} eventeket a {@link EventBus}-ról feldolgozó metódus. Android UI szálát hasznélja a feldolgozásra
      * @param event
      */
-    public void onEventMainThread(SaveAppointmentsEvents event) {
+    public void onEventMainThread(SaveAppointmentsEvent event) {
         Throwable throwable = event.getThrowable();
         if (throwable != null) {
             throwable.printStackTrace();
@@ -102,7 +113,7 @@ public class AppointmentPresenter extends Presenter<AppointmentScreen> {
             Log.e("Networking", throwable.getMessage(), throwable);
         } else {
             if (screen != null) {
-                screen.appointmentSaved(event.getAppointment());
+                screen.navigateToAppointmentList("Sikeres időpont foglalás! ");
             }
         }
     }

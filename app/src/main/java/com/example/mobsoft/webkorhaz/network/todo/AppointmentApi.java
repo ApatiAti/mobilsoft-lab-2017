@@ -1,6 +1,7 @@
 package com.example.mobsoft.webkorhaz.network.todo;
 
 
+import com.example.mobsoft.webkorhaz.model.Appointment;
 import com.example.mobsoft.webkorhaz.model.dto.AppointmentDto;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public interface AppointmentApi {
    */
   @DELETE("appointment")
   Call<Void> appointmentDelete(
-          @Body AppointmentDto request
+          @Query("appointmentId") Long appointmentId
   );
 
   /**
@@ -57,7 +58,7 @@ public interface AppointmentApi {
    */
   
   @POST("appointment")
-  Call<Void> appointmentPost(
+  Call<AppointmentDto> appointmentPost(
           @Body AppointmentDto request
   );
 

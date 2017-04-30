@@ -159,7 +159,7 @@ public class MainPresenter extends Presenter<MainScreen> {
             if (screen != null) {
                 screen.showMessage("Hiba történt a foglalási időpontok lekérdezésekor." + throwable.getMessage());
             }
-            Log.e("DB", "Error reading appointments from DB", throwable);
+            Log.e("DB", "Error reading appointments from Server", throwable);
         } else {
             if (screen != null) {
                 screen.showMessage("Időpontok frissítve lettek a serverről");

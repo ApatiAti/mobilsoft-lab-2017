@@ -14,4 +14,11 @@
         app:showAsAction="always"
         android:title="@string/appointment_save">
     </item>
+    <item
+        android:id="@+id/miDelete"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_delete_forever"
+        app:showAsAction="always"
+        android:title="@string/appointment_reload">
+    </item>
 </menu>

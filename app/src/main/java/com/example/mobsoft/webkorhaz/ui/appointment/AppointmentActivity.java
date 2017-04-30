@@ -104,8 +104,8 @@ public class AppointmentActivity extends AppCompatActivity implements Appointmen
     }
 
     @Override
-    public void appointmentSaved(Appointment appointment) {
-        Toast.makeText(this, "Sikeres időpont foglalás! ", Toast.LENGTH_SHORT).show();
+    public void navigateToAppointmentList(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         Intent i = new Intent(AppointmentActivity.this, MainActivity.class);
         startActivity(i);
         finish();
@@ -139,6 +139,9 @@ public class AppointmentActivity extends AppCompatActivity implements Appointmen
             case R.id.miSave:
                 activeAppointment.setComplaints(editTextComplaints.getText().toString());
                 appointmentPresenter.saveorUpdateAppointment(activeAppointment);
+                return true;
+            case R.id.miDelete:
+                appointmentPresenter.deleteAppointment(activeAppointment);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

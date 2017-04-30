@@ -8,14 +8,14 @@ import java.util.List;
  * Created by Apati on 2017.04.08..
  */
 
-public class SaveAppointmentsEvents {
+public class SaveAppointmentsEvent {
     private int code;
     private Appointment appointment;
     private Throwable throwable;
 
     //<editor-fold desc="Constructors|Getters|Setters">
 
-    public SaveAppointmentsEvents() {
+    public SaveAppointmentsEvent() {
     }
 
     public int getCode() {
