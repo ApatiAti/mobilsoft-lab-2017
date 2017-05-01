@@ -5,7 +5,6 @@ import com.example.mobsoft.webkorhaz.network.todo.AppointmentApi;
 import com.example.mobsoft.webkorhaz.network.todo.ConsultationHourApi;
 import com.example.mobsoft.webkorhaz.network.todo.DepartmentApi;
 import com.example.mobsoft.webkorhaz.network.todo.LoginApi;
-import com.example.mobsoft.webkorhaz.network.todo.TodoApi;
 import com.example.mobsoft.webkorhaz.utils.GsonHelper;
 
 import javax.inject.Singleton;
@@ -25,7 +24,6 @@ public class NetworkModule {
         return new OkHttpClient().newBuilder();
     }
 
-
     @Provides
     @Singleton
     public OkHttpClient provideOkHttpClient(OkHttpClient.Builder builder) {
@@ -44,12 +42,6 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    public TodoApi provideTodoApi(Retrofit retrofit) {
-        return retrofit.create(TodoApi.class);
-    }
-
-    @Provides
-    @Singleton
     public LoginApi provideLoginApi(Retrofit retrofit) { return retrofit.create(LoginApi.class);}
 
     @Provides
@@ -59,7 +51,6 @@ public class NetworkModule {
     @Provides
     @Singleton
     public AppointmentApi provideAppointmentApi(Retrofit retrofit) { return retrofit.create(AppointmentApi.class);}
-
 
     @Provides
     @Singleton

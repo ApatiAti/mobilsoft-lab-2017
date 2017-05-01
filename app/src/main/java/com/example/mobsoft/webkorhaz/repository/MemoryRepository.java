@@ -5,7 +5,6 @@ import android.content.Context;
 import com.example.mobsoft.webkorhaz.model.Appointment;
 import com.example.mobsoft.webkorhaz.model.ConsultationHourType;
 import com.example.mobsoft.webkorhaz.model.Department;
-import com.example.mobsoft.webkorhaz.model.Todo;
 import com.example.mobsoft.webkorhaz.model.User;
 
 import java.util.ArrayList;
@@ -30,8 +29,6 @@ public class MemoryRepository implements Repository {
 		createConsultationHourTypes();
 		createDepartments();
 		createAppointment();
-
-		openTodoRepo(context);
 	}
 
 	public void createAppointment() {
@@ -167,49 +164,6 @@ public class MemoryRepository implements Repository {
 	@Override
 	public List<Department> getDepartments() {
 		return departmentList;
-	}
-
-	/**
-	 *  Labor miatt
-	 */
-
-	public static List<Todo> todos;
-
-	public void openTodoRepo(Context context) {
-		Todo flight1 = new Todo(1L,"todo one");
-		Todo flight2 = new Todo(3L,"todo two");
-
-		todos = new ArrayList<>();
-		todos.add(flight1);
-		todos.add(flight2);
-	}
-
-	@Override
-	public List<Todo> getFavourites() {
-		return todos;
-	}
-
-	@Override
-	public void saveFavourite(Todo todo) {
-		todos.add(todo);
-
-	}
-
-	@Override
-	public void updateFavourites(List<Todo> todos) {
-		for (int i = 0; i < this.todos.size(); i++) {
-			Todo favourite = this.todos.get(i);
-			for (Todo todo : todos) {
-				if (todo.getId().equals(favourite.getId())) {
-					this.todos.set(i, todo);
-				}
-			}
-		}
-	}
-
-	@Override
-	public void removeFavourite(Todo flight) {
-		todos.remove(flight);
 	}
 
 	@Override

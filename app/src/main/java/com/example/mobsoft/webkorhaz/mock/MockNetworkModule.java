@@ -5,7 +5,6 @@ import com.example.mobsoft.webkorhaz.network.todo.AppointmentApi;
 import com.example.mobsoft.webkorhaz.network.todo.ConsultationHourApi;
 import com.example.mobsoft.webkorhaz.network.todo.DepartmentApi;
 import com.example.mobsoft.webkorhaz.network.todo.LoginApi;
-import com.example.mobsoft.webkorhaz.network.todo.TodoApi;
 
 import java.io.IOException;
 
@@ -55,12 +54,6 @@ public class MockNetworkModule {
 	@Singleton
 	public Retrofit provideRetrofit(OkHttpClient client) {
 		return networkModule.provideRetrofit(client);
-	}
-
-	@Provides
-	@Singleton
-	public TodoApi provideTodoApi(Retrofit retrofit) {
-		return networkModule.provideTodoApi(retrofit);
 	}
 
 	@Provides

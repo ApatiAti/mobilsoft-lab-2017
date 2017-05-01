@@ -38,9 +38,7 @@ public class MockInterceptor implements Interceptor {
 
 
 		String path = uri.getPath();
-		if (path.startsWith(NetworkConfig.ENDPOINT_PREFIX + "Todos")) {
-			return TodoMock.process(request);
-		} else if (path.startsWith(NetworkConfig.ENDPOINT_PREFIX + AppointmentMock.APPOINTMENT_URL)) {
+		if (path.startsWith(NetworkConfig.ENDPOINT_PREFIX + AppointmentMock.APPOINTMENT_URL)) {
 			return AppointmentMock.process(request);
 		} else if (path.startsWith(NetworkConfig.ENDPOINT_PREFIX + DepartmentMock.DEPARTMENT_URL)){
 			return DepartmentMock.process(request);

@@ -7,9 +7,6 @@ import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointme
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointmentListFromServerEvents;
 import com.example.mobsoft.webkorhaz.interactor.consultationhour.ConsultationHourInteractor;
 import com.example.mobsoft.webkorhaz.interactor.consultationhour.events.RefreshDepartmentsDataEvent;
-import com.example.mobsoft.webkorhaz.interactor.todo.FavouritesInteractor;
-import com.example.mobsoft.webkorhaz.interactor.todo.events.GetFavouritesEvent;
-import com.example.mobsoft.webkorhaz.model.Todo;
 import com.example.mobsoft.webkorhaz.model.User;
 import com.example.mobsoft.webkorhaz.ui.Presenter;
 
@@ -28,12 +25,6 @@ import static com.example.mobsoft.webkorhaz.MobSoftApplication.injector;
 
 
 public class MainPresenter extends Presenter<MainScreen> {
-
-    /**
-     * LAbor miatt marad
-     */
-    @Inject
-    FavouritesInteractor favouritesInteractor;
 
     @Inject
     AppointmentInteractor appointmentInteractor;
@@ -100,34 +91,6 @@ public class MainPresenter extends Presenter<MainScreen> {
         });
     }
 
-    /**
-     *  labor miatt
-     */
-    public void getFavourites() {
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                favouritesInteractor.getFavourites();
-            }
-        });
-    }
-
-    // Only for test
-    public void onEventMainThread(GetFavouritesEvent event) {
-        if (event.getThrowable() != null) {
-            event.getThrowable().printStackTrace();
-            if (screen != null) {
-                screen.showMessage("error");
-            }
-            Log.e("Networking", "Error reading favourites", event.getThrowable());
-        } else {
-            if (screen != null) {
-                for(Todo t : event.getTodos()){
-                    screen.showMessage(t.getName());
-                }
-            }
-        }
-    }
 
     /**
      * {@link LoadAppointmentListFromDbEvent} eventeket a {@link EventBus}-ról feldolgozó metódus. Android UI szálát hasznélja a feldolgozásra
@@ -186,12 +149,4 @@ public class MainPresenter extends Presenter<MainScreen> {
         }
     }
 
-    public void testNetwork() {
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                favouritesInteractor.testNetwork();
-            }
-        });
-    }
 }

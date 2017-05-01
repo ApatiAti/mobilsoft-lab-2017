@@ -5,14 +5,12 @@ import android.content.Context;
 import com.example.mobsoft.webkorhaz.model.Appointment;
 import com.example.mobsoft.webkorhaz.model.ConsultationHourType;
 import com.example.mobsoft.webkorhaz.model.Department;
-import com.example.mobsoft.webkorhaz.model.Todo;
 import com.example.mobsoft.webkorhaz.model.User;
 import com.orm.SugarContext;
 import com.orm.SugarRecord;
 import com.orm.query.Condition;
 import com.orm.query.Select;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -71,35 +69,6 @@ public class SugarOrmRepository implements Repository {
     /**
      *  Labor miatt
      */
-
-    @Override
-    public List<Todo> getFavourites() {
-        return SugarRecord.listAll(Todo.class);
-    }
-
-    @Override
-    public void saveFavourite(Todo flight) {
-        SugarRecord.saveInTx(flight);
-    }
-
-    @Override
-    public void updateFavourites(List<Todo> todos) {
-        List<Todo> favourites = getFavourites();
-        List<Todo> toUpdate = new ArrayList<>(favourites.size());
-        for (Todo favourite : favourites) {
-            for (Todo todo : todos) {
-                if (todo.getId().equals(favourite.getId())) {
-                    toUpdate.add(todo);
-                }
-            }
-        }
-        SugarRecord.saveInTx(toUpdate);
-    }
-
-    @Override
-    public void removeFavourite(Todo flight) {
-        SugarRecord.deleteInTx(flight);
-    }
 
     @Override
     public User saveUser(User user) {
