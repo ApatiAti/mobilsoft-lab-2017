@@ -22,7 +22,7 @@ import javax.inject.Inject;
 
 
 public class LoginActivity  extends AppCompatActivity implements LoginScreen {
-    private static final String TAG = "LoginActivity";
+    private static final String TAG = "Login";
     Tracker mTracker;
 
     Button btnLogin;

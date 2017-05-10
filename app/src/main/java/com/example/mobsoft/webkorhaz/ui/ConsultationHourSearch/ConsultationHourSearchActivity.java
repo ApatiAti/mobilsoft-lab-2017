@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,6 +23,8 @@ import com.example.mobsoft.webkorhaz.ui.MySlideDateTimeListener;
 import com.example.mobsoft.webkorhaz.ui.consultationHourList.ConsultationHourListActivity;
 import com.github.jjobes.slidedatetimepicker.SlideDateTimeListener;
 import com.github.jjobes.slidedatetimepicker.SlideDateTimePicker;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,6 +38,8 @@ import javax.inject.Inject;
 
 
 public class ConsultationHourSearchActivity extends AppCompatActivity implements ConsultationHourSearchScreen {
+    private static final String TAG = "ConsultationHourSearch";
+    Tracker mTracker;
 
     static SimpleDateFormat simpleDateFormat;
 
@@ -58,6 +63,9 @@ public class ConsultationHourSearchActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consultationhour_search);
+
+        MobSoftApplication application = (MobSoftApplication) getApplication();
+        mTracker = application.getDefaultTracker();
         MobSoftApplication.injector.inject(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -117,6 +125,11 @@ public class ConsultationHourSearchActivity extends AppCompatActivity implements
     @Override
     protected void onStart() {
         super.onStart();
+
+        Log.i(TAG, "OnStart activity name: " + TAG);
+        mTracker.setScreenName("Activity~" + TAG);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+
         consultationHourSearchPresenter.attachScreen(this);
 
         consultationHourSearchPresenter.getDepartmentsDataFromServer();

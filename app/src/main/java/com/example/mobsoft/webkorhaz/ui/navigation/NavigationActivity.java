@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -13,13 +14,16 @@ import com.example.mobsoft.webkorhaz.ui.ConsultationHourSearch.ConsultationHourS
 import com.example.mobsoft.webkorhaz.ui.consultationHourList.ConsultationHourListActivity;
 import com.example.mobsoft.webkorhaz.ui.login.LoginActivity;
 import com.example.mobsoft.webkorhaz.ui.main.MainActivity;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import javax.inject.Inject;
 
 
 
 public class NavigationActivity extends AppCompatActivity implements NavigationScreen {
-
+    private static final String TAG = "Navigation";
+    Tracker mTracker;
     @Inject
     NavigationPresenter navigationPresenter;
 
@@ -29,6 +33,8 @@ public class NavigationActivity extends AppCompatActivity implements NavigationS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
 
+        MobSoftApplication application = (MobSoftApplication) getApplication();
+        mTracker = application.getDefaultTracker();
         MobSoftApplication.injector.inject(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -40,6 +46,11 @@ public class NavigationActivity extends AppCompatActivity implements NavigationS
     @Override
     protected void onStart() {
         super.onStart();
+
+        Log.i(TAG, "OnStart activity name: " + TAG);
+        mTracker.setScreenName("Activity~" + TAG);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+
         navigationPresenter.attachScreen(this);
     }
 

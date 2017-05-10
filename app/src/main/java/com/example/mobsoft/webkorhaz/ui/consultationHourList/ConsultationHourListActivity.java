@@ -8,6 +8,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 import com.example.mobsoft.webkorhaz.MobSoftApplication;
@@ -21,6 +22,8 @@ import com.example.mobsoft.webkorhaz.model.dto.ConsultationHourDtoList;
 import com.example.mobsoft.webkorhaz.ui.appointment.AppointmentActivity;
 import com.example.mobsoft.webkorhaz.ui.main.RecyclerTouchListener;
 import com.example.mobsoft.webkorhaz.ui.util.adapter.ConsultationHourListAdapter;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -31,6 +34,8 @@ import java.util.List;
 
 
 public class ConsultationHourListActivity extends AppCompatActivity implements ConsultationHourListScreen {
+    private static final String TAG = "ConsultationHourList";
+    Tracker mTracker;
 
     static DateFormat timeFormat;
     static DateFormat fullDateTimeFormat;
@@ -91,6 +96,9 @@ public class ConsultationHourListActivity extends AppCompatActivity implements C
     @Override
     protected void onStart() {
         super.onStart();
+        Log.i(TAG, "OnStart activity name: " + TAG);
+        mTracker.setScreenName("Activity~" + TAG);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     @Override

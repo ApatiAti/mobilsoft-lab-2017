@@ -33,14 +33,14 @@ import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity implements MainScreen {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "Main";
+    Tracker mTracker;
+
     DateFormat dateFormat;
     RecyclerView recyclerView;
     AppointmentAdapter appointmentAdapter;
     private List<Appointment> appointmentList = new ArrayList<>();
     User currentUser;
-
-    Tracker mTracker;
 
     @Inject
     MainPresenter mainPresenter;

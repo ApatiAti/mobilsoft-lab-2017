@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -13,6 +14,8 @@ import com.example.mobsoft.webkorhaz.MobSoftApplication;
 import com.example.mobsoft.webkorhaz.R;
 import com.example.mobsoft.webkorhaz.model.Appointment;
 import com.example.mobsoft.webkorhaz.ui.main.MainActivity;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -23,6 +26,8 @@ import javax.inject.Inject;
 
 
 public class AppointmentActivity extends AppCompatActivity implements AppointmentScreen {
+    private static final String TAG = "Appointment";
+    Tracker mTracker;
 
     DateFormat fullDateTimeFormat;
     DateFormat timeFormat;
@@ -45,6 +50,8 @@ public class AppointmentActivity extends AppCompatActivity implements Appointmen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appointment);
 
+        MobSoftApplication application = (MobSoftApplication) getApplication();
+        mTracker = application.getDefaultTracker();
         MobSoftApplication.injector.inject(this);
 
         fullDateTimeFormat = new SimpleDateFormat(getString(R.string.fullDateTimeFormat));
@@ -87,6 +94,10 @@ public class AppointmentActivity extends AppCompatActivity implements Appointmen
     @Override
     protected void onStart() {
         super.onStart();
+
+        Log.i(TAG, "OnStart activity name: " + TAG);
+        mTracker.setScreenName("Activity~" + TAG);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
         appointmentPresenter.attachScreen(this);
     }
 
