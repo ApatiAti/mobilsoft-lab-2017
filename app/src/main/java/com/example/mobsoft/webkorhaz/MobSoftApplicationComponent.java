@@ -25,9 +25,7 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 
-/**
- * Created by mobsoft on 2017. 03. 31..
- */
+
 
 @Singleton
 @Component(modules = {UIModule.class, RepositoryModule.class, InteractorModule.class

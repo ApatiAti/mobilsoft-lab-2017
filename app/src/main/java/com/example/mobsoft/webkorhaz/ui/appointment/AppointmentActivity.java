@@ -20,9 +20,7 @@ import java.text.SimpleDateFormat;
 import javax.inject.Inject;
 
 
-/**
- * Created by mobsoft on 2017. 03. 31..
- */
+
 
 public class AppointmentActivity extends AppCompatActivity implements AppointmentScreen {
 

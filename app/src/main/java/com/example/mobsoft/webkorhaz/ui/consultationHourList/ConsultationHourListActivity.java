@@ -28,9 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/**
- * Created by mobsoft on 2017. 03. 31..
- */
+
 
 public class ConsultationHourListActivity extends AppCompatActivity implements ConsultationHourListScreen {
 

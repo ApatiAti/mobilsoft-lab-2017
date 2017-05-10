@@ -14,9 +14,7 @@ import de.greenrobot.event.EventBus;
 
 import static com.example.mobsoft.webkorhaz.MobSoftApplication.injector;
 
-/**
- * Created by mobsoft on 2017. 03. 31..
- */
+
 
 public class NavigationPresenter extends Presenter<NavigationScreen> {
 

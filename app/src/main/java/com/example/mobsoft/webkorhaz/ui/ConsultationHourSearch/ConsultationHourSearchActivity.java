@@ -32,9 +32,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-/**
- * Created by mobsoft on 2017. 03. 31..
- */
+
 
 public class ConsultationHourSearchActivity extends AppCompatActivity implements ConsultationHourSearchScreen {
 

@@ -19,9 +19,7 @@ import com.google.android.gms.analytics.Tracker;
 
 import javax.inject.Inject;
 
-/**
- * Created by mobsoft on 2017. 03. 31..
- */
+
 
 public class LoginActivity  extends AppCompatActivity implements LoginScreen {
     private static final String TAG = "LoginActivity";

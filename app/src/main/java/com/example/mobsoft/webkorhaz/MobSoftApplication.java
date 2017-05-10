@@ -11,9 +11,7 @@ import com.google.android.gms.analytics.Tracker;
 
 import javax.inject.Inject;
 
-/**
- * Created by mobsoft on 2017. 03. 31..
- */
+
 
 public class MobSoftApplication extends Application {
 
