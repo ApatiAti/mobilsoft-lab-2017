@@ -33,6 +33,7 @@
     <string name="consultationHourSearch_date_interval">Idő intervallum</string>
 
     <string name="appointment_doctor">Doctor</string>
+    <string name="appointment_CHType">Rendelés típusa</string>
     <string name="appointment_room">Helyszín</string>
     <string name="appointment_date">Időpont</string>
     <string name="appointment_complaints">Beteg panaszai</string>

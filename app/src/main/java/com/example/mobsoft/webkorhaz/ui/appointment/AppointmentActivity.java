@@ -33,6 +33,7 @@ public class AppointmentActivity extends AppCompatActivity implements Appointmen
     Appointment activeAppointment;
 
     EditText editTextDoctor;
+    EditText editTextCHType;
     EditText editTextRoom;
     EditText editTextDate;
     EditText editTextComplaints;
@@ -55,6 +56,7 @@ public class AppointmentActivity extends AppCompatActivity implements Appointmen
         refreshAppointmentFromOldValue();
 
         editTextDoctor = (EditText) findViewById(R.id.appointmentEditDoctor);
+        editTextCHType = (EditText) findViewById(R.id.appointmentEditCHType);
         editTextRoom = (EditText) findViewById(R.id.appointmentEditRoom);
         editTextDate = (EditText) findViewById(R.id.appointmentEditDate);
         editTextComplaints = (EditText) findViewById(R.id.appointmentEditComplaints);
@@ -68,6 +70,7 @@ public class AppointmentActivity extends AppCompatActivity implements Appointmen
         String dateInterval = fullDateTimeFormat.format(activeAppointment.getBeginDate()) +  " - " + timeFormat.format(activeAppointment.getEndDate());
 
         editTextDoctor.setText(activeAppointment.getDoctorsName());
+        editTextCHType.setText(activeAppointment.getConsultationHourType().getType());
         editTextRoom.setText(activeAppointment.getRoom());
         editTextDate.setText(dateInterval);
         editTextComplaints.setText(activeAppointment.getComplaints());
