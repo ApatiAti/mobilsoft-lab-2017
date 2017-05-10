@@ -11,8 +11,6 @@ public class LogoutEvent {
     private User user;
     private Throwable throwable;
 
-    //<editor-fold desc="Constructors|Getters|Setters">
-
     public LogoutEvent() {
     }
 
@@ -40,5 +38,4 @@ public class LogoutEvent {
         this.throwable = throwable;
     }
 
-//</editor-fold>
 }

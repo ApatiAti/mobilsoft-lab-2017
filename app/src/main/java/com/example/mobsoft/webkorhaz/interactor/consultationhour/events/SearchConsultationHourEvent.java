@@ -14,8 +14,6 @@ public class SearchConsultationHourEvent {
     private List<ConsultationHourDto> consultationHourDTOs;
     private Throwable throwable;
 
-    //<editor-fold desc="Constructors|Getters|Setters">
-
     public SearchConsultationHourEvent() {
     }
 
@@ -43,5 +41,4 @@ public class SearchConsultationHourEvent {
         this.throwable = throwable;
     }
 
-//</editor-fold>
 }

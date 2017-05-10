@@ -13,8 +13,6 @@ public class SaveAppointmentsEvent {
     private Appointment appointment;
     private Throwable throwable;
 
-    //<editor-fold desc="Constructors|Getters|Setters">
-
     public SaveAppointmentsEvent() {
     }
 
@@ -42,5 +40,4 @@ public class SaveAppointmentsEvent {
         this.throwable = throwable;
     }
 
-//</editor-fold>
 }

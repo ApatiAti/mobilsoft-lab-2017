@@ -11,8 +11,6 @@ public class LoginEvent {
     private User user;
     private Throwable throwable;
 
-    //<editor-fold desc="Constructors|Getters|Setters">
-
     public LoginEvent() {
     }
 
@@ -40,5 +38,4 @@ public class LoginEvent {
         this.throwable = throwable;
     }
 
-//</editor-fold>
 }

@@ -10,8 +10,6 @@ public class LoadAppointmentListFromServerEvents {
     private List<Appointment> appointments;
     private Throwable throwable;
 
-    //<editor-fold desc="Constructors|Getters|Setters">
-
     public LoadAppointmentListFromServerEvents() {
     }
 
@@ -39,5 +37,4 @@ public class LoadAppointmentListFromServerEvents {
         this.throwable = throwable;
     }
 
-//</editor-fold>
 }

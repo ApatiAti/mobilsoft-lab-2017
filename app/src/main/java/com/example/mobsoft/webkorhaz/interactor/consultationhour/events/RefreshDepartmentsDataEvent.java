@@ -13,8 +13,6 @@ public class RefreshDepartmentsDataEvent {
     private List<Department> Department;
     private Throwable throwable;
 
-    //<editor-fold desc="Constructors|Getters|Setters">
-
     public RefreshDepartmentsDataEvent() {
     }
 
@@ -42,5 +40,4 @@ public class RefreshDepartmentsDataEvent {
         this.throwable = throwable;
     }
 
-//</editor-fold>
 }

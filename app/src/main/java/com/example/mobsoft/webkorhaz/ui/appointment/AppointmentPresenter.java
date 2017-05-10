@@ -100,7 +100,7 @@ public class AppointmentPresenter extends Presenter<AppointmentScreen> {
             Log.e("Networking", throwable.getMessage(), throwable);
         } else {
             if (screen != null) {
-                screen.navigateToAppointmentList("Sikeres időpont foglalás! ");
+                screen.navigateToAppointmentList("Sikeres időpont foglalás!");
             }
         }
     }

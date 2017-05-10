@@ -1,5 +1,6 @@
 package com.example.mobsoft.webkorhaz.model;
 
+import com.orm.dsl.Ignore;
 import com.orm.dsl.Table;
 
 import java.io.Serializable;
@@ -10,8 +11,8 @@ import java.io.Serializable;
 @Table
 public class User implements Serializable{
     private Long id;
-    private Long patientId;
     private String username;
+    @Ignore
     private String password;
 
     public User() {
