@@ -6,18 +6,18 @@ import java.util.List;
 
 
 public class LoadAppointmentListFromServerEvents {
-    private int code;
+    private AppointmentsEventCode code;
     private List<Appointment> appointments;
     private Throwable throwable;
 
     public LoadAppointmentListFromServerEvents() {
     }
 
-    public int getCode() {
+    public AppointmentsEventCode getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(AppointmentsEventCode code) {
         this.code = code;
     }
 

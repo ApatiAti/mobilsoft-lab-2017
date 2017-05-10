@@ -2,6 +2,7 @@ package com.example.mobsoft.webkorhaz.ui.appointment;
 
 import android.util.Log;
 
+import com.example.mobsoft.webkorhaz.R;
 import com.example.mobsoft.webkorhaz.interactor.appointment.AppointmentInteractor;
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.DeleteAppointmentEvent;
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.SaveAppointmentsEvent;
@@ -78,7 +79,7 @@ public class AppointmentPresenter extends Presenter<AppointmentScreen> {
             Log.e("Networking", throwable.getMessage() , throwable);
         } else {
             if (screen != null) {
-                screen.navigateToAppointmentList("Sikeres időpont törlés! ");
+                screen.navigateToAppointmentList(R.string.appointment_event_delete);
             }
         }
     }
@@ -98,7 +99,7 @@ public class AppointmentPresenter extends Presenter<AppointmentScreen> {
             Log.e("Networking", throwable.getMessage(), throwable);
         } else {
             if (screen != null) {
-                screen.navigateToAppointmentList("Sikeres időpont foglalás!");
+                screen.navigateToAppointmentList(event.getCode().getMessageStringId());
             }
         }
     }

@@ -4,6 +4,7 @@ package com.example.mobsoft.webkorhaz.interactor.appointment;
 import android.support.annotation.NonNull;
 
 import com.example.mobsoft.webkorhaz.MobSoftApplication;
+import com.example.mobsoft.webkorhaz.interactor.appointment.events.AppointmentsEventCode;
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.DeleteAppointmentEvent;
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointmentListFromDbEvent;
 import com.example.mobsoft.webkorhaz.interactor.appointment.events.LoadAppointmentListFromServerEvents;
@@ -192,7 +193,7 @@ public class AppointmentInteractor {
 
     private void saveAppointment(Appointment appointment) {
         Call<AppointmentDto> saveAppointment = appointmentApi.appointmentPost(new AppointmentDto(appointment));
-        SaveAppointmentsEvent event = new SaveAppointmentsEvent();
+        SaveAppointmentsEvent event = new SaveAppointmentsEvent(AppointmentsEventCode.SAVE);
         try {
             Response<AppointmentDto> execute = saveAppointment.execute();
             int responseCode = execute.code();
@@ -217,7 +218,7 @@ public class AppointmentInteractor {
     private void updateAppointment(Appointment appointment) {
         AppointmentDto request = new AppointmentDto(appointment);
         Call<Void> updateAppointment = appointmentApi.appointmentPut(request);
-        SaveAppointmentsEvent event = new SaveAppointmentsEvent();
+        SaveAppointmentsEvent event = new SaveAppointmentsEvent(AppointmentsEventCode.UPDATE);
         try {
             Response<Void> execute = updateAppointment.execute();
             int responseCode = execute.code();

@@ -40,6 +40,9 @@
     <string name="appointment_reload">Visszaállítás</string>
     <string name="appointment_save">Mentés</string>
 
+    <string name="appointment_event_save">Sikeres időpont foglalás!</string>
+    <string name="appointment_event_update">Sikeres időpont mentés!</string>
+    <string name="appointment_event_delete">Sikeres időpont törlés!</string>
 
     <string name="resource_intent_consultationHour">consultationHourDtoList</string>
     <string name="resource_intent_appointment">appointment</string>

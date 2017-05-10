@@ -102,8 +102,8 @@ public class AppointmentActivity extends AppCompatActivity implements Appointmen
     }
 
     @Override
-    public void navigateToAppointmentList(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    public void navigateToAppointmentList(int messageStringId) {
+        Toast.makeText(this, getString(messageStringId), Toast.LENGTH_SHORT).show();
         Intent i = new Intent(AppointmentActivity.this, MainActivity.class);
         startActivity(i);
         finish();

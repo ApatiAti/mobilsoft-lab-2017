@@ -2,25 +2,24 @@ package com.example.mobsoft.webkorhaz.interactor.appointment.events;
 
 import com.example.mobsoft.webkorhaz.model.Appointment;
 
-import java.util.List;
-
 /**
  * Created by Apati on 2017.04.08..
  */
 
 public class SaveAppointmentsEvent {
-    private int code;
+    private AppointmentsEventCode code;
     private Appointment appointment;
     private Throwable throwable;
 
-    public SaveAppointmentsEvent() {
+    public SaveAppointmentsEvent(AppointmentsEventCode code) {
+        this.code = code;
     }
 
-    public int getCode() {
+    public AppointmentsEventCode getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(AppointmentsEventCode code) {
         this.code = code;
     }
 
