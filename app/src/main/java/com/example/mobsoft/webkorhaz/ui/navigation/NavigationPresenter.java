@@ -32,10 +32,12 @@ public class NavigationPresenter extends Presenter<NavigationScreen> {
     public void attachScreen(NavigationScreen screen) {
         injector.inject(this);
         super.attachScreen(screen);
+        bus.register(this);
     }
 
     @Override
     public void detachScreen() {
+        bus.unregister(this);
         super.detachScreen();
     }
 
@@ -58,6 +60,7 @@ public class NavigationPresenter extends Presenter<NavigationScreen> {
             throwable.printStackTrace();
             if (screen != null) {
                 screen.error(throwable.getMessage());
+                screen.afterLogout();
             }
             Log.e("DB", "Error reading appointments from DB", throwable);
         } else {

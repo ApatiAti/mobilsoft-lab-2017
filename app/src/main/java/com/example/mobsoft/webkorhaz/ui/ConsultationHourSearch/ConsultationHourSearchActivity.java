@@ -202,11 +202,6 @@ public class ConsultationHourSearchActivity extends AppCompatActivity implements
         consultationHourSearch.setTypeId(selectedConsultationHourType.getConsultationHourTypeId());
 
         consultationHourSearchPresenter.search(consultationHourSearch);
-
-        String departmentName = selectedDepartment.getDepartmentName();
-        String chTypeName = selectedConsultationHourType.getType();
-        Toast.makeText(this, "Sikeres keresés: " + departmentName + " ; " + chTypeName, Toast.LENGTH_SHORT).show();
-
     }
 
 

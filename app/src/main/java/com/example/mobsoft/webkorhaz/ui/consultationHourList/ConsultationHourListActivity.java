@@ -53,6 +53,8 @@ public class ConsultationHourListActivity extends AppCompatActivity implements C
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consultationhour_list);
 
+        MobSoftApplication application = (MobSoftApplication) getApplication();
+        mTracker = application.getDefaultTracker();
         MobSoftApplication.injector.inject(this);
 
         timeFormat = new SimpleDateFormat(getString(R.string.timeFormat));
@@ -90,7 +92,7 @@ public class ConsultationHourListActivity extends AppCompatActivity implements C
                 showApointmentCreateScreen(position);
             }
         }));
-            }
+    }
 
 
     @Override

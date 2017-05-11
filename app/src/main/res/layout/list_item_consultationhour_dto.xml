@@ -35,7 +35,7 @@
         android:layout_alignLeft="@+id/chListPatientNumbers"
         android:layout_alignStart="@+id/chListPatientNumbers"
         android:layout_alignTop="@+id/chListViewDoctorName"
-        android:text="TextView" />
+        android:text="IB025" />
 
     <TextView
         android:id="@+id/chListViewInterval"
