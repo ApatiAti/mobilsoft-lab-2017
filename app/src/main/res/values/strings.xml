@@ -54,5 +54,6 @@
     <string name="fullDateTimeFormat">yyyy-MM-dd HH:mm</string>
     <string name="resource_intent_consultationHourDto">consultationHourDto</string>
     <string name="resource_intent_consultationHourType">consultationHourType</string>
+    <string name="main_menu_department_refresh">Osztály adatok frissítése</string>
 
 </resources>
