@@ -153,4 +153,42 @@ public class Appointment implements Serializable {
     public void setConsultationHourType(ConsultationHourType consultationHourType) {
         this.consultationHourType = consultationHourType;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Appointment that = (Appointment) o;
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (!appointmentId.equals(that.appointmentId)) return false;
+        if (!beginDate.equals(that.beginDate)) return false;
+        if (!endDate.equals(that.endDate)) return false;
+        if (!room.equals(that.room)) return false;
+        if (!doctorsName.equals(that.doctorsName)) return false;
+        if (complaints != null ? !complaints.equals(that.complaints) : that.complaints != null)
+            return false;
+        if (!patient.equals(that.patient)) return false;
+        if (!consultationHourId.equals(that.consultationHourId)) return false;
+        if (!department.equals(that.department)) return false;
+        return consultationHourType.equals(that.consultationHourType);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + appointmentId.hashCode();
+        result = 31 * result + beginDate.hashCode();
+        result = 31 * result + endDate.hashCode();
+        result = 31 * result + room.hashCode();
+        result = 31 * result + doctorsName.hashCode();
+        result = 31 * result + (complaints != null ? complaints.hashCode() : 0);
+        result = 31 * result + patient.hashCode();
+        result = 31 * result + consultationHourId.hashCode();
+        result = 31 * result + department.hashCode();
+        result = 31 * result + consultationHourType.hashCode();
+        return result;
+    }
 }

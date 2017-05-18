@@ -1,6 +1,7 @@
 package com.example.mobsoft.webkorhaz.repository;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.example.mobsoft.webkorhaz.model.Appointment;
 import com.example.mobsoft.webkorhaz.model.ConsultationHourType;
@@ -32,6 +33,28 @@ public class MemoryRepository implements Repository {
 	}
 
 	public void createAppointment() {
+		Appointment flight1 = getAppointmentOne();
+
+		Calendar c = Calendar.getInstance();
+		c.setTime(flight1.getEndDate());
+		c.add(Calendar.DAY_OF_YEAR, +1);
+		Date beginDate = c.getTime();
+		c.add(Calendar.HOUR_OF_DAY, +1);
+		Date endDate = c.getTime();
+
+		Appointment flight2 = new Appointment(0L, beginDate, endDate, "EB01", "Dr Doktor"
+				, departmentList.get(1), "Szem baj"
+				, userList.get(1), 17L
+				, consultiConsultationHourTypeList.get(1));
+		flight2.setId(12L);
+
+		appointmentList = new ArrayList<>();
+		appointmentList.add(flight1);
+		appointmentList.add(flight2);
+	}
+
+	@NonNull
+	public Appointment getAppointmentOne() {
 		Calendar c = Calendar.getInstance();
 		c.setTime(new Date());
 		c.add(Calendar.DAY_OF_YEAR, +2);
@@ -45,21 +68,7 @@ public class MemoryRepository implements Repository {
 				, userList.get(0), 12L
 				, consultiConsultationHourTypeList.get(0));
 		flight1.setId(11L);
-
-		c.add(Calendar.DAY_OF_YEAR, +1);
-		beginDate = c.getTime();
-		c.add(Calendar.HOUR_OF_DAY, +1);
-		endDate = c.getTime();
-
-		Appointment flight2 = new Appointment(0L, beginDate, endDate, "EB01", "Dr Doktor"
-				, departmentList.get(1), "Szem baj"
-				, userList.get(1), 17L
-				, consultiConsultationHourTypeList.get(1));
-		flight2.setId(12L);
-
-		appointmentList = new ArrayList<>();
-		appointmentList.add(flight1);
-		appointmentList.add(flight2);
+		return flight1;
 	}
 
 	public void createUser() {
@@ -69,17 +78,23 @@ public class MemoryRepository implements Repository {
 	}
 
 	public void createDepartments() {
+		int chListSize = consultiConsultationHourTypeList.size();
+
 		departmentList  = new ArrayList<>();
 
 		List<ConsultationHourType> chtypeList = new ArrayList<>();
-		chtypeList.add(consultiConsultationHourTypeList.get(0));
-		chtypeList.add(consultiConsultationHourTypeList.get(1));
+		if (chListSize >= 2) {
+			chtypeList.add(consultiConsultationHourTypeList.get(0));
+			chtypeList.add(consultiConsultationHourTypeList.get(1));
+		}
 
 		departmentList.add(new Department(100L, "Ortopédia", chtypeList));
 
 		List<ConsultationHourType> chtypeList2 = new ArrayList<>();
-		chtypeList2.add(consultiConsultationHourTypeList.get(0));
-		chtypeList2.add(consultiConsultationHourTypeList.get(2));
+		if (chListSize >= 2) {
+			chtypeList2.add(consultiConsultationHourTypeList.get(0));
+			chtypeList2.add(consultiConsultationHourTypeList.get(2));
+		}
 
 		departmentList.add(new Department(101L, "Szemészet", chtypeList2));
 	}
@@ -115,14 +130,23 @@ public class MemoryRepository implements Repository {
 
 	@Override
 	public void saveAppointment(Appointment appointment) {
+		for (int i =  0; i<= appointmentList.size() ; i++){
+			Appointment dbAppointment = appointmentList.get(i);
+			if (dbAppointment.getId().equals(appointment.getId())){
+				appointmentList.add(i, appointment);
+				return;
+			}
+		}
+
 		appointmentList.add(appointment);
 	}
 
 
 	@Override
-	public Appointment getAppointmentByAppointmentId(Long appointmentId, long userId) {
+	public Appointment getAppointmentByAppointmentId(Long appointmentId, Long userId) {
 		for (Appointment appointment: appointmentList) {
-			if (appointment.getAppointmentId().equals(appointmentId)){
+			if (appointment.getAppointmentId().equals(appointmentId)
+					&& appointment.getPatient().getId().equals(userId)){
 				return appointment;
 			}
 		}
@@ -132,7 +156,7 @@ public class MemoryRepository implements Repository {
 
 	@Override
 	public void deleteAppointment(Appointment appointment) {
-		Appointment dbAppointment = getAppointmentByAppointmentId(appointment.getAppointmentId() , 1L);
+		Appointment dbAppointment = getAppointmentByAppointmentId(appointment.getAppointmentId(), appointment.getPatient().getId());
 		appointmentList.remove(dbAppointment);
 	}
 

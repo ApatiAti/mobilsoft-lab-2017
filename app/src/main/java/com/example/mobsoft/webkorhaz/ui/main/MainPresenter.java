@@ -71,7 +71,7 @@ public class MainPresenter extends Presenter<MainScreen> {
     /**
      * Szerver oldalról lekérdezi a felhasználó Appointmentjeit
      */
-    public void refreashAppointments(final User user){
+    public void refreshAppointmentsFromServer(final User user){
         executor.execute(new Runnable() {
             @Override
             public void run() {
@@ -110,7 +110,7 @@ public class MainPresenter extends Presenter<MainScreen> {
     }
 
     /**
-     * {@link LoadAppointmentListFromServerEvents} eventeket a {@link EventBus}-ról feldolgozó metódus. Android UI szálát hasznélja a feldolgozásra
+     * {@link LoadAppointmentListFromServerEvents} eventeket a {@link EventBus}-ról feldolgozó metódus. Android UI szálát használja a feldolgozásra
      * @param event
      */
     public void onEventMainThread(LoadAppointmentListFromServerEvents event) {

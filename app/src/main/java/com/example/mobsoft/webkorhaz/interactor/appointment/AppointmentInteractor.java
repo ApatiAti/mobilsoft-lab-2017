@@ -192,7 +192,8 @@ public class AppointmentInteractor {
     }
 
     private void saveAppointment(Appointment appointment) {
-        Call<AppointmentDto> saveAppointment = appointmentApi.appointmentPost(new AppointmentDto(appointment));
+        AppointmentDto request = new AppointmentDto(appointment);
+        Call<AppointmentDto> saveAppointment = appointmentApi.appointmentPost(request);
         SaveAppointmentsEvent event = new SaveAppointmentsEvent(AppointmentsEventCode.SAVE);
         try {
             Response<AppointmentDto> execute = saveAppointment.execute();

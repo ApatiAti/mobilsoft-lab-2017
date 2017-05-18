@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
                 return true;
             case R.id.miRefresh:
                 Toast.makeText(this, getString(R.string.main_refresh_from_network) , Toast.LENGTH_SHORT).show();
-                mainPresenter.refreashAppointments(currentUser);
+                mainPresenter.refreshAppointmentsFromServer(currentUser);
                 return true;
             case R.id.miRefreshDepartment:
                 onTapRefreshDepartment();
@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
 
     @Override
     public void showMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     /**

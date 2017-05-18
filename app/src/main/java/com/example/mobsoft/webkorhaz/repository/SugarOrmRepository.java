@@ -38,7 +38,7 @@ public class SugarOrmRepository implements Repository {
     }
 
     @Override
-    public Appointment getAppointmentByAppointmentId(Long appointmentId, long userId) {
+    public Appointment getAppointmentByAppointmentId(Long appointmentId, Long userId) {
         return Select.from(Appointment.class)
                 .where(Condition.prop("appointmentId").eq(appointmentId))
                     .and(Condition.prop("parient.id").eq(userId)).first();

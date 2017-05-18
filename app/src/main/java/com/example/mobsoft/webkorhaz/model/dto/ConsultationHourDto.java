@@ -12,7 +12,6 @@ import java.util.Date;
 public class ConsultationHourDto implements Serializable {
     public Long consultationHourId;
     public String tpyeId;
-    // STring
     public Date beginDate;
     public Date endDate;
     public String room;
@@ -20,18 +19,6 @@ public class ConsultationHourDto implements Serializable {
     @SerializedName("maxPatientCount")
     public int maxNumberOfPatient;
     public int currentPatientCount;
-
-
-//   ap   "appointmentId": 0,
-//   ok   "beginDate": "2017-04-29T19:57:22.029Z",
-//   ok   "endDate": "2017-04-29T19:57:22.029Z",
-//   ok   "room": "string",
-//   ok   "doctorsName": "string",
-//   ap   "complaints": "string",
-//   ap   "patientName": "string",
-//   ok   "consultationHourId": 0,
-//   dp   "departmentId": 0,
-//   dp   "consultationTypeId": 0
 
 
     public ConsultationHourDto() {
@@ -42,17 +29,11 @@ public class ConsultationHourDto implements Serializable {
         this.tpyeId = tpyeId;
         this.beginDate = beginDate;
         this.endDate = endDate;
+        this.room = room;
+        this.doctorsName = doctorsName;
         this.maxNumberOfPatient = maxNumberOfPatient;
         this.currentPatientCount = currentPatientCount;
     }
-
-    //    public String getDepartmentName() {
-//        return departmentName;
-//    }
-//
-//    public void setDepartmentName(String departmentName) {
-//        this.departmentName = departmentName;
-//    }
 
 
     public Long getConsultationHourId() {

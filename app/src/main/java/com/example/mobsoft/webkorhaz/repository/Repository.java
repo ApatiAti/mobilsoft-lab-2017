@@ -20,7 +20,7 @@ public interface Repository {
 
     void saveAppointment(Appointment appointment);
 
-    Appointment getAppointmentByAppointmentId(Long appointmentId, long userId);
+    Appointment getAppointmentByAppointmentId(Long appointmentId, Long userId);
 
     void deleteAllAppointement(User username);
 
