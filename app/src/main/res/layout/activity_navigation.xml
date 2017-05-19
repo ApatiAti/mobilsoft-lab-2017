@@ -85,6 +85,29 @@
                 android:onClick="showConsultationHourSearch"/>
         </TableRow>
 
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp" >
+
+            <ImageView
+                android:id="@+id/imageViewCrash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                app:srcCompat="@drawable/ic_search" />
+
+            <Button
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Force Crash!"
+                android:onClick="forceCrash"
+                android:layout_weight="0.8"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+        </TableRow>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"

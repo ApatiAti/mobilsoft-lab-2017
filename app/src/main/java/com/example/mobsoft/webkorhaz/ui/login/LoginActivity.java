@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.example.mobsoft.webkorhaz.MobSoftApplication;
 import com.example.mobsoft.webkorhaz.R;
 import com.example.mobsoft.webkorhaz.model.User;
@@ -85,8 +86,17 @@ public class LoginActivity  extends AppCompatActivity implements LoginScreen {
     @Override
     public void loginSucces(User currentUser) {
         ((MobSoftApplication) getApplication()).setCurrentUser(currentUser);
+        setFabricUserInformation(currentUser);
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
     }
+
+    private void setFabricUserInformation(User currentUser) {
+        // TODO: Use the current user's information
+        // You can call any combination of these three methods
+        Crashlytics.setUserIdentifier(currentUser.getUsername());
+        Crashlytics.setUserName(currentUser.getUsername());
+    }
+
 }
