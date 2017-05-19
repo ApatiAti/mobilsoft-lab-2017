@@ -1,6 +1,5 @@
 package com.example.mobsoft.webkorhaz.test;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.example.mobsoft.webkorhaz.BuildConfig;
@@ -89,7 +88,7 @@ public class MainPresenterTest {
         Log.d(TAG, "refreshAppointment_NoAppointmentIdDb: finish");
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void refreshAppointmentsFromServer_WithAppointmentInDb() {
         Log.d(TAG, "refreshAppointment_WithAppointmentInDb: start");
 

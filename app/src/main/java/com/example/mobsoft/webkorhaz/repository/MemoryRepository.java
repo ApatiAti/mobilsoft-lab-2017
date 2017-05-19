@@ -130,14 +130,15 @@ public class MemoryRepository implements Repository {
 
 	@Override
 	public void saveAppointment(Appointment appointment) {
-		for (int i =  0; i<= appointmentList.size() ; i++){
-			Appointment dbAppointment = appointmentList.get(i);
-			if (dbAppointment.getId().equals(appointment.getId())){
-				appointmentList.add(i, appointment);
-				return;
+		if (!appointmentList.isEmpty()) {
+			for (int i = 0; i <= appointmentList.size(); i++) {
+				Appointment dbAppointment = appointmentList.get(i);
+				if (dbAppointment.getId().equals(appointment.getId())) {
+					appointmentList.add(i, appointment);
+					return;
+				}
 			}
 		}
-
 		appointmentList.add(appointment);
 	}
 
