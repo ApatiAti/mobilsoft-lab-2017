@@ -2,6 +2,7 @@ package com.example.mobsoft.webkorhaz;
 
 import android.app.Application;
 
+import com.crashlytics.android.Crashlytics;
 import com.example.mobsoft.webkorhaz.model.User;
 import com.example.mobsoft.webkorhaz.repository.Repository;
 import com.example.mobsoft.webkorhaz.ui.UIModule;
@@ -9,6 +10,7 @@ import com.example.mobsoft.webkorhaz.ui.UIModule;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
 
+import io.fabric.sdk.android.Fabric;
 import javax.inject.Inject;
 
 
@@ -36,6 +38,7 @@ public class MobSoftApplication extends Application {
 	@Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
 
         injector =
                 DaggerMobSoftApplicationComponent.builder().

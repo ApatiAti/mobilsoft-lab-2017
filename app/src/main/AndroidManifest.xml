@@ -46,6 +46,9 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:label="@string/title_activity_consultationHourListActivity" />
 
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="900b1d7e8d2198999c381b4f946170bbf9b65b87" />
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
